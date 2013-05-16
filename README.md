@@ -14,6 +14,10 @@ I am writing Pomodori because I want something a little bit different than what 
     - Pomodori completed in the last work week
     - Some extended report formatting options
 
+## Why not just use a stopwatch or egg timer?
+
+If that's what works for you, fantastic. I'm specifically interested exploring the reporting angle.
+
 ## Prerequisites
 
 - Ruby 1.9.3
