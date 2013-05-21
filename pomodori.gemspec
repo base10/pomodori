@@ -35,6 +35,5 @@ I am writing Pomodori because I want something a little bit different than what 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
 
-  spec.add_dependency "sqlite3-ruby"
-
+  spec.add_dependency "sqlite3"
 end
