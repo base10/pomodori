@@ -10,6 +10,10 @@
 - started_at
 - finished_at
 
+## schema_migrations
+
+- version
+
 ## Objects
 
 - Config
@@ -18,5 +22,5 @@
     - Break
         - LongBreak
 - Report
-- Setup (database)
+- Setup (database + config files, schema)
 - Database
