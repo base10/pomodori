@@ -6,6 +6,7 @@
 - name
 - duration
 - event_type (enum: pomodoro, break, long_break)
+- state (enum: complete, aborted, in_progress)
 - started_at
 - finished_at
 

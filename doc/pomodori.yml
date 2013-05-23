@@ -1,0 +1,13 @@
+---
+data:
+  database: pomodori.sqlite3
+  database_test: pomodori_test.sqlite3
+
+event_rules:
+  pomodori:
+    duration: 25
+    count_to_long_break: 4
+  break:
+    duration: 5
+  long_break:
+    duration: 15
