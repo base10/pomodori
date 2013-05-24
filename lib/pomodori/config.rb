@@ -1,9 +1,16 @@
+require 'yaml'
+require 'fileutils'
+
 module Pomodori
   class Config
-    require 'yaml'
-    require 'fileutils'
+    attr_reader :config
 
-    attr_accessor :config_file1
+    def initialize(file_path = nil)
+      config_file = file_path || ENV['HOME'] + "/.pomodori/pomodori.yml"
 
+      if !File.exists?( config_file )
+        raise Errno::ENOENT, "#{config_file}"
+      end
+    end
   end
 end
