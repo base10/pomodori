@@ -1,0 +1,13 @@
+---
+database:
+  file: ~/.pomodori/pomodori_test.sqlite3
+pomodoro:
+  summary: Working on Lorum Ipsum
+  duration: 25
+  count_to_long_break: 4
+break:
+  summary: Taking a short break
+  duration: 5
+long_break:
+  summary: Taking a long break
+  duration: 15
