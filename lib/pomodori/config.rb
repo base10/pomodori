@@ -13,7 +13,7 @@ module Pomodori
       end
 
       config = YAML.load( File.read( config_file ) )
-      
+
       @config = config
     end
   end
