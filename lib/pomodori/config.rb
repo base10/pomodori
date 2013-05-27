@@ -17,6 +17,8 @@ module Pomodori
         raise Errno::ENOENT, "#{config_file}"
       end
 
+      # TODO: Consider wrapping this in a begin/rescue block to 
+      # specify a more specific error message
       config_data = YAML.load( File.read( config_file ) )
 
       @config = config_data
