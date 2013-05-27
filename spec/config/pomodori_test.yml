@@ -1,6 +1,6 @@
 ---
 database:
-  file: ~/.pomodori/pomodori_test.sqlite3
+  file: pomodori_test.sqlite3
 pomodoro:
   summary: Working on Lorum Ipsum
   duration: 25
