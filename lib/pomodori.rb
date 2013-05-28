@@ -1,4 +1,4 @@
-require "pomodori/version"
+require_relative "pomodori/version"
 
 module Pomodori
 end
