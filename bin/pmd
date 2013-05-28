@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/pomodori'
+require 'gli'
+
+include GLI::App
+
+desc "Setup the Pomodori database and default configuration file"
+command :setup do |c|
+  c.action do |global_options, options, args|
+    puts "setup called"
+  end
+end
+
+desc "Begin a new Pomodoro followed by a Break"
+command :start do |c|
+  c.flag :summary, :s
+  c.flag :length, :l
+
+  c.action do |global_options, options, args|
+    puts "start called"
+  end
+end
+
+desc "End an in-progress Pomodoro"
+command :end do |c|
+  c.action do |global_options, options, args|
+    puts "end called"
+  end
+end
+
+exit run(ARGV)
