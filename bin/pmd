@@ -10,7 +10,8 @@ program_desc "A command-line Pomodoro application"
 desc "Setup the Pomodori database and default configuration file"
 command :setup do |c|
   c.action do
-    puts "setup called"
+    setup = Pomodori::Setup.new
+    setup.run
   end
 end
 
