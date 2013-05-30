@@ -1,12 +1,18 @@
 require 'yaml'
-require 'fileutils'
 
 module Pomodori
   module Config
     attr_reader :config
 
+    # FIXME: Make this a constant instead?
+    def default_config_path
+      config_path = ENV['HOME'] + "/.pomodori"
+      config_path
+    end
+
+    # FIXME: Make this a constant instead?
     def default_config_file
-      file_path = ENV['HOME'] + "/.pomodori/pomodori.yml"
+      file_path = default_config_path + "/pomodori.yml"
       file_path
     end
 
