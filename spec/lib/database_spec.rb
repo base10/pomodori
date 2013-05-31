@@ -3,7 +3,7 @@ require "spec_helper"
 describe Pomodori::Database do
   describe "config" do
     before(:each) do
-      Pomodori::Database.any_instance.stub(:default_config_file).and_return( File.expand_path("../../config/pomodori_test.yml", __FILE__ ))
+      Pomodori::Database.any_instance.stub(:default_config_file).and_return( File.expand_path("../../config/pomodori.yml", __FILE__ ))
     end
 
     it "has a config" do
