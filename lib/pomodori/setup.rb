@@ -5,13 +5,12 @@ module Pomodori
   class Setup
     include Pomodori::Config
 
-    def default_config_path
-      config_path = File.expand_path( "../../../config", __FILE__)
-      config_path
-    end
+    attr_reader :initial_config_file
 
-    def initialize
-      read_config
+    def initialize( file_path = nil )
+      @initial_config_file = file_path || File.expand_path( "../../../config/pomodori.yml", __FILE__)
+
+      read_config @initial_config_file
 
       # TODO: Check to see if an alternate config exists and if it does, 
       # load it
@@ -19,8 +18,8 @@ module Pomodori
 
     def run
       ensure_config_path_exists
+      ensure_config_file_exists
 
-      # Install config if necessary
       # Find database state
         # Create the database
         # Run database migrations
@@ -29,6 +28,12 @@ module Pomodori
     def ensure_config_path_exists
       unless File.directory? default_config_path
         FileUtils.mkdir_p default_config_path
+      end
+    end
+
+    def ensure_config_file_exists
+      unless File.exists? default_config_file
+        FileUtils.cp initial_config_file, default_config_file
       end
     end
   end

@@ -20,15 +20,29 @@ describe Pomodori::Setup do
     end
   end
 
-#   describe "write config file" do
-#     it "creates the config file if it doesn't exist" do
-#       pending
-#     end
-# 
-#     it "respects an existing config file" do
-#       pending
-#     end
-#   end
+  describe "config file handling" do
+    before(:each) do
+      @setup.ensure_config_path_exists
+    end
+
+    context "write config file" do
+      it "creates the config file if it doesn't exist" do
+        expect { @setup.ensure_config_file_exists }.to_not raise_error
+        expect( File.exists?( @setup.default_config_file ) ).to be(true)
+      end
+    end
+
+    context "don't overwrite existing config" do
+      before (:each) do 
+        @setup.ensure_config_file_exists
+      end
+
+      it "respects an existing config file" do
+        expect(FileUtils).to receive(:cp).with(@setup.initial_config_file).exactly(0).times
+        @setup.ensure_config_file_exists
+      end
+    end
+  end
 
   # Find database state
   # Create the database

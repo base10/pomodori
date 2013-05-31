@@ -12,5 +12,3 @@ break:
 long_break:
   summary: Taking a long break
   duration: 15
-setup:
-  directory: "~/.pomodori"
