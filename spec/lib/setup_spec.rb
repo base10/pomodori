@@ -1,28 +1,30 @@
 require "spec_helper"
+require 'fileutils'
 
 describe Pomodori::Setup do
   describe "data directory setup" do
     before(:each) do
       @setup = Pomodori::Setup.new
-      #@setup.stub().and_return(File.expand_path( "../../dotpomodori", __FILE__ )
-
+      allow(@setup).to receive(:default_config_path).and_return( 
+                            File.expand_path( "../../dotpomodori", __FILE__ )  
+                          )
     end
 
     it "creates the .pomodori folder if it doesn't exist" do
-      pending
+      expect { @setup.ensure_config_path_exists }.to_not raise_error
+      expect( File.directory?( @setup.default_config_path ) ).to be(true)
     end
 
     after(:each) do
-      # TODO: Remove the dotpomodori directory
+      FileUtils.rm_rf @setup.default_config_path
     end
   end
 
   describe "write config file" do
   end
 
-  describe "config" do
-    before(:each) do
-      Pomodori::Database.any_instance.stub(:default_config_file).and_return( File.expand_path("../../config/pomodori_test.yml", __FILE__ ))
-    end
-  end
+  # Find database state
+  # Create the database
+  # Run database migrations
+
 end
