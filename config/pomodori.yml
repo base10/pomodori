@@ -1,7 +1,7 @@
 ---
 version: 1
 database:
-  file: pomodori_test.sqlite3
+  file: pomodori.sqlite3
 pomodoro:
   summary: Working on Lorum Ipsum
   duration: 25
@@ -12,3 +12,5 @@ break:
 long_break:
   summary: Taking a long break
   duration: 15
+setup:
+  directory: "~/.pomodori"
