@@ -1,4 +1,6 @@
 require_relative "config"
+require_relative "database"
+
 require 'fileutils'
 
 module Pomodori
@@ -19,7 +21,7 @@ module Pomodori
     def run
       ensure_config_path_exists
       ensure_config_file_exists
-
+      ensure_database_exists
       # Find database state
         # Create the database
         # Run database migrations
@@ -35,6 +37,12 @@ module Pomodori
       unless File.exists? default_config_file
         FileUtils.cp initial_config_file, default_config_file
       end
+    end
+
+    # FIXME: This should probably move to Pomodori::Database
+    def ensure_database_exists
+      dbo = Pomodori::Database.new
+      dbo.ensure_database_exists
     end
   end
 end

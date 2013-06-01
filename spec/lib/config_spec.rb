@@ -3,14 +3,17 @@ require "spec_helper"
 module Pomodori
   class Example  
     include Pomodori::Config
-
-    def initialize(config_file = nil)
-      read_config(config_file)
-    end
   end
 end
 
 describe Pomodori::Example do
+
+  let ( :test_config_path ) { File.expand_path( "../../dotpomodori", __FILE__ ) }
+
+  before(:each) do
+    Pomodori::Example.any_instance.stub(:default_config_path).and_return( test_config_path )
+  end
+
   it "raises an error without a config file" do
     expect { Pomodori::Example.new }.to raise_error(Errno::ENOENT)
   end

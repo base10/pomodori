@@ -44,7 +44,28 @@ describe Pomodori::Setup do
     end
   end
 
-  # Find database state
+  describe "database" do
+    before(:each) do
+      @setup.ensure_config_path_exists
+      @setup.ensure_config_file_exists
+
+      Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
+    end
+
+    describe "new database" do
+      it "creates a new database if one doesn't exist" do
+        expect { @setup.ensure_database_exists }.to_not raise_error
+        expect( File.exists?( 
+                      @setup.default_config_path + "/" + @setup.config['database']['file'] 
+                    ) ).to be(true)
+      end
+    end
+
+    describe "existing database" do
+
+    end
+  end
+
   # Create the database
   # Run database migrations
 end
