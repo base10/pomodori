@@ -4,6 +4,10 @@ module Pomodori
   module Config
     attr_reader :config
 
+  	def initialize( config_file = nil )
+      read_config
+  	end
+
     # FIXME: Make this a constant instead?
     def default_config_path
       config_path = ENV['HOME'] + "/.pomodori"
