@@ -25,9 +25,7 @@ module Pomodori
       ensure_config_path_exists
       ensure_config_file_exists
       ensure_database_exists
-      # Find database state
-        # Create the database
-        # Run database migrations
+      setup_database_schema
     end
 
     def ensure_config_path_exists
@@ -47,6 +45,7 @@ module Pomodori
     end
 
     def setup_database_schema
+      database.setup_database_schema
     end
   end
 end

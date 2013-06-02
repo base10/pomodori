@@ -62,6 +62,8 @@ describe Pomodori::Setup do
 
       it "creates the database structure" do
         expect { @setup.setup_database_schema }.to_not raise_error
+        
+
       end
     end
   end
