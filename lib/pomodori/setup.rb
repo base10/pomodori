@@ -8,11 +8,14 @@ module Pomodori
     include Pomodori::Config
 
     attr_reader :initial_config_file
+    attr_reader :database
 
     def initialize( file_path = nil )
       @initial_config_file = file_path || File.expand_path( "../../../config/pomodori.yml", __FILE__)
 
       read_config @initial_config_file
+
+      @database = Pomodori::Database.new( @initial_config_file )
 
       # TODO: Check to see if an alternate config exists and if it does, 
       # load it
@@ -39,10 +42,11 @@ module Pomodori
       end
     end
 
-    # FIXME: This should probably move to Pomodori::Database
     def ensure_database_exists
-      dbo = Pomodori::Database.new
-      dbo.ensure_database_exists
+      database.ensure_database_exists
+    end
+
+    def setup_database_schema
     end
   end
 end

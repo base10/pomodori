@@ -5,7 +5,7 @@ module Pomodori
     attr_reader :config
 
   	def initialize( config_file = nil )
-      read_config
+      read_config config_file
   	end
 
     # FIXME: Make this a constant instead?

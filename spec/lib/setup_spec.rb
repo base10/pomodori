@@ -59,13 +59,12 @@ describe Pomodori::Setup do
                       @setup.default_config_path + "/" + @setup.config['database']['file'] 
                     ) ).to be(true)
       end
-    end
 
-    describe "existing database" do
-
+      it "creates the database structure" do
+        expect { @setup.setup_database_schema }.to_not raise_error
+      end
     end
   end
 
-  # Create the database
   # Run database migrations
 end
