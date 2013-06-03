@@ -22,8 +22,13 @@ module Pomodori
       create_table_schema_migrations
     end
 
-    def create_table_schema_migrations
+    def connect
       @db_handle = Sequel.connect("sqlite:///#{database_file}")
+    end
+
+    def create_table_schema_migrations
+      connect
+      
       @db_handle.run("create table schema_migrations ( version integer )")
       @db_handle.run("insert into schema_migrations values ( '1' )")
     end
