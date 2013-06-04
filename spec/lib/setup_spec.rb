@@ -62,11 +62,8 @@ describe Pomodori::Setup do
 
       it "creates the database structure" do
         expect { @setup.setup_database_schema }.to_not raise_error
-        
-
+        # TODO: Add a test to validate that schema migrations have run
       end
     end
   end
-
-  # Run database migrations
 end

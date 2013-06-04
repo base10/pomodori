@@ -5,11 +5,22 @@ module Pomodori
   class Database
     include Pomodori::Config
 
+    Sequel.extension :migration
+
     attr_accessor :db_handle
 
     def database_file
       db_file = default_config_path + "/" + config['database']['file']
       db_file
+    end
+
+    def connect
+      @db_handle = Sequel.connect("sqlite:///#{database_file}")
+    end
+
+    def migrations_path
+      migrations = File.expand_path( "../../../config/migrations", __FILE__ )
+      migrations
     end
 
     def ensure_database_exists
@@ -18,19 +29,8 @@ module Pomodori
       end
     end
 
-    def setup_database_schema
-      create_table_schema_migrations
-    end
-
-    def connect
-      @db_handle = Sequel.connect("sqlite:///#{database_file}")
-    end
-
-    def create_table_schema_migrations
-      connect
-      
-      @db_handle.run("create table schema_migrations ( version integer )")
-      @db_handle.run("insert into schema_migrations values ( '1' )")
+    def run_migrations
+      Sequel::Migrator.run( connect, migrations_path, :use_transactions => true )
     end
   end
 end

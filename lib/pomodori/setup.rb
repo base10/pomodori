@@ -45,7 +45,7 @@ module Pomodori
     end
 
     def setup_database_schema
-      database.setup_database_schema
+      database.run_migrations
     end
   end
 end
