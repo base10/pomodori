@@ -9,8 +9,8 @@ Sequel.migration do
       DateTime      :created_at
       DateTime      :completed_at
       
-      index :event_type
-      index :created_at
+      index         :event_type
+      index         :created_at
     end
   end
   
