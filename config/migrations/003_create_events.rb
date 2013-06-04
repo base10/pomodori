@@ -4,12 +4,13 @@ Sequel.migration do
       primary_key   :id
       String        :summary
       Integer       :duration
-      enum          :event_type,  :elements => [ 'Pomodoro', 'Break', 'LongBreak']
-      enum          :state,       :elements => [ 'complete', 'aborted', 'in_progress' ]
+
       DateTime      :created_at
       DateTime      :completed_at
+
+      foreign_key   :event_type_id, :event_types
+      foreign_key   :state_id,      :states
       
-      index         :event_type
       index         :created_at
     end
   end
