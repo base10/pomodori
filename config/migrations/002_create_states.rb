@@ -4,6 +4,8 @@ Sequel.migration do
       primary_key   :id
       String        :name
     end
+
+    #     enum          :state,       :elements => ['complete', 'aborted', 'in_progress']
   end
   
   down do
