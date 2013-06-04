@@ -3,7 +3,7 @@ Sequel.migration do
     create_table(:notifications) do
       primary_key   :id
 
-      enum          :action, :elements => ['complete', 'halfway']
+      String        :action
 
       DateTime      :deliver_at
       DateTime      :completed_at
