@@ -5,13 +5,15 @@ Sequel.migration do
       String        :summary
       Integer       :duration
 
+      String        :kind
+      String        :state
+
       DateTime      :created_at
       DateTime      :completed_at
 
-      foreign_key   :event_type_id, :event_types
-      foreign_key   :state_id,      :states
-      
       index         :created_at
+      index         :kind
+      index         :state
     end
   end
   
