@@ -8,6 +8,7 @@ gemspec
 # guard, spork and others are "nice to have"
 
 gem "rspec",        '~> 2.14rc1'
+gem "factory_girl"
 gem "guard-bundler"
 gem "guard-rspec"
 gem "guard-spork"
