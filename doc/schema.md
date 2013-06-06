@@ -5,8 +5,8 @@
 - id
 - summary
 - duration
-- event_type (enum: pomodoro, break, long_break)
-- state (enum: complete, aborted, in_progress)
+- kind (pomodoro, break, long_break)
+- state (complete, aborted, in_progress)
 - started_at
 - completed_at
 
