@@ -5,12 +5,19 @@
 # kinds:    'pomodoro', 'break', 'long_break'
 # States:   'complete', 'aborted', 'in_progress'
 
-module Pomodori
-  class Event
-    include Pomodori::Config
+@@database = Pomodori::Database.new
+@@database.connect
 
+module Pomodori
+  class Event < Sequel::Model
     attr_accessor :notifications, :summary, :duration, 
-                  :started_at, :completed_at
+                  :started_at, :completed_at, :database
+
+    def initialize(*opts)
+      @config = @@database.config
+
+      super opts
+    end
 
     def kind
       
@@ -19,5 +26,13 @@ module Pomodori
     def state
       
     end
+
+    def validate
+
+    end
+
+    # begin
+    # mark_complete
+    # mark_incomplete
   end
 end
