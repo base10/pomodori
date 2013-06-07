@@ -1,3 +1,5 @@
+require 'factory_girl'
+
 FactoryGirl.define do
   factory :pomodoro do
     summary       'Starting Project Lorum Ipsum'
