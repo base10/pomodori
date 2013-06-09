@@ -15,6 +15,12 @@ Spork.prefork do
     config.run_all_when_everything_filtered = true
     config.filter_run :focus
 
+    ## TODO: Put the set-up block here for configs. Alternately, I require
+    ## files for the spec files themselves. Might be an interesting bit of 
+    ## inception, that.
+    
+    ## Other strategy: Rescue the exception, run setup?
+
     # Require Ruby files under the lib directory
     base_dir = File.expand_path("../../", __FILE__)
     Dir["#{base_dir}/lib/**/*.rb"].each {|f| require f}
