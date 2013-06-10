@@ -14,8 +14,10 @@ describe Pomodori::Example do
     Pomodori::Example.any_instance.stub(:default_config_path).and_return( test_config_path )
   end
 
-  it "raises an error without a config file" do
-    expect { Pomodori::Example.new }.to raise_error(Errno::ENOENT)
+  it "has a baseline config if no config file is available" do
+    expect { @example = Pomodori::Example.new }.to_not raise_error
+    
+    @example
   end
 
   it "raises an error with an invalid YAML file" do

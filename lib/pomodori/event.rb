@@ -9,12 +9,11 @@
 # @@database.connect
 # 
 
-#@@database = Pomodori::Database.new
-
 module Pomodori
-#   DB = @@database.connect
+  @@database = Pomodori::Database.new
+  DB = @@database.connect
 
-  class Event #< Sequel::Model
+  class Event < Sequel::Model
     attr_accessor :notifications, :summary, :duration, 
                   :started_at, :completed_at, :database
 
