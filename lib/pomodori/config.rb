@@ -32,10 +32,11 @@ module Pomodori
                       'file' => File.expand_path('../../tmp/tmp_db.sqlite3', __FILE__) 
                     }
                   }
+
+        # TODO: Determine context (am I testing?) and specify a more specific
+        # error message
       end
 
-      # TODO: Consider wrapping this in a begin/rescue block to 
-      # specify a more specific error message
     end
   end
 end
