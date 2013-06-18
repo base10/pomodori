@@ -36,7 +36,6 @@ module Pomodori
         # TODO: Determine context (am I testing?) and specify a more specific
         # error message
       end
-
     end
   end
 end

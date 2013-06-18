@@ -16,8 +16,7 @@ describe Pomodori::Example do
 
   it "has a baseline config if no config file is available" do
     expect { @example = Pomodori::Example.new }.to_not raise_error
-    
-    @example
+    expect(@example.config).to have_key('database')
   end
 
   it "raises an error with an invalid YAML file" do
