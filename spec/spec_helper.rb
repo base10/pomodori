@@ -15,6 +15,8 @@ Spork.prefork do
     config.run_all_when_everything_filtered = true
     config.filter_run :focus
 
+    config.include FactoryGirl::Syntax::Methods
+
     ## TODO: Put the set-up block here for configs. Alternately, I require
     ## files for the spec files themselves. Might be an interesting bit of 
     ## inception, that.
