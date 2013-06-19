@@ -1,8 +1,5 @@
 require "spec_helper"
 
-
-
-
 describe "Pomodori::Pomodoro" do
   let ( :test_config_path ) { File.expand_path( "../../dotpomodori", __FILE__ ) }
 
@@ -20,17 +17,21 @@ describe "Pomodori::Pomodoro" do
 
     @database = Pomodori::Database.new
     @database.connect
+
+    @config = @database.config
   end
 
   after(:each) do
     FileUtils.rm_rf test_config_path
   end
 
-  describe "save a valid object" do
-    pomodoro = FactoryGirl.build(:pomodoro)
+  describe "saving" do
     
-    pending
-    #expect { pomodoro.save }.to_not raise_error
+    it "saves a valid object" do
+      pomodoro = build(:pomodoro, config: @config)
+      #expect(pomodoro.valid?).to be_true
+      #expect { pomodoro.save }.to_not raise_error
+    end
   end
 
   # TODO: Test for failure without a config

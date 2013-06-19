@@ -10,18 +10,22 @@
 # 
 
 module Pomodori
-  @@database = Pomodori::Database.new
-  DB = @@database.connect
+  database  = Pomodori::Database.new
+  DB        = database.connect
+
+  CONFIG    = database.config
 
   class Event < Sequel::Model
+    include Pomodori::Config
+
     attr_accessor :notifications, :summary, :duration, 
                   :started_at, :completed_at, :database
 
-    def initialize(*opts)
-      #@config = @@database.config
-
-      #super opts
-    end
+#     def initialize(*opts)
+#       @config = CONFIG
+# 
+#       super opts
+#     end
 
     def kind
       

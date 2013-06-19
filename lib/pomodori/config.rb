@@ -1,8 +1,9 @@
 require 'yaml'
+require 'pp'
 
 module Pomodori
   module Config
-    attr_reader :config, :needs_setup
+    attr_accessor :config, :needs_setup
 
   	def initialize( config_file = nil )
       read_config config_file
