@@ -20,3 +20,13 @@ Tried the above, sadly, it doesn't look like it's going to work, so onto doing s
 
 ## 2013-06-19
 
+Giving Pomodori::Event information about the table Sequel::Model should expect to work against and testing is a bit of pain, particularly if I expect that I don't have a database. I was hoping to present a good bootstrapping experience and have that tested on every run, but it seems like that's not a good thing to expect. That would involve having to do a lot more magic in spec_helper that I probably shouldn't be doing.
+
+A brief divergence into what I shouldn't be doing:
+
+- Have spec_helper.rb require each file under lib, as it does now
+- rescue Sequel::DatabaseConnectionError *and*, bonus crazy, run the database migrations against a temp sql file
+
+What I should do instead:
+
+- Take the Ruby on Rails approach of expecting set-up to be done ahead of testing with a database present
