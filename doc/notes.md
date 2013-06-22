@@ -30,3 +30,4 @@ A brief divergence into what I shouldn't be doing:
 What I should do instead:
 
 - Take the Ruby on Rails approach of expecting set-up to be done ahead of testing with a database present
+- Continue on with building Event and Pomodori models
