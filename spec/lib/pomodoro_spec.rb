@@ -11,16 +11,14 @@ describe "Pomodori::Pomodoro" do
 
     @setup.run
 
-    # TODO, see if I can setup a Sequel::Model.db call here and get the model 
+    # TODO: see if I can setup a Sequel::Model.db call here and get the model 
     # to work. As if I had to call Sequel.connect or something before I even
     # opened an object
 
     @database = Pomodori::Database.new
     @database.connect
 
-    @config = @database.config
-    
-    pp @config
+    @config = @database.config    
   end
 
   after(:each) do

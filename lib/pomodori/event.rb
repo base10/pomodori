@@ -17,11 +17,12 @@ module Pomodori
 
   CONFIG    = database.config
 
-  class Event < Sequel::Model(:events)
+  class Event #< Sequel::Model(:events)
     include Pomodori::Config
 
-#     attr_accessor :notifications, :summary, :duration, 
-#                   :started_at, :completed_at, :database
+    # FIXME: These *may* go away when Sequel::Model gets working
+    attr_accessor :notifications, :summary, :duration, 
+                  :started_at, :completed_at, :database
 
     def after_initialize
       super
