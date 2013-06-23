@@ -24,12 +24,10 @@ That said, if you get what you need working with a stop watch or other timing me
 ## Prerequisites
 
 - Ruby 1.9.3
-- SQLite
+- SQLite3
 - Sequel
 
-## Nice to have
-
-- Growl or Notification Center
+I'm writing this on OS X Mountain Lion, so I'm also expecting things like Notification Center. NB: Mountain Lion and earlier releases of OS X use an older version of Ruby. You'll need to update that to a later version. To do that (and install some of this software), you'll need developer tools installed.
 
 ## Installation
 
@@ -39,12 +37,28 @@ This is a complete command line application distributed as a gem. Install it wit
 
 ## Usage
 
-TODO: Write usage instructions here
+Everything with Pomodori starts with the command `pmd`. Use `pmd help` to see what's available.
+
+Once you install Pomodori, you should run the setup command.
+
+    $ pmd setup
+
+This will get you started with a config file (pomodori.yml) and a database file (pomodori.sqlite3). You can find those in $HOME/.pomodori.
+
+To start a new pomodoro with a default summary, run:
+
+    $ pmd start
+    
+You can also specify a specific summary:
+
+    $ pmd start -s "Defining Pomodori usage"
 
 ## Contributing
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+3. Make your changes, adding tests as appropriate
+4. Make sure tests pass cleanly (`rspec`)
+5. Commit your changes (`git commit -am 'Add some feature'`)
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create new Pull Request
