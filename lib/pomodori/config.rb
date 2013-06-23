@@ -42,7 +42,13 @@ module Pomodori
 
     def set_environment
       if ENV['POMODORI_ENV']
-        @environment = 'production'
+        known_environments = ['production', 'test', 'development']
+
+        if known_environments.member?(ENV['POMODORI_ENV'])
+          @environment = ENV['POMODORI_ENV']
+        else
+          raise Exception, "Improper environment. Must be in #{known_environments.flatten}"
+        end
       else
         @environment = 'production'
       end

@@ -40,35 +40,53 @@ describe Pomodori::Example do
   end
 
   describe 'environments' do
-    let ( :environment )  { 'test' }
+    describe "known or default" do
+      let ( :environment )  { 'test' }
 
-    before(:each) do
-      ENV['POMODORI_ENV'] = environment
+      before(:each) do
+        ENV['POMODORI_ENV'] = environment
       
-      @config = Pomodori::Example.new
-    end
+        @config = Pomodori::Example.new
+      end
 
-    describe "test" do
-    
-    end
-    
-    describe "development" do
-    
-    end
+      describe "test" do
+        let ( :environment ) { 'test' }
 
-    describe "production" do
-      let ( :environment ) { 'production' }
+        it "supports test environment" do
+          expect( @config.environment ).to eq('test')
+        end
+      end
+    
+      describe "development" do
+        let ( :environment ) { 'development' }
+    
+        it "supports development environment" do
+          expect( @config.environment ).to eq('development')
+        end    
+      end
 
-      it "supports production environment" do
-        expect( @config.environment ).to eq('production')
+      describe "production" do
+        let ( :environment ) { 'production' }
+
+        it "supports production environment" do
+          expect( @config.environment ).to eq('production')
+        end
+      end
+
+      describe "nil (default)" do
+        let ( :environment ) { nil }
+    
+        it "sets a default environment" do
+          expect( @config.environment ).to eq('production')
+        end
       end
     end
 
-    describe "nil (default)" do
-      let ( :environment ) { nil }
-    
+    describe "bad environment raises Exception" do
       it "sets a default environment" do
-        expect( @config.environment ).to eq('production')
+        ENV['POMODORI_ENV'] = "OHAI"
+
+        expect { Pomodori::Example.new }.to raise_error
       end
     end
   end
