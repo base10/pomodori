@@ -3,10 +3,11 @@ require 'pp'
 
 module Pomodori
   module Config
-    attr_accessor :config, :needs_setup
+    attr_accessor :config, :needs_setup, :environment
 
   	def initialize( config_file = nil )
       read_config config_file
+      set_environment
   	end
 
     # FIXME: Make this a constant instead?
@@ -36,6 +37,14 @@ module Pomodori
 
         # TODO: Determine context (am I testing?) and specify a more specific
         # error message
+      end
+    end
+
+    def set_environment
+      if ENV['POMODORI_ENV']
+        @environment = 'production'
+      else
+        @environment = 'production'
       end
     end
   end

@@ -14,26 +14,62 @@ describe Pomodori::Example do
     Pomodori::Example.any_instance.stub(:default_config_path).and_return( test_config_path )
   end
 
-  it "has a baseline config if no config file is available" do
-    expect { @example = Pomodori::Example.new }.to_not raise_error
-    expect(@example.config).to have_key('database')
+  describe "config" do 
+    it "has a baseline config if no config file is available" do
+      expect { @example = Pomodori::Example.new }.to_not raise_error
+      expect(@example.config).to have_key('database')
+    end
+
+    it "raises an error with an invalid YAML file" do
+      File.stub(:exists?).and_return(true)
+      File.stub(:read).and_return("- foo\rfoo -\r - bar")
+
+      expect { Pomodori::Example.new }.to raise_error(SyntaxError)
+    end
+
+    it "sets the config accessor" do
+      File.stub(:exists?).and_return(true)
+      File.stub(:read).and_return("---\nfoo: bar\nbippy: baz")
+    
+      config_obj = Pomodori::Example.new
+    
+      expect( config_obj.config ).to_not    be(nil)
+      expect( config_obj.config.class ).to  be(Hash)
+      expect( config_obj.config['foo'] ).to eq('bar')
+    end
   end
 
-  it "raises an error with an invalid YAML file" do
-    File.stub(:exists?).and_return(true)
-    File.stub(:read).and_return("- foo\rfoo -\r - bar")
+  describe 'environments' do
+    let ( :environment )  { 'test' }
 
-    expect { Pomodori::Example.new }.to raise_error(SyntaxError)
-  end
+    before(:each) do
+      ENV['POMODORI_ENV'] = environment
+      
+      @config = Pomodori::Example.new
+    end
 
-  it "sets the config accessor" do
-    File.stub(:exists?).and_return(true)
-    File.stub(:read).and_return("---\nfoo: bar\nbippy: baz")
+    describe "test" do
     
-    config_obj = Pomodori::Example.new
+    end
     
-    expect( config_obj.config ).to_not    be(nil)
-    expect( config_obj.config.class ).to  be(Hash)
-    expect( config_obj.config['foo'] ).to eq('bar')
+    describe "development" do
+    
+    end
+
+    describe "production" do
+      let ( :environment ) { 'production' }
+
+      it "supports production environment" do
+        expect( @config.environment ).to eq('production')
+      end
+    end
+
+    describe "nil (default)" do
+      let ( :environment ) { nil }
+    
+      it "sets a default environment" do
+        expect( @config.environment ).to eq('production')
+      end
+    end
   end
 end
