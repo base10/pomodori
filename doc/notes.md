@@ -31,3 +31,7 @@ What I should do instead:
 
 - Take the Ruby on Rails approach of expecting set-up to be done ahead of testing with a database present
 - Continue on with building Event and Pomodori models
+
+## 2013-06-22
+
+Beginning work setting up a test database as noted above.
