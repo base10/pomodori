@@ -19,6 +19,8 @@ describe "Pomodori::Pomodoro" do
     @database.connect
 
     @config = @database.config
+    
+    pp @config
   end
 
   after(:each) do
@@ -29,6 +31,9 @@ describe "Pomodori::Pomodoro" do
     
     it "saves a valid object" do
       pomodoro = build(:pomodoro, config: @config)
+      
+      #pp pomodoro
+
       #expect(pomodoro.valid?).to be_true
       #expect { pomodoro.save }.to_not raise_error
     end
