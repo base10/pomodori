@@ -1,9 +1,11 @@
 ---
 version: 1
 database:
-  file: pomodori.sqlite3
+  production: pomodori.sqlite3
+  test: pomodori_test.sqlite3
+  development: pomodori_development.sqlite3
 pomodoro:
-  summary: Working on Lorum Ipsum
+  summary: Working on something awesome
   duration: 25
   count_to_long_break: 4
 break:
