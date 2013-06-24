@@ -7,6 +7,8 @@ Spork.prefork do
   require 'rspec/autorun'
 
   RSpec.configure do |config|
+    ENV['POMODORI_ENV'] = 'test'
+
     config.mock_with :rspec do |config|
       config.syntax = [:expect, :should]
     end
