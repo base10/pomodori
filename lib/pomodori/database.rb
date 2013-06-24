@@ -11,6 +11,10 @@ module Pomodori
     attr_accessor :db_handle
 
     def database_file
+      unless known_environments.member?(environment)
+        raise Exception, "Improper environment. Must be in #{known_environments.flatten}"
+      end
+
       db_file = default_config_path + "/" + config['database']["#{environment}"]
       db_file
     end

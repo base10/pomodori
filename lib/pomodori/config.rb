@@ -44,10 +44,12 @@ module Pomodori
       end
     end
 
+    def known_environments
+      ['production', 'test', 'development']
+    end
+
     def set_environment
       if ENV['POMODORI_ENV']
-        known_environments = ['production', 'test', 'development']
-
         if known_environments.member?(ENV['POMODORI_ENV'])
           @environment = ENV['POMODORI_ENV']
         else
