@@ -28,10 +28,14 @@ module Pomodori
       if File.exists?( config_file )
         @config = YAML.load( File.read( config_file ) )
       else
-        @needs_setup = true
+        @needs_setup  = true
+        db_path       = File.expand_path('../../tmp/tmp_db.sqlite3', __FILE__)
+
         @config = {
                     'database' => {
-                      'file' => File.expand_path('../../tmp/tmp_db.sqlite3', __FILE__) 
+                      'production'  => db_path,
+                      'test'        => db_path,
+                      'development' => db_path
                     }
                   }
 

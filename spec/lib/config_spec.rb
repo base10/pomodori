@@ -14,6 +14,10 @@ describe Pomodori::Example do
     Pomodori::Example.any_instance.stub(:default_config_path).and_return( test_config_path )
   end
 
+  after(:each) do
+    ENV['POMODORI_ENV'] = "test"
+  end
+
   describe "config" do 
     it "has a baseline config if no config file is available" do
       expect { @example = Pomodori::Example.new }.to_not raise_error
