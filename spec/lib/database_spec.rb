@@ -16,6 +16,7 @@ describe Pomodori::Database do
 
   after(:each) do
     FileUtils.rm_rf test_config_path
+    ENV['POMODORI_ENV'] = 'test'
   end
 
   describe "config" do
@@ -24,9 +25,16 @@ describe Pomodori::Database do
     end
   end
 
-  describe "database file by environment" do 
-    it "finds a database file by environment variable" do
-      pending
+  describe "database files by environment" do 
+    ['test', 'development', 'production'].each do |env|
+      before(:each) do 
+        ENV['POMODORI_ENV'] = env
+        @database = Pomodori::Database.new
+      end
+
+      it "knows where the #{env} database_file is" do
+        expect(@database.database_file).to_not be(nil)
+      end
     end
   end
 
