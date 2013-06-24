@@ -1,5 +1,6 @@
 require 'sequel'
 require 'sqlite3'
+require 'pp'
 
 module Pomodori
   class Database
@@ -10,7 +11,7 @@ module Pomodori
     attr_accessor :db_handle
 
     def database_file
-      db_file = default_config_path + "/" + config['database']['file']
+      db_file = default_config_path + "/" + config['database']["#{environment}"]
       db_file
     end
 

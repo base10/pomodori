@@ -56,7 +56,7 @@ describe Pomodori::Setup do
       it "creates a new database if one doesn't exist" do
         expect { @setup.ensure_database_exists }.to_not raise_error
         expect( File.exists?( 
-                      @setup.default_config_path + "/" + @setup.config['database']['file'] 
+                      @setup.default_config_path + "/" + @setup.config['database']['test'] 
                     ) ).to be(true)
       end
 

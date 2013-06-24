@@ -24,6 +24,12 @@ describe Pomodori::Database do
     end
   end
 
+  describe "database file by environment" do 
+    it "finds a database file by environment variable" do
+      pending
+    end
+  end
+
   describe "connection" do
     it "connects to a database" do
       expect { @database.connect }.to_not raise_error
