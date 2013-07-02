@@ -55,21 +55,20 @@ describe Pomodori::Setup do
         @setup.ensure_config_path_exists
         @setup.ensure_config_file_exists
 
+        @test_path = @setup.default_config_path + "/" + @setup.config['database']["#{ENV['POMODORI_ENV']}"]
+
         Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
       end
 
       describe "new database for #{kenv}" do
         it "sets the correct database path by environment" do        
-          puts @setup.default_config_path + "/" + @setup.config['database']["#{ENV['POMODORI_ENV']}"]
+          #puts @test_path
           pending
         end
 
         it "creates a new database if one doesn't exist" do
           expect { @setup.ensure_database_exists }.to_not raise_error
-
-          expect( File.exists?( 
-                        @setup.default_config_path + "/" + @setup.config['database']["#{ENV['POMODORI_ENV']}"]
-                      ) ).to eq(true)
+          expect( File.exists?( @test_path ) ).to eq(true)
         end
 
         it "creates the database structure for #{kenv}" do
