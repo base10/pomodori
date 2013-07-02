@@ -2,7 +2,6 @@ require 'spork'
 require 'factory_girl'
 
 Spork.prefork do
-
   require 'rspec/core'
   require 'rspec/autorun'
 
