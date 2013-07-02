@@ -2,15 +2,17 @@ require "spec_helper"
 require 'fileutils'
 
 describe Pomodori::Setup do
-  let ( :test_config_path ) { File.expand_path( "../../dotpomodori", __FILE__ ) }
+  let ( :test_config_path )     { File.expand_path( "../../dotpomodori", __FILE__ ) }
 
   before(:each) do
+    Pomodori::Setup.any_instance.stub(:default_config_path).and_return( test_config_path )
     @setup = Pomodori::Setup.new
-    allow(@setup).to receive(:default_config_path).and_return( test_config_path )
   end
 
   after(:each) do
     FileUtils.rm_rf test_config_path
+
+    ENV['POMODORI_ENV'] = 'test'
   end
 
   describe "data directory setup" do
@@ -45,24 +47,35 @@ describe Pomodori::Setup do
   end
 
   describe "database" do
-    before(:each) do
-      @setup.ensure_config_path_exists
-      @setup.ensure_config_file_exists
+    ['production', 'test', 'development'].each do |kenv|
+      before(:each) do
+        ENV['POMODORI_ENV'] = kenv        
 
-      Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
-    end
+        @setup = Pomodori::Setup.new
+        @setup.ensure_config_path_exists
+        @setup.ensure_config_file_exists
 
-    describe "new database" do
-      it "creates a new database if one doesn't exist" do
-        expect { @setup.ensure_database_exists }.to_not raise_error
-        expect( File.exists?( 
-                      @setup.default_config_path + "/" + @setup.config['database']['test'] 
-                    ) ).to be(true)
+        Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
       end
 
-      it "creates the database structure" do
-        expect { @setup.setup_database_schema }.to_not raise_error
-        # TODO: Add a test to validate that schema migrations have run
+      describe "new database for #{kenv}" do
+        it "sets the correct database path by environment" do        
+          puts @setup.default_config_path + "/" + @setup.config['database']["#{ENV['POMODORI_ENV']}"]
+          pending
+        end
+
+        it "creates a new database if one doesn't exist" do
+          expect { @setup.ensure_database_exists }.to_not raise_error
+
+          expect( File.exists?( 
+                        @setup.default_config_path + "/" + @setup.config['database']["#{ENV['POMODORI_ENV']}"]
+                      ) ).to eq(true)
+        end
+
+        it "creates the database structure for #{kenv}" do
+          expect { @setup.setup_database_schema }.to_not raise_error
+          # TODO: Add a test to validate that schema migrations have run
+        end
       end
     end
   end
