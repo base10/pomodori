@@ -46,24 +46,39 @@ describe Pomodori::Setup do
     end
   end
 
+  
+
   describe "database" do
-    ['production', 'test', 'development'].each do |kenv|
+    env_list = ['production', 'development', 'test']
+
+    def setup_by_env(env)
+      ENV['POMODORI_ENV'] = env
+
+      setup = Pomodori::Setup.new
+
+      setup.ensure_config_path_exists
+      setup.ensure_config_file_exists
+
+      setup
+    end
+
+    def test_path(setup_obj)
+      env = setup_obj.environment    
+      setup_obj.default_config_path + "/" + setup_obj.config['database'][env]
+    end
+
+    env_list.each do |kenv|
       before(:each) do
-        ENV['POMODORI_ENV'] = kenv        
-
-        @setup = Pomodori::Setup.new
-        @setup.ensure_config_path_exists
-        @setup.ensure_config_file_exists
-
-        @test_path = @setup.default_config_path + "/" + @setup.config['database']["#{ENV['POMODORI_ENV']}"]
-
         Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
       end
 
       describe "new database for #{kenv}" do
-        it "sets the correct database path by environment" do        
-          #puts @test_path
-          pending
+        it "sets the correct database path by environment", focus: true do
+          @setup      = setup_by_env(kenv)
+          @test_path  = test_path(@setup)
+
+          expect( @setup.database.database_file ).to eq(@test_path)
+          expect( @setup.database.database_file ).to match(/#{kenv}/)
         end
 
         it "creates a new database if one doesn't exist" do
