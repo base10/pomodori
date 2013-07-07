@@ -35,3 +35,12 @@ What I should do instead:
 ## 2013-06-22
 
 Beginning work setting up a test database as noted above.
+
+
+## 2013-07-06
+
+Ideally, addressing last pieces of having environments do the right thing.
+
+- Looking at the tests, it looks like I'm expecting the setup object to know about accessors that _other_ objects are setting. That's no good. Found out that I wasn't setting the environment in the Setup object
+- Updated config file, tweaked matchers
+- Should resolve Issue #4
