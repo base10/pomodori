@@ -18,7 +18,7 @@ module Pomodori
   CONFIG    = database.config
 
   class Event #< Sequel::Model(:events)
-    include Pomodori::Config
+    include Pomodori::Configure
 
     # FIXME: These *may* go away when Sequel::Model gets working
     attr_accessor :notifications, :summary, :duration, 
@@ -30,15 +30,15 @@ module Pomodori
     end
 
     def kind
-      
-    end
-
-    def kind=( thing )
     
     end
 
+    def kind=( thing )
+  
+    end
+
     def state
-      
+    
     end
 
     def validate

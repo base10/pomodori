@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Pomodori
   class Example  
-    include Pomodori::Config
+    include Pomodori::Configure
   end
 end
 

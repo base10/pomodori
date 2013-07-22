@@ -4,7 +4,7 @@ require 'pp'
 
 module Pomodori
   class Database
-    include Pomodori::Config
+    include Pomodori::Configure
 
     Sequel.extension :migration
 

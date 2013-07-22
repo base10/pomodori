@@ -2,13 +2,13 @@ require 'yaml'
 require 'pp'
 
 module Pomodori
-  module Config
+  module Configure
     attr_accessor :config, :needs_setup, :environment
 
-  	def initialize( config_file = nil )
+    def initialize( config_file = nil )
       read_config config_file
       set_environment
-  	end
+    end
 
     # FIXME: Make this a constant instead?
     def default_config_path

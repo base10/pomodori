@@ -1,11 +1,8 @@
-require_relative "config"
-require_relative "database"
-
 require 'fileutils'
 
 module Pomodori
   class Setup
-    include Pomodori::Config
+    include Pomodori::Configure
 
     attr_reader :initial_config_file
     attr_reader :database

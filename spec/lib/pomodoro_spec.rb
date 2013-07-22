@@ -29,12 +29,9 @@ describe "Pomodori::Pomodoro" do
     
     it "saves a valid object" do
       pomodoro = build(:pomodoro, config: @config)
-      pending
 
-      #pp pomodoro
-
-      #expect(pomodoro.valid?).to be_true
-      #expect { pomodoro.save }.to_not raise_error
+      expect(pomodoro.valid?).to be_true
+      expect { pomodoro.save }.to_not raise_error
     end
   end
 
