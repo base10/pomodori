@@ -46,8 +46,6 @@ describe Pomodori::Setup do
     end
   end
 
-  
-
   describe "database" do
     env_list = ['production', 'development', 'test']
 
@@ -70,10 +68,12 @@ describe Pomodori::Setup do
     env_list.each do |kenv|
       before(:each) do
         Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
+
+        setup_by_env(kenv)
       end
 
       describe "new database for #{kenv}" do
-        it "sets the correct database path by environment", focus: true do
+        it "sets the correct database path by environment" do
           @setup      = setup_by_env(kenv)
           @test_path  = test_path(@setup)
 
@@ -83,7 +83,7 @@ describe Pomodori::Setup do
 
         it "creates a new database if one doesn't exist" do
           expect { @setup.ensure_database_exists }.to_not raise_error
-          expect( File.exists?( @test_path ) ).to eq(true)
+          expect( File.exists?( test_path(@setup) ) ).to eq(true)
         end
 
         it "creates the database structure for #{kenv}" do

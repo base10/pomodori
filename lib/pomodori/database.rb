@@ -1,5 +1,5 @@
 require 'sequel'
-require 'sqlite3'
+require 'fileutils'
 require 'pp'
 
 module Pomodori
@@ -29,8 +29,31 @@ module Pomodori
     end
 
     def ensure_database_exists
+#       unless File.exists?( database_file )
+#         puts "I'm ensuring a database!"
+#
+#         begin
+#           @db_handle = SQLite3::Database.new database_file
+#         rescue SQLite3::CantOpenException => e
+#           pp e
+#           puts database_file
+#
+#           raise e
+#         end
+#
+#       else
+#         puts "No database needed!"
+#       end
+
       unless File.exists?( database_file )
-        @db_handle = SQLite3::Database.new database_file
+        begin
+          FileUtils.touch database_file
+        rescue Errno::ENOENT => e
+          pp e
+          raise e
+        end
+
+        connect
       end
     end
 
