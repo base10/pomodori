@@ -36,10 +36,12 @@ module Pomodori
       end
     end
 
+    # FIXME: Likely component of DCI
     def ensure_database_exists
       database.ensure_database_exists
     end
 
+    # FIXME: Likely component of DCI
     def setup_database_schema
       database.run_migrations
     end
