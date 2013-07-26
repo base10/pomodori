@@ -17,7 +17,7 @@ module Pomodori
 
   CONFIG    = database.config
 
-  class Event #< Sequel::Model(:events)
+  class Event < Sequel::Model(:events)
     include Pomodori::Configure
 
     # FIXME: These *may* go away when Sequel::Model gets working
