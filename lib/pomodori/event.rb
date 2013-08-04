@@ -24,18 +24,23 @@ module Pomodori
     end
 
     def kind
-    
+
     end
 
     def validate
       super
       
       validate_summary
+      validate_duration
     end
 
     def validate_summary
       errors.add(:summary, "can't be nil")   if summary.nil?
       errors.add(:summary, "can't be empty") if summary.respond_to?(:empty?) && summary.empty?
+    end
+
+    def validate_duration
+      errors.add(:duration, "can't be nil") if duration.nil?
     end
 
     # begin

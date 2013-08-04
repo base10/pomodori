@@ -42,9 +42,15 @@ describe "Pomodori::Pomodoro" do
       pomodoro = build(:pomodoro, config: @config, summary: nil)
       expect(pomodoro.valid?).to be_false
     end
+
+    it "expects a duration" do
+      pomodoro = build(:pomodoro, config: @config, duration: '')
+      expect(pomodoro.valid?).to be_false
+    end
   end
 
   # TODO: Testing of business logic/workflow
+    # Auto-set kind, determine or accept duration
 
   # TODO: Test for failure without a config
 end
