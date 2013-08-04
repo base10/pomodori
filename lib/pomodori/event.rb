@@ -5,24 +5,18 @@
 # kinds:    'pomodoro', 'break', 'long_break'
 # States:   'complete', 'aborted', 'in_progress'
 
-# @@database = Pomodori::Database.new
-# @@database.connect
-# 
-
 require 'pp'
 
 module Pomodori
   database  = Pomodori::Database.new
   DB        = database.connect
-
   CONFIG    = database.config
 
   class Event < Sequel::Model(:events)
-    include Pomodori::Configure
-
-    # FIXME: These *may* go away when Sequel::Model gets working
-    attr_accessor :notifications, :summary, :duration, 
-                  :started_at, :completed_at, :database
+    # FIXME: I need to rethink using initialize in a composed module when I'm
+    # inheriting something that also provides initialize
+    #include Pomodori::Configure
+    attr_accessor :config, :database
 
     def after_initialize
       super
