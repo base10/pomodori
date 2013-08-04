@@ -25,15 +25,26 @@ describe "Pomodori::Pomodoro" do
     FileUtils.rm_rf test_config_path
   end
 
+  # TODO: Once the Pomodoro tests are written, abstract them to a shared
+  # example groupm
   describe "saving" do
-    
     it "saves a valid object" do
       pomodoro = build(:pomodoro, config: @config)
       expect(pomodoro.valid?).to be_true
+      expect { pomodoro.save }.to_not raise_error
+    end
 
-      #expect { pomodoro.save }.to_not raise_error
+    # Initial creation needs summary, duration, kind, state, started_at
+    it "expects a summary" do
+      pomodoro = build(:pomodoro, config: @config, summary: '')
+      expect(pomodoro.valid?).to be_false
+
+      pomodoro = build(:pomodoro, config: @config, summary: nil)
+      expect(pomodoro.valid?).to be_false
     end
   end
+
+  # TODO: Testing of business logic/workflow
 
   # TODO: Test for failure without a config
 end

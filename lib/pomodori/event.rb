@@ -36,7 +36,14 @@ module Pomodori
     end
 
     def validate
+      super
+      
+      validate_summary
+    end
 
+    def validate_summary
+      errors.add(:summary, "can't be nil")   if summary.nil?
+      errors.add(:summary, "can't be empty") if summary.respond_to?(:empty?) && summary.empty?
     end
 
     # begin
