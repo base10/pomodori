@@ -53,3 +53,11 @@ Ideally, addressing last pieces of having environments do the right thing.
 
 - Added several issues recently on the GitHub project
 - Fixed up getting bin/pmd to work
+
+## 2013-08-03
+
+I have discovered a flaw in my thinking of having Pomodori::Configure be a composable module with an initialize method. Namely, when I get to having a Configure object be part of the object when I am also using Sequel::Model, I'm not getting Sequel::Model's initialize method. I can fix this by using database's configure object, but this seems like I'm violating encapsulation.
+
+My other thought is to make Configure a singleton. I need to think about that more. In the meantime, I'm going to pragmatically press ahead with a FIXME to revisit this and make forward progress. Opened as Issue #8
+
+I also had to fix up issues with the factories and not having a created_at field in the first migration.

@@ -18,6 +18,8 @@ Spork.prefork do
 
     config.include FactoryGirl::Syntax::Methods
 
+    FactoryGirl.find_definitions
+
     ## TODO: Put the set-up block here for configs. Alternately, I require
     ## files for the spec files themselves. Might be an interesting bit of 
     ## inception, that.

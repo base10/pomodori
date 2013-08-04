@@ -8,6 +8,7 @@ Sequel.migration do
       String        :kind
       String        :state
 
+      DateTime      :started_at
       DateTime      :created_at
       DateTime      :completed_at
 
