@@ -4,6 +4,9 @@ require 'factory_girl'
 Spork.prefork do
   require 'rspec/core'
   require 'rspec/autorun'
+  require 'simplecov'
+  
+  SimpleCov.start
 
   RSpec.configure do |config|
     ENV['POMODORI_ENV'] = 'test'
