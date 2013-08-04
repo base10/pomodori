@@ -27,14 +27,6 @@ module Pomodori
     
     end
 
-    def kind=( thing )
-  
-    end
-
-    def state
-    
-    end
-
     def validate
       super
       
