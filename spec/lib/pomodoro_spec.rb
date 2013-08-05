@@ -30,14 +30,12 @@ describe "Pomodori::Pomodoro" do
   describe "saving" do
     it "saves a valid object", focus: true do
       pomodoro = build(:pomodoro, config: @config)
-      
-      pp pomodoro
-      
+
       expect(pomodoro.valid?).to be_true
       expect { pomodoro.save }.to_not raise_error
     end
 
-    # Initial creation needs summary, duration, kind, state, started_at
+    # Initial creation needs summary, duration, kind, state, created_at
     it "expects a summary" do
       pomodoro = build(:pomodoro, config: @config, summary: '')
       expect(pomodoro.valid?).to be_false
