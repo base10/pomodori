@@ -28,8 +28,11 @@ describe "Pomodori::Pomodoro" do
   # TODO: Once the Pomodoro tests are written, abstract them to a shared
   # example group
   describe "saving" do
-    it "saves a valid object" do
+    it "saves a valid object", focus: true do
       pomodoro = build(:pomodoro, config: @config)
+      
+      pp pomodoro
+      
       expect(pomodoro.valid?).to be_true
       expect { pomodoro.save }.to_not raise_error
     end
@@ -52,6 +55,14 @@ describe "Pomodori::Pomodoro" do
       pomodoro = build(:pomodoro, config: @config)
       pomodoro.stub(:kind).and_return(nil)
 
+      expect(pomodoro.valid?).to be_false
+    end
+
+    it "expects a state" do
+      pomodoro = build(:pomodoro, config: @config, state: '')
+      expect(pomodoro.valid?).to be_false
+      
+      pomodoro = build(:pomodoro, config: @config, state: nil)
       expect(pomodoro.valid?).to be_false
     end
 

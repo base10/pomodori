@@ -16,10 +16,12 @@ module Pomodori
     # FIXME: I need to rethink using initialize in a composed module when I'm
     # inheriting something that also provides initialize
     #include Pomodori::Configure
-    attr_accessor :config, :database
+    attr_accessor :config
 
-    def after_initialize
-      super
+    def initialize(values = {})
+      values[:state]  = 'new'
+
+      super(values)
       @config = CONFIG
     end
 
@@ -33,6 +35,7 @@ module Pomodori
       validate_summary
       validate_duration
       validate_kind
+      validate_state
     end
 
     def validate_summary
@@ -48,8 +51,16 @@ module Pomodori
       errors.add(:kind, "can't be nil") if kind.nil?
     end
 
+    def validate_state
+      errors.add(:state, "can't be nil")   if state.nil?
+      errors.add(:state, "can't be empty") if state.respond_to?(:empty?) && state.empty?
+    end
+
     # begin
+    # after_begin
     # mark_complete
+    # after_complete
     # mark_incomplete
+    # after_incomplete
   end
 end
