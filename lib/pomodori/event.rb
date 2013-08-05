@@ -24,7 +24,7 @@ module Pomodori
     end
 
     def kind
-
+      raise "Called abstract method: kind"
     end
 
     def validate
@@ -32,6 +32,7 @@ module Pomodori
       
       validate_summary
       validate_duration
+      validate_kind
     end
 
     def validate_summary
@@ -41,6 +42,10 @@ module Pomodori
 
     def validate_duration
       errors.add(:duration, "can't be nil") if duration.nil?
+    end
+
+    def validate_kind
+      errors.add(:kind, "can't be nil") if kind.nil?
     end
 
     # begin

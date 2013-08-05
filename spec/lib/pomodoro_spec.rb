@@ -26,7 +26,7 @@ describe "Pomodori::Pomodoro" do
   end
 
   # TODO: Once the Pomodoro tests are written, abstract them to a shared
-  # example groupm
+  # example group
   describe "saving" do
     it "saves a valid object" do
       pomodoro = build(:pomodoro, config: @config)
@@ -47,6 +47,14 @@ describe "Pomodori::Pomodoro" do
       pomodoro = build(:pomodoro, config: @config, duration: '')
       expect(pomodoro.valid?).to be_false
     end
+
+    it "expects a kind" do
+      pomodoro = build(:pomodoro, config: @config)
+      pomodoro.stub(:kind).and_return(nil)
+
+      expect(pomodoro.valid?).to be_false
+    end
+
   end
 
   # TODO: Testing of business logic/workflow

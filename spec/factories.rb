@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :pomodoro, class: 'Pomodori::Pomodoro' do
     summary       'Starting Project Lorum Ipsum'
     duration      '25'
-    kind          'pomodoro'
 
     created_at    '2013-06-05T22:07:18-04:00'
     started_at    '2013-06-05T22:07:19-04:00'
@@ -14,7 +13,6 @@ FactoryGirl.define do
   factory :break, class: 'Pomodori::Break' do
     summary       'Break time!'
     duration      '5'
-    kind          'break'
   
     created_at    '2013-06-05T22:32:20-04:00'
     started_at    '2013-06-05T22:32:20-04:00'
@@ -24,7 +22,6 @@ FactoryGirl.define do
   factory :long_break, class: 'Pomodori::LongBreak' do
     summary       'Take a walk!'
     duration      '15'
-    kind          'long_break'
 
     created_at    '2013-06-06T18:59:27-04:00'  
     started_at    '2013-06-06T19:06:13-04:00'
