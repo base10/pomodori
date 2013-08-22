@@ -30,7 +30,7 @@ module Pomodori
     end
 
     def before_validation
-      if values[:created_at].nil? || values[:created_at].empty?      
+      if values[:created_at].nil?
         values[:created_at] = DateTime.now
       end
     end
