@@ -64,7 +64,7 @@ describe "Pomodori::Pomodoro" do
       expect(pomodoro.valid?).to be_false
     end
 
-    it "expects a creation date and time", focus: true do
+    it "fills in a creation date and time", focus: true do
       pomodoro = build(:pomodoro, config:       @config,
                                   created_at:   nil,
                                   started_at:   nil,
