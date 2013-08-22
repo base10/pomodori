@@ -64,7 +64,7 @@ describe "Pomodori::Pomodoro" do
       expect(pomodoro.valid?).to be_false
     end
 
-    it "fills in a creation date and time", focus: true do
+    it "fills in a creation date and time" do
       pomodoro = build(:pomodoro, config:       @config,
                                   created_at:   nil,
                                   started_at:   nil,
@@ -73,6 +73,22 @@ describe "Pomodori::Pomodoro" do
 
       expect(pomodoro.valid?).to be_true
       expect(pomodoro.created_at.nil?).to be_false
+    end
+  end
+
+  describe "initialization" do 
+    it "sets a state" do
+      pending
+    end
+
+    describe "duration" do 
+      it "sets a default duration" do
+        pending
+      end
+
+      it "uses config to set a custom duration" do
+        pending
+      end
     end
   end
 
