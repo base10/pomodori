@@ -64,4 +64,10 @@ I also had to fix up issues with the factories and not having a created_at field
 
 ## 2013-08-21
 
-Finally got object validation working with a created_at date. Had to learn a bit about how Sequel::Model instance values are represented
+Finally got object validation working with a created_at date. Had to learn a bit about how Sequel::Model instance values are represented.
+
+## 2013-08-22
+
+- Durations should be set at initialization from the available config. Later on, I may want to allow a CLI-defined duration
+- I need to think through how states advance and arrive at completion / incompletion. Flow diagram likely to be helpful.
+- In code, state might be represented with a constant hash and a method like "next_action" that acts on begin, mark_complete and so on. Or, might be flipped so that the action methods act on state (more likely). Key will be making sure methods only act if they *can* act.
