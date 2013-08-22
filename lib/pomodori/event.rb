@@ -29,13 +29,20 @@ module Pomodori
       raise "Called abstract method: kind"
     end
 
+    def before_validation
+      if values[:created_at].nil? || values[:created_at].empty?      
+        values[:created_at] = DateTime.now
+      end
+    end
+
     def validate
-      super
-      
       validate_summary
       validate_duration
       validate_kind
       validate_state
+      validate_created_at
+
+      super
     end
 
     def validate_summary
@@ -54,6 +61,10 @@ module Pomodori
     def validate_state
       errors.add(:state, "can't be nil")   if state.nil?
       errors.add(:state, "can't be empty") if state.respond_to?(:empty?) && state.empty?
+    end
+
+    def validate_created_at
+      errors.add(:created_at, "can't be nil")   if created_at.nil?
     end
 
     # begin

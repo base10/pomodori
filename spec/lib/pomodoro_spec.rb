@@ -28,7 +28,7 @@ describe "Pomodori::Pomodoro" do
   # TODO: Once the Pomodoro tests are written, abstract them to a shared
   # example group
   describe "saving" do
-    it "saves a valid object", focus: true do
+    it "saves a valid object" do
       pomodoro = build(:pomodoro, config: @config)
 
       expect(pomodoro.valid?).to be_true
@@ -64,6 +64,16 @@ describe "Pomodori::Pomodoro" do
       expect(pomodoro.valid?).to be_false
     end
 
+    it "expects a creation date and time", focus: true do
+      pomodoro = build(:pomodoro, config:       @config,
+                                  created_at:   nil,
+                                  started_at:   nil,
+                                  completed_at: nil
+                                )
+
+      expect(pomodoro.valid?).to be_true
+      expect(pomodoro.created_at.nil?).to be_false
+    end
   end
 
   # TODO: Testing of business logic/workflow

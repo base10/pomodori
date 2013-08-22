@@ -61,3 +61,7 @@ I have discovered a flaw in my thinking of having Pomodori::Configure be a compo
 My other thought is to make Configure a singleton. I need to think about that more. In the meantime, I'm going to pragmatically press ahead with a FIXME to revisit this and make forward progress. Opened as Issue #8
 
 I also had to fix up issues with the factories and not having a created_at field in the first migration.
+
+## 2013-08-21
+
+Finally got object validation working with a created_at date. Had to learn a bit about how Sequel::Model instance values are represented
