@@ -76,14 +76,20 @@ describe "Pomodori::Pomodoro" do
     end
   end
 
-  describe "initialization" do 
+  describe "initialization" do
+    before(:each) do
+      @pomo = Pomodori::Pomodoro.new
+    end
+  
     it "sets a state" do
-      pending
+      expect(@pomo.state).not_to be_nil
+      expect(@pomo.state).to eq('new')
     end
 
     describe "duration" do 
       it "sets a default duration" do
-        pending
+        expect(@pomo.duration).not_to be_nil
+        expect(@pomo.duration).to eq(25)
       end
 
       it "uses config to set a custom duration" do
