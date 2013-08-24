@@ -25,10 +25,6 @@ module Pomodori
       @config = CONFIG
     end
 
-    def kind
-      raise "Called abstract method: kind"
-    end
-
     def before_validation
       if values[:created_at].nil?
         values[:created_at] = DateTime.now
