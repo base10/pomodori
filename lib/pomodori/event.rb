@@ -3,7 +3,7 @@
 # In both cases above, this is to work around sqlite's lack of enum fields
 
 # kinds:    'pomodoro', 'break', 'long_break'
-# States:   'complete', 'aborted', 'in_progress'
+# States:   'new', 'complete', 'aborted', 'in_progress'
 
 require 'pp'
 
@@ -19,10 +19,20 @@ module Pomodori
     attr_accessor :config
 
     def initialize(values = {})
-      values[:state]  = 'new'
+      @config           = CONFIG
+
+      values[:kind]     = determine_kind
+      values[:state]    = 'new'
+      values[:duration] = @config[values[:kind]]['duration']
+      values[:summary]  = @config[values[:kind]]['summary']
 
       super(values)
-      @config = CONFIG
+    end
+
+    def determine_kind
+      klass       = self.class.to_s.downcase
+      hierarchy   = klass.split(/\:\:/)
+      kind        = hierarchy.pop
     end
 
     def before_validation
