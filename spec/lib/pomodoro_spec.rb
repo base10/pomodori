@@ -80,28 +80,34 @@ describe "Pomodori::Pomodoro" do
     before(:each) do
       @pomo = Pomodori::Pomodoro.new
     end
-  
+
+    it "sets a kind" do
+      expect(@pomo.kind).not_to be_nil
+      expect(@pomo.determine_kind).to eq('pomodoro')
+      expect(@pomo.kind).to eq('pomodoro')
+    end
+
     it "sets a state" do
       expect(@pomo.state).not_to be_nil
       expect(@pomo.state).to eq('new')
     end
 
     describe "duration" do 
-      it "sets a default duration" do
+      it "sets a default duration from config" do
         expect(@pomo.duration).not_to be_nil
         expect(@pomo.duration).to eq(25)
       end
 
-      it "uses config to set a custom duration" do
-        pending "Custom durations not handled yet"
-      end
+      # TODO: CLI provided duration
     end
 
     describe "summary" do
-      it "sets a default summary" do
+      it "sets a default summary from config" do
         expect(@pomo.summary).not_to be_nil
         expect(@pomo.summary).to include("Working on")
       end
+
+      # TODO: CLI provided summary
     end
   end
 
