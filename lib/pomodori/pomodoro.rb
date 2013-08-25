@@ -1,10 +1,12 @@
 module Pomodori
   class Pomodoro < Pomodori::Event
     def initialize( values = {} )
-      values[:kind]       = 'pomodoro'
-      values[:duration]   = 25
+      @config = CONFIG
 
-      # TODO, define strategy for pulling duration, default summary
+      values[:kind]       = 'pomodoro'
+      values[:duration]   = @config[values[:kind]]['duration']
+      values[:summary]    = @config[values[:kind]]['summary']
+
       super(values)
     end
   end

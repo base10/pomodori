@@ -93,13 +93,18 @@ describe "Pomodori::Pomodoro" do
       end
 
       it "uses config to set a custom duration" do
-        pending
+        pending "Custom durations not handled yet"
+      end
+    end
+
+    describe "summary" do
+      it "sets a default summary" do
+        expect(@pomo.summary).not_to be_nil
+        expect(@pomo.summary).to include("Working on")
       end
     end
   end
 
   # TODO: Testing of business logic/workflow
-    # Auto-set kind, determine or accept duration
-
   # TODO: Test for failure without a config
 end

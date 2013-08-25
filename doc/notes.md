@@ -71,3 +71,7 @@ Finally got object validation working with a created_at date. Had to learn a bit
 - Durations should be set at initialization from the available config. Later on, I may want to allow a CLI-defined duration
 - I need to think through how states advance and arrive at completion / incompletion. Flow diagram likely to be helpful.
 - In code, state might be represented with a constant hash and a method like "next_action" that acts on begin, mark_complete and so on. Or, might be flipped so that the action methods act on state (more likely). Key will be making sure methods only act if they *can* act.
+
+## August 24, 2013
+
+Trying to set default values and running into some test failures, which suggests a change in approach is needed. I'm fleshing out initialize for Pomodori::Pomodoro and I'll then abstract it back into Pomodori::Event
