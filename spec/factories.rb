@@ -10,7 +10,7 @@ FactoryGirl.define do
     completed_at  '2013-06-05T22:32:19-04:00'
   end
 
-  factory :break, class: 'Pomodori::Break' do
+  factory :pausa, class: 'Pomodori::Pausa' do
     summary       'Break time!'
     duration      '5'
   
