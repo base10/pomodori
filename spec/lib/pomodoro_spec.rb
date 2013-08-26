@@ -10,11 +10,6 @@ describe "Pomodori::Pomodoro" do
     Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
 
     @setup.run
-
-    # TODO: see if I can setup a Sequel::Model.db call here and get the model 
-    # to work. As if I had to call Sequel.connect or something before I even
-    # opened an object
-
     @database = Pomodori::Database.new
     @database.connect
 
@@ -109,6 +104,18 @@ describe "Pomodori::Pomodoro" do
 
       # TODO: CLI provided summary
     end
+  end
+
+  describe "starting a pomodoro" do
+    # Pending
+  end
+
+  describe "marking a pomodoro complete" do
+    # Pending
+  end
+
+  describe "marking a pomodoro incomplete" do
+    # Pending  
   end
 
   # TODO: Testing of business logic/workflow
