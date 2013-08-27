@@ -11,6 +11,6 @@ pomodoro:
 pausa:
   summary: Taking a short break
   duration: 5
-long_break:
+lunga_pausa:
   summary: Taking a long break
   duration: 15

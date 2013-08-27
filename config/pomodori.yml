@@ -7,10 +7,10 @@ database:
 pomodoro:
   summary: Working on something awesome
   duration: 25
-  count_to_long_break: 4
+  count_to_lunga_pausa: 4
 pausa:
   summary: Taking a short break
   duration: 5
-long_break:
+lunga_pausa:
   summary: Taking a long break
   duration: 15
