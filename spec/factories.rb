@@ -19,7 +19,7 @@ FactoryGirl.define do
     completed_at  '2013-06-05T22:37:20-04:00'
   end
 
-  factory :long_break, class: 'Pomodori::LongBreak' do
+  factory :lunga_pausa, class: 'Pomodori::LungaPausa' do
     summary       'Take a walk!'
     duration      '15'
 

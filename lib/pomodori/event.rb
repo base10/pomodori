@@ -23,16 +23,19 @@ module Pomodori
 
       values[:kind]     = determine_kind
       values[:state]    = 'new'
-      values[:duration] = @config[values[:kind]]['duration']
-      values[:summary]  = @config[values[:kind]]['summary']
+      values[:duration] = @config[determine_kind]['duration']
+      values[:summary]  = @config[determine_kind]['summary']
 
       super(values)
     end
 
     def determine_kind
-      klass       = self.class.to_s.downcase
-      hierarchy   = klass.split(/\:\:/)
-      kind        = hierarchy.pop
+      klass     = self.class.to_s
+      hierarchy = klass.split(/\:\:/)
+      kind      = hierarchy.pop.to_underscore
+      kind      = kind.downcase
+      
+      kind
     end
 
     def before_validation
