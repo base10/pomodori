@@ -98,12 +98,20 @@ Trying to set default values and running into some test failures, which suggests
         - Downside of using at is that OS X users would have to enable at to work on their systems
     - Either approach will work. I'm going to start with the first one and see how it does
 - I checked out a lot of [background job handlers](https://www.ruby-toolbox.com/categories/Background_Jobs) and Sidekiq stuck out. However, I don't like having a dependency on redis. Two potential options:
-    - [Clockwork](https://github.com/tomykaira/clockwork)
     - [rufus-scheduler](https://github.com/jmettraux/rufus-scheduler)
+        - Likely pick
+    - [later](https://github.com/Erol/later)
+    - [Clockwork](https://github.com/tomykaira/clockwork)
+    - Other options might be helpful when we get to crunching reports
+        - delayed\_job
+        - sucker\_punch
+        - qu
 - It looks like a state machine will also be helpful
     - [state_machine](https://github.com/pluginaweek/state_machine)
     - [AASM](https://github.com/aasm/aasm)
+        - Possible pick
     - [micromachine](https://github.com/soveran/micromachine)
+        - Possible pick
 - Messages + Receivers
     - Events
         - begin
@@ -112,4 +120,5 @@ Trying to set default values and running into some test failures, which suggests
             - set_started_at
             - fork_notification_process
 - TODO: Model the state diagram for events
+- TODO: Write rules for the state machine
 - TODO: pmd (the CLI application) should be non-blocking
