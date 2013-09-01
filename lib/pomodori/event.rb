@@ -81,6 +81,7 @@ module Pomodori
     # mark_complete
     # after_complete
     # mark_incomplete
+      # If it's a Pomodoro, invalidate the next break
     # after_incomplete
   end
 end
