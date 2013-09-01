@@ -79,3 +79,19 @@ Trying to set default values and running into some test failures, which suggests
 ## 2013-08-31
 
 - [x] TODO: Move String class monkey patching into separate file, [document source](http://stackoverflow.com/questions/1509915/converting-camel-case-to-underscore-case-in-ruby)
+- I've been thinking on how to both notify the user of milestones of their progress and to mark events as complete when they finish. Here's what I'm thinking:
+    - When an event begins, the following notifications are created:
+        - Notify at the beginning
+        - Notify halfway (only for Pomodori)
+        - Notify five minutes to go (only for Pomodori)
+        - Notify complete
+            - Notify complete triggers completion
+    - A pid is saved to keep more than one process from running at a time
+        - NB: Pomodori can be specified or terminated, reports can also be run, but only one Pomodori or Pausa can be live at one time
+    - A process is marked to sleep for the amount of time until the next Notification is due
+    - When the process wakes up, the notification is completed
+    - When the Event itself is marked complete or incomplete, the Notifications for that Event are removed from the database
+    - When an Event is resolved, the pid is removed and the process exits
+    - I am, as yet, uncertain about retaining the process and beginning a second (or third) Event. I'll leave that for a later determination. I would like to have a Pomodoro be followed by the appropriate Pausa. I don't see having everything chained, however.
+    - Alternately, I can use "at" as the mechanism and have it check against active Events and Notifications
+    - Either approach will work. I'm going to start with the first one and see how it does
