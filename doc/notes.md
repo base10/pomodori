@@ -72,6 +72,10 @@ Finally got object validation working with a created_at date. Had to learn a bit
 - I need to think through how states advance and arrive at completion / incompletion. Flow diagram likely to be helpful.
 - In code, state might be represented with a constant hash and a method like "next_action" that acts on begin, mark_complete and so on. Or, might be flipped so that the action methods act on state (more likely). Key will be making sure methods only act if they *can* act.
 
-## August 24, 2013
+## 2013-08-24
 
 Trying to set default values and running into some test failures, which suggests a change in approach is needed. I'm fleshing out initialize for Pomodori::Pomodoro and I'll then abstract it back into Pomodori::Event
+
+## 2013-08-31
+
+- [x] TODO: Move String class monkey patching into separate file, [document source](http://stackoverflow.com/questions/1509915/converting-camel-case-to-underscore-case-in-ruby)
