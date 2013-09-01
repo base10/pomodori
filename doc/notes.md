@@ -90,8 +90,26 @@ Trying to set default values and running into some test failures, which suggests
         - NB: Pomodori can be specified or terminated, reports can also be run, but only one Pomodori or Pausa can be live at one time
     - A process is marked to sleep for the amount of time until the next Notification is due
     - When the process wakes up, the notification is completed
+        - How does that happen?
     - When the Event itself is marked complete or incomplete, the Notifications for that Event are removed from the database
     - When an Event is resolved, the pid is removed and the process exits
     - I am, as yet, uncertain about retaining the process and beginning a second (or third) Event. I'll leave that for a later determination. I would like to have a Pomodoro be followed by the appropriate Pausa. I don't see having everything chained, however.
     - Alternately, I can use "at" as the mechanism and have it check against active Events and Notifications
+        - Downside of using at is that OS X users would have to enable at to work on their systems
     - Either approach will work. I'm going to start with the first one and see how it does
+- I checked out a lot of [background job handlers](https://www.ruby-toolbox.com/categories/Background_Jobs) and Sidekiq stuck out. However, I don't like having a dependency on redis. Two potential options:
+    - [Clockwork](https://github.com/tomykaira/clockwork)
+    - [rufus-scheduler](https://github.com/jmettraux/rufus-scheduler)
+- It looks like a state machine will also be helpful
+    - [state_machine](https://github.com/pluginaweek/state_machine)
+    - [AASM](https://github.com/aasm/aasm)
+    - [micromachine](https://github.com/soveran/micromachine)
+- Messages + Receivers
+    - Events
+        - begin
+            - check_for_live_events
+            - build_notifications
+            - set_started_at
+            - fork_notification_process
+- TODO: Model the state diagram for events
+- TODO: pmd (the CLI application) should be non-blocking
