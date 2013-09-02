@@ -7,6 +7,8 @@ gemspec
 # Technically, RSpec is the *only* necessary one.
 # guard, spork and others are "nice to have"
 
+gem "transitions"
+
 gem "rspec",        '~> 2.14rc1'
 gem "simplecov",    require: false
 gem "factory_girl"
