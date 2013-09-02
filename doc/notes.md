@@ -107,11 +107,12 @@ Trying to set default values and running into some test failures, which suggests
         - sucker\_punch
         - qu
 - It looks like a state machine will also be helpful
-    - [state_machine](https://github.com/pluginaweek/state_machine)
+    - [transitions](https://github.com/troessner/transitions)
+        - On a quick read, this is the DSL I like best, starting here
+    - [workflow](https://github.com/geekq/workflow)
     - [AASM](https://github.com/aasm/aasm)
-        - Possible pick
+    - [state_machine](https://github.com/pluginaweek/state_machine)
     - [micromachine](https://github.com/soveran/micromachine)
-        - Possible pick
 - Messages + Receivers
     - Events
         - begin
