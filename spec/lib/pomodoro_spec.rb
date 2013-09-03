@@ -72,25 +72,23 @@ describe "Pomodori::Pomodoro" do
   end
 
   describe "initialization" do
-    before(:each) do
-      @pomo = Pomodori::Pomodoro.new
-    end
+    let(:pomodoro) { Pomodori::Pomodoro.new }
 
     it "sets a kind" do
-      expect(@pomo.kind).not_to be_nil
-      expect(@pomo.determine_kind).to eq('pomodoro')
-      expect(@pomo.kind).to eq('pomodoro')
+      expect(pomodoro.kind).not_to be_nil
+      expect(pomodoro.determine_kind).to eq('pomodoro')
+      expect(pomodoro.kind).to eq('pomodoro')
     end
 
     it "sets a state" do
-      expect(@pomo.state).not_to be_nil
-      expect(@pomo.state).to eq('new')
+      expect(pomodoro.state).not_to be_nil
+      expect(pomodoro.state).to eq('ready')
     end
 
     describe "duration" do 
       it "sets a default duration from config" do
-        expect(@pomo.duration).not_to be_nil
-        expect(@pomo.duration).to eq(25)
+        expect(pomodoro.duration).not_to be_nil
+        expect(pomodoro.duration).to eq(25)
       end
 
       # TODO: CLI provided duration
@@ -98,8 +96,8 @@ describe "Pomodori::Pomodoro" do
 
     describe "summary" do
       it "sets a default summary from config" do
-        expect(@pomo.summary).not_to be_nil
-        expect(@pomo.summary).to include("Working on")
+        expect(pomodoro.summary).not_to be_nil
+        expect(pomodoro.summary).to include("Working on")
       end
 
       # TODO: CLI provided summary

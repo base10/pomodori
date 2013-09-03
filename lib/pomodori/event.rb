@@ -10,6 +10,8 @@ module Pomodori
   CONFIG    = database.config
 
   class Event < Sequel::Model(:events)
+    include Transitions
+
     # FIXME: I need to rethink using initialize in a composed module when I'm
     # inheriting something that also provides initialize
     #include Pomodori::Configure
@@ -21,7 +23,7 @@ module Pomodori
       @config           = CONFIG
 
       values[:kind]     = determine_kind
-      values[:state]    = 'new'
+      values[:state]    = 'ready'
       values[:duration] = @config[determine_kind]['duration']
       values[:summary]  = @config[determine_kind]['summary']
 
@@ -76,13 +78,13 @@ module Pomodori
     end
 
     state_machine do
-      state :new
+      state :ready
       state :in_progress
       state :cancelled
       state :completed
 
       event :start do
-        transitions :to => :in_progress, :from => :new
+        transitions :to => :in_progress, :from => :ready
           # TODO: guard, no more than one in_progress event
           # TODO: on_transition, create the necessary events
 
