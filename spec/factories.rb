@@ -2,9 +2,6 @@ require 'factory_girl'
 
 FactoryGirl.define do
   factory :pomodoro, class: 'Pomodori::Pomodoro' do
-    summary       'Starting Project Lorum Ipsum'
-    duration      '25'
-
     created_at    '2013-06-05T22:07:18-04:00'
     started_at    '2013-06-05T22:07:19-04:00'
     completed_at  '2013-06-05T22:32:19-04:00'

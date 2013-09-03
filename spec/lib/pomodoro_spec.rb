@@ -1,4 +1,5 @@
 require "spec_helper"
+require "pp"
 
 describe "Pomodori::Pomodoro" do
   let ( :test_config_path ) { File.expand_path( "../../dotpomodori", __FILE__ ) }
@@ -73,7 +74,12 @@ describe "Pomodori::Pomodoro" do
   end
 
   describe "initialization" do
-    let(:pomodoro) { Pomodori::Pomodoro.new }
+    let(:pomodoro) { build(:pomodoro, config: @config,
+                                      created_at:   nil,
+                                      started_at:   nil,
+                                      completed_at: nil
+                                )    
+                    }
 
     it "sets a kind" do
       expect(pomodoro.kind).not_to be_nil
@@ -97,6 +103,8 @@ describe "Pomodori::Pomodoro" do
 
     describe "summary" do
       it "sets a default summary from config" do
+        pp pomodoro
+
         expect(pomodoro.summary).not_to be_nil
         expect(pomodoro.summary).to include("Working on")
       end
@@ -106,7 +114,12 @@ describe "Pomodori::Pomodoro" do
   end
 
   describe "starting a pomodoro" do
-    let(:pomodoro) { build(:pomodoro, config: @config) }
+    let(:pomodoro) { build(:pomodoro, config: @config,
+                                      created_at:   nil,
+                                      started_at:   nil,
+                                      completed_at: nil
+                                )    
+                    }
 
     it "changes state to 'in_progress'" do
       expect(pomodoro.current_state).to eq(:ready)
@@ -121,7 +134,10 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "sets started_at" do
-      pending
+      pending "Not implemented yet"
+
+      pomodoro.start
+      expect(pomodoro.started_at).not_to be_nil
     end
 
     it "cannot be completed" do
@@ -134,7 +150,12 @@ describe "Pomodori::Pomodoro" do
   end
 
   describe "completing a pomodoro" do
-    let(:pomodoro) { build(:pomodoro, config: @config) }
+    let(:pomodoro) { build(:pomodoro, config: @config,
+                                      created_at:   nil,
+                                      started_at:   nil,
+                                      completed_at: nil
+                                )    
+                    }
     
     before(:each) do
       pomodoro.start
