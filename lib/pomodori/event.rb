@@ -1,11 +1,8 @@
-# TODO: Each event will have to declare a type
-# TODO: Acceptable states will be defined. 
-# In both cases above, this is to work around sqlite's lack of enum fields
-
-# kinds:    'pomodoro', 'break', 'long_break'
-# States:   'new', 'complete', 'aborted', 'in_progress'
+# kinds:    'pomodoro', 'pausa', 'lungo_pausa'
+# States:   'new', 'completed', 'cancelled', 'in_progress'
 
 require 'pp'
+require 'transitions'
 
 module Pomodori
   database  = Pomodori::Database.new
@@ -17,6 +14,8 @@ module Pomodori
     # inheriting something that also provides initialize
     #include Pomodori::Configure
     attr_accessor :config
+
+    # TODO: define scopes
 
     def initialize(values = {})
       @config           = CONFIG
@@ -74,6 +73,33 @@ module Pomodori
 
     def validate_created_at
       errors.add(:created_at, "can't be nil")   if created_at.nil?
+    end
+
+    state_machine do
+      state :new
+      state :in_progress
+      state :cancelled
+      state :completed
+
+      event :start do
+        transitions :to => :in_progress, :from => :new
+          # TODO: guard, no more than one in_progress event
+          # TODO: on_transition, create the necessary events
+
+      end
+ 
+      event :cancel do
+        transitions :to => :cancelled, :from => :in_progress
+          # TODO: guard for in_progress only
+          # TODO: Cancel outstanding notifications
+          # TODO: Mark event as cancelled
+      end
+    
+      event :complete do
+        transitions :to => :completed, :from => :in_progress
+          # TODO: guard for in_progress only
+          # TODO: Mark event as complete
+      end
     end
 
     # begin

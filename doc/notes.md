@@ -123,3 +123,9 @@ Trying to set default values and running into some test failures, which suggests
 - TODO: Model the state diagram for events
 - TODO: Write rules for the state machine
 - TODO: pmd (the CLI application) should be non-blocking
+
+## 2013-09-02
+
+- Began work on implementing the state machine
+- My approach is going to be get the walking skeleton of the state machine done, then layer on object saving, validating transition states and handling notifications
+- Once the state machine is fully implemented, I'll add the Event-specific durations
