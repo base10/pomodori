@@ -116,15 +116,85 @@ describe "Pomodori::Pomodoro" do
     
     it "saves state to the database" do
       pending
+
+      expect(pomodoro.state).to eq('in_progress')
+    end
+
+    it "sets started_at" do
+      pending
+    end
+
+    it "cannot be completed" do
+      pending
+    end
+
+    it "cannot be cancelled" do
+      pending
     end
   end
 
-  describe "marking a pomodoro complete" do
-    # Pending
+  describe "completing a pomodoro" do
+    let(:pomodoro) { build(:pomodoro, config: @config) }
+    
+    before(:each) do
+      pomodoro.start
+    end
+
+    it "changes state to 'completed'" do
+      expect(pomodoro.current_state).to eq(:in_progress)
+      pomodoro.complete
+      expect(pomodoro.current_state).to eq(:completed)
+    end
+
+    it "saves state to the database" do
+      pending
+
+      expect(pomodoro.state).to eq('completed')
+    end
+
+    it "sets completed_at" do
+      pending
+    end
+
+    it "cannot be cancelled" do
+      pending
+    end
+
+    it "cannot be started" do
+      pending
+    end
   end
 
-  describe "marking a pomodoro incomplete" do
-    # Pending  
+  describe "cancelling a pomodoro" do
+    let(:pomodoro) { build(:pomodoro, config: @config) }
+    
+    before(:each) do
+      pomodoro.start
+    end
+
+    it "changes state to 'cancelled'" do
+      expect(pomodoro.current_state).to eq(:in_progress)
+      pomodoro.cancel
+      expect(pomodoro.current_state).to eq(:cancelled)
+    end
+
+    it "saves state to the database" do
+      pending
+
+      expect(pomodoro.state).to eq('cancelled')
+    end
+
+    it "sets cancelled_at" do
+      pending
+    end
+
+    it "cannot be started" do
+      pending
+    end
+
+    it "cannot be completed" do
+      pending
+    end
   end
 
   # TODO: Testing of business logic/workflow
