@@ -84,7 +84,7 @@ describe "Pomodori::Pausa" do
 
     it "sets a state" do
       expect(@pausa.state).not_to be_nil
-      expect(@pausa.state).to eq('new')
+      expect(@pausa.state).to eq('ready')
     end
 
     describe "duration" do 

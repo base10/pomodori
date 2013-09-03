@@ -3,6 +3,7 @@ require "spec_helper"
 describe "Pomodori::Pomodoro" do
   let ( :test_config_path ) { File.expand_path( "../../dotpomodori", __FILE__ ) }
 
+  # TODO: Convert to 'let' blocks
   before(:each) do
     @setup = Pomodori::Setup.new
     allow(@setup).to receive(:default_config_path).and_return( test_config_path )
@@ -13,7 +14,7 @@ describe "Pomodori::Pomodoro" do
     @database = Pomodori::Database.new
     @database.connect
 
-    @config = @database.config    
+    @config = @database.config
   end
 
   after(:each) do
@@ -105,7 +106,17 @@ describe "Pomodori::Pomodoro" do
   end
 
   describe "starting a pomodoro" do
-    # Pending
+    let(:pomodoro) { build(:pomodoro, config: @config) }
+
+    it "changes state to 'in_progress'" do
+      expect(pomodoro.current_state).to eq(:ready)
+      pomodoro.start
+      expect(pomodoro.current_state).to eq(:in_progress)
+    end
+    
+    it "saves state to the database" do
+      pending
+    end
   end
 
   describe "marking a pomodoro complete" do
