@@ -129,3 +129,8 @@ Trying to set default values and running into some test failures, which suggests
 - Began work on implementing the state machine
 - My approach is going to be get the walking skeleton of the state machine done, then layer on object saving, validating transition states and handling notifications
 - Once the state machine is fully implemented, I'll add the Event-specific durations
+
+## 2013-09-03
+
+- Working with Sequel, it doesn't seem like Transitions is compatible
+- Looking around, there's a [plugin for Workflow and Sequel](http://jackchu.com/blog/2013/01/18/state-machines-with-the-workflow-gem/), so I'm going to give that a shot
