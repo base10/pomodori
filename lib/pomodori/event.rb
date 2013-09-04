@@ -84,7 +84,7 @@ module Pomodori
       state :completed
 
       event :start do
-        transitions :to => :in_progress, :from => :ready
+        transitions :to => :in_progress, :from => :ready, :guard => :can_start?
           # TODO: guard, no more than one in_progress event
           # TODO: on_transition, create the necessary events
 
