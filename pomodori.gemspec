@@ -39,4 +39,5 @@ I am writing Pomodori because I want something a little bit different than what 
   spec.add_dependency "sqlite3"
   spec.add_dependency "terminal-notifier"
   spec.add_dependency "sequel"
+  spec.add_dependency "micromachine"
 end
