@@ -155,3 +155,7 @@ Trying to set default values and running into some test failures, which suggests
 - Next: Try to get a local version of workflow installed
 - Workflow again has not worked out. Looking at micromachine
     - See issue-11-micromachine branch
+
+## 2013-10-11
+
+- MicroMachine seems to be fitting the bill
