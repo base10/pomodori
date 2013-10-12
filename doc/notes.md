@@ -134,3 +134,24 @@ Trying to set default values and running into some test failures, which suggests
 
 - Working with Sequel, it doesn't seem like Transitions is compatible
 - Looking around, there's a [plugin for Workflow and Sequel](http://jackchu.com/blog/2013/01/18/state-machines-with-the-workflow-gem/), so I'm going to give that a shot
+
+## 2013-09-28
+
+- Yeah, been a while. Work's been crazy busy the last few weeks
+- workflow and workflow_sequel_adaptor seem to expect a :states column. It's
+  not terribly obvious which.
+- Based on a suggestion seen on http://jackchu.com/blog/2013/01/18/state-machines-with-the-workflow-gem/
+  I'm going to try the transitions gem again with an ActiveModel plugin
+- I'm still hoping to avoid going to state_machine since that seems like
+  a much larger hammer than I need
+
+## 2013-10-07
+
+- Taking the approach of trying transitions and workflow gems separately in two branches, issue-11 and issue-11-workflow respectively
+
+## 2013-10-09
+
+- transitions has not worked out, running into the same problem as jackchu mentioned
+- Next: Try to get a local version of workflow installed
+- Workflow again has not worked out. Looking at micromachine
+    - See issue-11-micromachine branch
