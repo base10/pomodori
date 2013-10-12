@@ -122,9 +122,9 @@ describe "Pomodori::Pomodoro" do
                     }
 
     it "changes state to 'in_progress'" do
-      expect(pomodoro.current_state).to eq(:ready)
+      expect(pomodoro.state).to eq("ready")
       pomodoro.start
-      expect(pomodoro.current_state).to eq(:in_progress)
+      expect(pomodoro.state).to eq("in_progress")
     end
     
     it "saves state to the database" do
@@ -162,9 +162,9 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "changes state to 'completed'" do
-      expect(pomodoro.current_state).to eq(:in_progress)
+      expect(pomodoro.state).to eq("in_progress")
       pomodoro.complete
-      expect(pomodoro.current_state).to eq(:completed)
+      expect(pomodoro.state).to eq("completed")
     end
 
     it "saves state to the database" do
@@ -194,9 +194,9 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "changes state to 'cancelled'" do
-      expect(pomodoro.current_state).to eq(:in_progress)
+      expect(pomodoro.state).to eq("in_progress")
       pomodoro.cancel
-      expect(pomodoro.current_state).to eq(:cancelled)
+      expect(pomodoro.state).to eq("cancelled")
     end
 
     it "saves state to the database" do

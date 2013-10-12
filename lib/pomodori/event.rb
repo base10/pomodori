@@ -2,7 +2,7 @@
 # States:   'new', 'completed', 'cancelled', 'in_progress'
 
 require 'pp'
-require 'transitions'
+require 'micromachine'
 
 module Pomodori
   database  = Pomodori::Database.new
@@ -10,8 +10,6 @@ module Pomodori
   CONFIG    = database.config
 
   class Event < Sequel::Model(:events)
-    include Transitions
-
     # FIXME: I need to rethink using initialize in a composed module when I'm
     # inheriting something that also provides initialize
     #include Pomodori::Configure
@@ -23,7 +21,7 @@ module Pomodori
       @config           = CONFIG
 
       values[:kind]     = determine_kind
-      values[:state]    = 'ready'
+      values[:state]    = "ready"
       values[:duration] = @config[determine_kind]['duration']
       values[:summary]  = @config[determine_kind]['summary']
 
@@ -77,39 +75,37 @@ module Pomodori
       errors.add(:created_at, "can't be nil")   if created_at.nil?
     end
 
-    state_machine do
-      state :ready
-      state :in_progress
-      state :cancelled
-      state :completed
+    def transition
+      @transition ||= begin
+        state_machine = MicroMachine.new( state || "ready" )
+        
+        state_machine.when(:start,    "ready" => "in_progress")
+        state_machine.when(:cancel,   "ready" => "cancelled", "in_progress" => "cancelled")
+        state_machine.when(:complete, "in_progress" => "completed")
 
-      event :start do
-        transitions :to => :in_progress, :from => :ready, :guard => :can_start?
-          # TODO: guard, no more than one in_progress event
-          # TODO: on_transition, create the necessary events
-
-      end
- 
-      event :cancel do
-        transitions :to => :cancelled, :from => :in_progress
-          # TODO: guard for in_progress only
-          # TODO: Cancel outstanding notifications
-          # TODO: Mark event as cancelled
-      end
-    
-      event :complete do
-        transitions :to => :completed, :from => :in_progress
-          # TODO: guard for in_progress only
-          # TODO: Mark event as complete
+        state_machine
       end
     end
 
-    # begin
-    # after_begin
-    # mark_complete
-    # after_complete
-    # mark_incomplete
-      # If it's a Pomodoro, invalidate the next break
-    # after_incomplete
+    def start
+      transition.trigger(:start)
+      persist_transition
+    end
+
+    def cancel
+      transition.trigger(:cancel)
+      persist_transition
+    end
+
+    def complete
+      transition.trigger(:complete)
+      persist_transition
+    end
+
+
+
+    def persist_transition
+      self.state = transition.state
+    end
   end
 end
