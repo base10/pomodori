@@ -28,7 +28,7 @@ describe Pomodori::Example do
       File.stub(:exists?).and_return(true)
       File.stub(:read).and_return("- foo\rfoo -\r - bar")
 
-      expect { Pomodori::Example.new }.to raise_error(SyntaxError)
+      expect { Pomodori::Example.new }.to raise_error(Psych::SyntaxError)
     end
 
     it "sets the config accessor" do
