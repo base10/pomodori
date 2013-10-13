@@ -143,11 +143,11 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "cannot be completed" do
-      pending
+      expect(pomodoro.transition.trigger(:complete) ).to eq(false)
     end
 
-    it "cannot be cancelled" do
-      pending
+    it "can be cancelled" do
+      expect(pomodoro.transition.trigger(:cancel) ).to eq(true)
     end
   end
 
@@ -176,15 +176,18 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "sets completed_at" do
-      pending
+      pomodoro.complete
+      expect(pomodoro.completed_at).not_to be_nil
     end
 
-    it "cannot be cancelled" do
-      pending
+    it "cannot be cancelled after completion" do
+      pomodoro.complete
+      expect(pomodoro.transition.trigger(:cancel) ).to eq(false)
     end
 
     it "cannot be started" do
-      pending
+      pomodoro.complete
+      expect(pomodoro.transition.trigger(:start) ).to eq(false)
     end
   end
 
@@ -207,16 +210,19 @@ describe "Pomodori::Pomodoro" do
       expect(pomodoro.state).to eq('cancelled')
     end
 
-    it "sets cancelled_at" do
-      pending
+    it "sets completed_at" do
+      pomodoro.cancel
+      expect(pomodoro.completed_at).not_to be_nil
     end
 
     it "cannot be started" do #expect exception here
-      pending
+      pomodoro.complete
+      expect(pomodoro.transition.trigger(:start) ).to eq(false)
     end
 
     it "cannot be completed" do #expect exception here (may need to add db cleaner)
-      pending
+      pomodoro.complete
+      expect(pomodoro.transition.trigger(:complete) ).to eq(false)
     end
   end
 

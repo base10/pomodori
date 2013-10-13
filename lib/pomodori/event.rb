@@ -96,10 +96,12 @@ module Pomodori
 
     def cancel
       transition.trigger(:cancel)
+      self.completed_at = DateTime.now
     end
 
     def complete
       transition.trigger(:complete)
+      self.completed_at = DateTime.now
     end
   end
 end
