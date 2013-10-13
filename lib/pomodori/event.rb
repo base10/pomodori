@@ -33,7 +33,7 @@ module Pomodori
       hierarchy = klass.split(/\:\:/)
       kind      = hierarchy.pop.to_underscore
       kind      = kind.downcase
-      
+
       kind
     end
 
@@ -78,7 +78,7 @@ module Pomodori
     def transition
       @transition ||= begin
         state_machine = MicroMachine.new( state || "ready" )
-        
+
         state_machine.when(:start,    "ready" => "in_progress")
         state_machine.when(:cancel,   "ready" => "cancelled", "in_progress" => "cancelled")
         state_machine.when(:complete, "in_progress" => "completed")
@@ -89,6 +89,8 @@ module Pomodori
 
     def start
       transition.trigger(:start)
+      self.started_at = DateTime.now
+
       persist_transition
     end
 
@@ -101,8 +103,6 @@ module Pomodori
       transition.trigger(:complete)
       persist_transition
     end
-
-
 
     def persist_transition
       self.state = transition.state

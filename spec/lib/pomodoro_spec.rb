@@ -134,8 +134,6 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "sets started_at" do
-      pending "Not implemented yet"
-
       pomodoro.start
       expect(pomodoro.started_at).not_to be_nil
     end
@@ -209,11 +207,11 @@ describe "Pomodori::Pomodoro" do
       pending
     end
 
-    it "cannot be started" do
+    it "cannot be started" do #expect exception here
       pending
     end
 
-    it "cannot be completed" do
+    it "cannot be completed" do #expect exception here (may need to add db cleaner)
       pending
     end
   end
