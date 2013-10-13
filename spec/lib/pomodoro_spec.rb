@@ -56,7 +56,7 @@ describe "Pomodori::Pomodoro" do
     it "expects a state" do
       pomodoro = build(:pomodoro, config: @config, state: '')
       expect(pomodoro.valid?).to be_false
-      
+
       pomodoro = build(:pomodoro, config: @config, state: nil)
       expect(pomodoro.valid?).to be_false
     end
@@ -78,7 +78,7 @@ describe "Pomodori::Pomodoro" do
                                       created_at:   nil,
                                       started_at:   nil,
                                       completed_at: nil
-                                )    
+                                )
                     }
 
     it "sets a kind" do
@@ -92,7 +92,7 @@ describe "Pomodori::Pomodoro" do
       expect(pomodoro.state).to eq('ready')
     end
 
-    describe "duration" do 
+    describe "duration" do
       it "sets a default duration from config" do
         expect(pomodoro.duration).not_to be_nil
         expect(pomodoro.duration).to eq(25)
@@ -118,7 +118,7 @@ describe "Pomodori::Pomodoro" do
                                       created_at:   nil,
                                       started_at:   nil,
                                       completed_at: nil
-                                )    
+                                )
                     }
 
     it "changes state to 'in_progress'" do
@@ -126,11 +126,15 @@ describe "Pomodori::Pomodoro" do
       pomodoro.start
       expect(pomodoro.state).to eq("in_progress")
     end
-    
-    it "saves state to the database" do
-      pending
 
-      expect(pomodoro.state).to eq('in_progress')
+    it "saves state to the database" do
+      pomodoro.start
+      pomodoro.save
+
+      db_pomodoro = Pomodori::Pomodoro.find(id: pomodoro.id)
+
+      expect(db_pomodoro.state).to eq('in_progress')
+      expect(db_pomodoro.object_id).not_to eq(pomodoro.object_id)
     end
 
     it "sets started_at" do
@@ -152,9 +156,9 @@ describe "Pomodori::Pomodoro" do
                                       created_at:   nil,
                                       started_at:   nil,
                                       completed_at: nil
-                                )    
+                                )
                     }
-    
+
     before(:each) do
       pomodoro.start
     end
@@ -186,7 +190,7 @@ describe "Pomodori::Pomodoro" do
 
   describe "cancelling a pomodoro" do
     let(:pomodoro) { build(:pomodoro, config: @config) }
-    
+
     before(:each) do
       pomodoro.start
     end
