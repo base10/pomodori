@@ -83,6 +83,8 @@ module Pomodori
         state_machine.when(:cancel,   "ready" => "cancelled", "in_progress" => "cancelled")
         state_machine.when(:complete, "in_progress" => "completed")
 
+        state_machine.on(:any) { self.state = transition.state }
+
         state_machine
       end
     end
@@ -90,22 +92,14 @@ module Pomodori
     def start
       transition.trigger(:start)
       self.started_at = DateTime.now
-
-      persist_transition
     end
 
     def cancel
       transition.trigger(:cancel)
-      persist_transition
     end
 
     def complete
       transition.trigger(:complete)
-      persist_transition
-    end
-
-    def persist_transition
-      self.state = transition.state
     end
   end
 end
