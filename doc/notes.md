@@ -159,3 +159,10 @@ Trying to set default values and running into some test failures, which suggests
 ## 2013-10-11
 
 - MicroMachine seems to be fitting the bill
+
+## 2013-10-14
+
+- Sure enough, MicroMachine took care of what I needed it to. Closed issue-11 on GitHub.
+    - issue-11 and issue-11-workflow branches are dead
+- Moving on to thinking though notifications
+    - See doc/code-brainstorming/notifications.md for more information
