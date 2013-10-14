@@ -79,8 +79,9 @@ module Pomodori
       @transition ||= begin
         state_machine = MicroMachine.new( state || "ready" )
 
-        state_machine.when(:start,    "ready" => "in_progress")
-        state_machine.when(:cancel,   "ready" => "cancelled", "in_progress" => "cancelled")
+        state_machine.when(:start,    "ready"       => "in_progress")
+        state_machine.when(:cancel,   "ready"       => "cancelled",
+                                      "in_progress" => "cancelled")
         state_machine.when(:complete, "in_progress" => "completed")
 
         state_machine.on(:any) { self.state = transition.state }
@@ -90,24 +91,30 @@ module Pomodori
     end
 
     def start
-      transition.trigger(:start)
-      self.started_at = DateTime.now
+      if transition.trigger?(:start)
+        transition.trigger(:start)
+        self.started_at = DateTime.now
 
-      self.save
+        self.save
+      end
     end
 
     def cancel
-      transition.trigger(:cancel)
-      self.completed_at = DateTime.now
+      if transition.trigger?(:cancel)
+        transition.trigger(:cancel)
+        self.completed_at = DateTime.now
 
-      self.save
+        self.save
+      end
     end
 
     def complete
-      transition.trigger(:complete)
-      self.completed_at = DateTime.now
+      if transition.trigger?(:complete)
+        transition.trigger(:complete)
+        self.completed_at = DateTime.now
 
-      self.save
+        self.save
+      end
     end
   end
 end

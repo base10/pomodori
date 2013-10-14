@@ -140,11 +140,11 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "cannot be completed" do
-      expect(pomodoro.transition.trigger(:complete) ).to eq(false)
+      expect(pomodoro.transition.trigger?(:complete) ).to eq(false)
     end
 
     it "can be cancelled" do
-      expect(pomodoro.transition.trigger(:cancel) ).to eq(true)
+      expect(pomodoro.transition.trigger?(:cancel) ).to eq(true)
     end
   end
 
@@ -182,12 +182,12 @@ describe "Pomodori::Pomodoro" do
 
     it "cannot be cancelled after completion" do
       pomodoro.complete
-      expect(pomodoro.transition.trigger(:cancel) ).to eq(false)
+      expect(pomodoro.transition.trigger?(:cancel) ).to eq(false)
     end
 
     it "cannot be started" do
       pomodoro.complete
-      expect(pomodoro.transition.trigger(:start) ).to eq(false)
+      expect(pomodoro.transition.trigger?(:start) ).to eq(false)
     end
   end
 
@@ -220,12 +220,12 @@ describe "Pomodori::Pomodoro" do
 
     it "cannot be started" do #expect exception here
       pomodoro.complete
-      expect(pomodoro.transition.trigger(:start) ).to eq(false)
+      expect(pomodoro.transition.trigger?(:start) ).to eq(false)
     end
 
     it "cannot be completed" do #expect exception here (may need to add db cleaner)
       pomodoro.complete
-      expect(pomodoro.transition.trigger(:complete) ).to eq(false)
+      expect(pomodoro.transition.trigger?(:complete) ).to eq(false)
     end
   end
 
