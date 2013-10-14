@@ -103,8 +103,6 @@ describe "Pomodori::Pomodoro" do
 
     describe "summary" do
       it "sets a default summary from config" do
-        pp pomodoro
-
         expect(pomodoro.summary).not_to be_nil
         expect(pomodoro.summary).to include("Working on")
       end
@@ -170,9 +168,13 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "saves state to the database" do
-      pending
+      pomodoro.complete
+      pomodoro.save
 
-      expect(pomodoro.state).to eq('completed')
+      db_pomodoro = Pomodori::Pomodoro.find(id: pomodoro.id)
+
+      expect(db_pomodoro.state).to eq('completed')
+      expect(db_pomodoro.object_id).not_to eq(pomodoro.object_id)
     end
 
     it "sets completed_at" do
@@ -205,9 +207,13 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "saves state to the database" do
-      pending
+      pomodoro.cancel
+      pomodoro.save
 
-      expect(pomodoro.state).to eq('cancelled')
+      db_pomodoro = Pomodori::Pomodoro.find(id: pomodoro.id)
+
+      expect(db_pomodoro.state).to eq('cancelled')
+      expect(db_pomodoro.object_id).not_to eq(pomodoro.object_id)
     end
 
     it "sets completed_at" do
