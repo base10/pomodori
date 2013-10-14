@@ -20,5 +20,14 @@ describe "Pomodori::Notification" do
     FileUtils.rm_rf test_config_path
   end
 
+  describe "saving" do
+    it "saves a valid object" do
+      notification = build(:note_start, config: @config)
 
+      expect(notification.valid?).to be_true
+      expect { notification.save }.not_to raise_error
+    end
+
+
+  end
 end

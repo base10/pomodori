@@ -9,14 +9,14 @@ Sequel.migration do
       DateTime      :completed_at
 
       foreign_key :event_id, :events
-      
+
       index :action
       index :deliver_at
       index :completed_at
     end
   end
-  
-  down do 
+
+  down do
     drop_table(:notifications)
   end
 end
