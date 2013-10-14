@@ -12,8 +12,6 @@ describe "Pomodori::Notification" do
     @setup.run
     @database = Pomodori::Database.new
     @database.connect
-
-    @config = @database.config
   end
 
   after(:each) do
@@ -22,12 +20,20 @@ describe "Pomodori::Notification" do
 
   describe "saving" do
     it "saves a valid object" do
-      notification = build(:note_start, config: @config)
+      notification = build(:note_start)
 
       expect(notification.valid?).to be_true
       expect { notification.save }.not_to raise_error
     end
 
+    it "expects an action" do
+      notification = build(:note_start, action: '')
+      expect(notification.valid?).to be_false
+    end
 
+    it "expects a deliver_at" do
+      notification = build(:note_start, deliver_at: nil)
+      expect(notification.valid?).to be_false
+    end
   end
 end
