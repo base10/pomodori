@@ -127,7 +127,6 @@ describe "Pomodori::Pomodoro" do
 
     it "saves state to the database" do
       pomodoro.start
-      pomodoro.save
 
       db_pomodoro = Pomodori::Pomodoro.find(id: pomodoro.id)
 
@@ -169,7 +168,6 @@ describe "Pomodori::Pomodoro" do
 
     it "saves state to the database" do
       pomodoro.complete
-      pomodoro.save
 
       db_pomodoro = Pomodori::Pomodoro.find(id: pomodoro.id)
 
@@ -208,7 +206,6 @@ describe "Pomodori::Pomodoro" do
 
     it "saves state to the database" do
       pomodoro.cancel
-      pomodoro.save
 
       db_pomodoro = Pomodori::Pomodoro.find(id: pomodoro.id)
 

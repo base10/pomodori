@@ -92,16 +92,22 @@ module Pomodori
     def start
       transition.trigger(:start)
       self.started_at = DateTime.now
+
+      self.save
     end
 
     def cancel
       transition.trigger(:cancel)
       self.completed_at = DateTime.now
+
+      self.save
     end
 
     def complete
       transition.trigger(:complete)
       self.completed_at = DateTime.now
+
+      self.save
     end
   end
 end
