@@ -3,6 +3,7 @@
 
 require 'pp'
 require 'micromachine'
+require 'verbs'
 
 module Pomodori
   database  = Pomodori::Database.new
@@ -80,8 +81,8 @@ module Pomodori
         state_machine = MicroMachine.new( state || "ready" )
 
         state_machine.when(:start,    "ready"       => "in_progress")
-        state_machine.when(:cancel,   "ready"       => "canceled",
-                                      "in_progress" => "canceled")
+        state_machine.when(:cancel,   "ready"       => "cancelled",
+                                      "in_progress" => "cancelled")
         state_machine.when(:complete, "in_progress" => "completed")
 
         state_machine.on(:any) { self.state = transition.state }
@@ -90,36 +91,30 @@ module Pomodori
       end
     end
 
-    def state_change
+    def time_method(state)
+      method = Verbs::Conjugator.conjugate state, tense: :past, aspect: :perfective
+      method += '_at='
+    end
 
+    def state_change(method)
+      transition.trigger(method)
 
+      self.send(time_method( method ), DateTime.now)
+      self.save
+
+      # kickoff transition tasks
     end
 
     def start
-      if transition.trigger?(:start)
-        transition.trigger(:start)
-        self.started_at = DateTime.now
-
-        self.save
-      end
+      state_change(:start) if transition.trigger?(:start)
     end
 
     def cancel
-      if transition.trigger?(:cancel)
-        transition.trigger(:cancel)
-        self.canceled_at = DateTime.now
-
-        self.save
-      end
+      state_change(:cancel) if transition.trigger?(:cancel)
     end
 
     def complete
-      if transition.trigger?(:complete)
-        transition.trigger(:complete)
-        self.completed_at = DateTime.now
-
-        self.save
-      end
+      state_change(:complete) if transition.trigger?(:complete)
     end
   end
 end

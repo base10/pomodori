@@ -11,7 +11,7 @@ Sequel.migration do
       DateTime      :started_at
       DateTime      :created_at
       DateTime      :completed_at
-      DateTime      :canceled_at
+      DateTime      :cancelled_at
 
       index         :created_at
       index         :kind
