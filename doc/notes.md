@@ -166,3 +166,4 @@ Trying to set default values and running into some test failures, which suggests
     - issue-11 and issue-11-workflow branches are dead
 - Moving on to thinking though notifications
     - See doc/code-brainstorming/notifications.md for more information
+- TODO: Make sure notification object doesn't have a recursion problem when showing an assoc. with event
