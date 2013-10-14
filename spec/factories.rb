@@ -22,5 +22,7 @@ FactoryGirl.define do
   factory :note_start, class: 'Pomodori::Notification' do
     action        'start'
     deliver_at    '2013-06-05T22:32:20-04:00'
+
+    association :event, factory: :pomodoro, strategy: :build
   end
 end

@@ -9,6 +9,8 @@ describe "Pomodori::Notification" do
 
     Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
 
+    Pomodori::Pomodoro.any_instance.stub(:id).and_return( 23 )
+
     @setup.run
     @database = Pomodori::Database.new
     @database.connect
@@ -20,19 +22,24 @@ describe "Pomodori::Notification" do
 
   describe "saving" do
     it "saves a valid object" do
-      notification = build(:note_start)
+      notification = FactoryGirl.build(:note_start)
 
       expect(notification.valid?).to be_true
       expect { notification.save }.not_to raise_error
     end
 
     it "expects an action" do
-      notification = build(:note_start, action: '')
+      notification = FactoryGirl.build(:note_start, action: '')
       expect(notification.valid?).to be_false
     end
 
     it "expects a deliver_at" do
-      notification = build(:note_start, deliver_at: nil)
+      notification = FactoryGirl.build(:note_start, deliver_at: nil)
+      expect(notification.valid?).to be_false
+    end
+
+    it "expects an event" do
+      notification = FactoryGirl.build(:note_start, event: nil)
       expect(notification.valid?).to be_false
     end
   end
