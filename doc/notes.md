@@ -167,3 +167,12 @@ Trying to set default values and running into some test failures, which suggests
 - Moving on to thinking though notifications
     - See doc/code-brainstorming/notifications.md for more information
 - TODO: Make sure notification object doesn't have a recursion problem when showing an assoc. with event
+- I want to separate the defining of notifications, when they need to be delivered from the mechanism that delivers them, so I'm going to add a notifier_strategy
+    - The notifier should be instantiated lazily
+- Strategies to implement
+    - Mac OS X Terminal Notifier
+    - Test STDOUT
+- Later, possible strategies
+    - Growl
+    - Linux-based
+- As for the notification itself, I want to have subclasses for each type to specify message and title
