@@ -31,11 +31,18 @@ describe "Pomodori::Notifier::Stdout" do
   end
 
   describe "delivery" do
-
     it "outputs information by type" do
-      options = { output: output  }
+      notification  = FactoryGirl.build(:note_start)
 
+      options      =  {
+                        output:       output,
+                        notification: notification
+                      }
 
+      output.should_receive(:puts).with(/#{notification.title}/)
+
+      notifier = Pomodori::Notifier::Stdout.new( options )
+      notifier.deliver
     end
   end
 end
