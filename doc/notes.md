@@ -176,3 +176,9 @@ Trying to set default values and running into some test failures, which suggests
     - Growl
     - Linux-based
 - As for the notification itself, I want to have subclasses for each type to specify message and title
+
+## 2013-10-17
+
+- Brought in associations for event and notification objects
+- Adding notification message and title tests as a start, until I start subclassing
+- Going to start modeling notification strategies
