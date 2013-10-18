@@ -14,3 +14,4 @@ pausa:
 lunga_pausa:
   summary: Taking a long break
   duration: 15
+notifier: stdout
