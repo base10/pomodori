@@ -15,6 +15,7 @@ module Pomodori
     # inheriting something that also provides initialize
     #include Pomodori::Configure
     attr_accessor :config
+    one_to_many   :notifications
 
     # TODO: define scopes
 

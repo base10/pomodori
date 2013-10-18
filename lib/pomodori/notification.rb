@@ -8,7 +8,7 @@ module Pomodori
   DB        = database.connect
 
   class Notification < Sequel::Model
-    attr_accessor :event
+    many_to_one :event
 
     def validate
       validate_action
@@ -35,8 +35,12 @@ module Pomodori
       errors.add(:event_id, "can't be nil") if event_id.nil?
     end
 
+    def title
+      "#{event.kind} #{action}"
+    end
+
     def message
-      "#{action.upcase}"
+      "#{event.kind}"
     end
   end
 end

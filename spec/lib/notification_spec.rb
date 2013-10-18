@@ -10,6 +10,7 @@ describe "Pomodori::Notification" do
     Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
 
     Pomodori::Pomodoro.any_instance.stub(:id).and_return( 23 )
+    Pomodori::Pomodoro.any_instance.stub(:pk).and_return( 23 )
 
     @setup.run
     @database = Pomodori::Database.new
@@ -41,6 +42,38 @@ describe "Pomodori::Notification" do
     it "expects an event" do
       notification = FactoryGirl.build(:note_start, event: nil)
       expect(notification.valid?).to be_false
+    end
+  end
+
+  describe "fulfillment" do
+    let ( :notification ) { FactoryGirl.build(:note_start) }
+
+    it "has a strategy" do
+      pending
+    end
+
+    it "presents a notification" do
+      pending
+      #expect(notification.deliver).
+    end
+
+    it "updates completed_at" do
+      pending
+    end
+  end
+
+  # This is prior to subclassing and using a Factory
+  describe "message and title for the notification mechanism" do
+    let ( :notification ) { FactoryGirl.build(:note_start) }
+    let ( :event )        { FactoryGirl.build(:pomodoro) }
+
+    it "returns a title based on the event" do
+      expect(notification.title).to include(event.kind)
+      expect(notification.title).to include(notification.action)
+    end
+
+    it "it returns a message based on the event" do
+      expect(notification.message).to include(event.kind)
     end
   end
 end
