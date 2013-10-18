@@ -1,21 +1,18 @@
 module Pomodori
-  class Notifier
+  module Notifier
     attr_accessor :notification, :output
 
     def initialize( options )
+      unless options.has_key?(:notification)
+        raise Pomodori::Notifier::Error, "Needs a notification"
+      end
+
       @notification = options[:notification]
-      @output       = options[:output]            || STDOUT
+      @output       = options[:output] || STDOUT
     end
 
     def deliver
-      raise ::Error, "This method needs to be overwritten"
-    end
-  end
-
-  module Notifier
-    class Error < StandardError
+      raise Pomodori::Notifier::Error, "This method needs to be overwritten"
     end
   end
 end
-
-
