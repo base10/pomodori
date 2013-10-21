@@ -182,3 +182,14 @@ Trying to set default values and running into some test failures, which suggests
 - Brought in associations for event and notification objects
 - Adding notification message and title tests as a start, until I start subclassing
 - Going to start modeling notification strategies
+
+## 2013-10-19
+
+- Writing two sets of strategy patterns
+    - First is from Notification, calling deliver, which calls get_strategy to read the config and determine which notifier to use
+    - Second, I build an initializer for Notification, using #action to return the right class
+- Strategy pattern seems to apply to Pausa and LungaPausa classes, too. I'll need a of some sort to hand back the right object from Pomodoro
+- A side-effect of the work I'm doing on Notification might be to simplify how I use Setup and Config.
+    - Create a proper base object, move the instantiation pieces there.
+    - Config becomes a singleton (Confident Ruby, search for module\_function)
+    - Setup becomes a true service object
