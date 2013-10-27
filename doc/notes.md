@@ -193,3 +193,13 @@ Trying to set default values and running into some test failures, which suggests
     - Create a proper base object, move the instantiation pieces there.
     - Config becomes a singleton (Confident Ruby, search for module\_function)
     - Setup becomes a true service object
+
+
+## 2013-10-26
+
+- Reviewing where I'm at, since I've not touched code in a week.
+
+## 2013-10-27
+
+- So, thinking about Setup and Config, I could use a null object for cases when there's not a config file or database in place. That will help with the initial setup and with testing.
+
