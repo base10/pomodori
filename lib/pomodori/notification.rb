@@ -1,11 +1,11 @@
 # actions: start, halfway, close, complete, cancel
 
 require 'pp'
-require 'terminal-notifier'
 
 module Pomodori
   database  = Pomodori::Database.new
   DB        = database.connect
+  CONFIG    = database.config
 
   class Notification < Sequel::Model
     many_to_one :event
@@ -33,6 +33,17 @@ module Pomodori
       end
 
       errors.add(:event_id, "can't be nil") if event_id.nil?
+    end
+
+    def notifier_strategy
+      strategy_pref   = CONFIG['notifier']
+      strategy_class  = 'Pomodori::Notifier::' + strategy_pref.camelcase
+    end
+
+    def deliver
+      # TODO: Get the right kind of notifier
+      # Call the delivery method
+      # Add tests
     end
 
     def title
