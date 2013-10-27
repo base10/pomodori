@@ -4,7 +4,12 @@ describe "Pomodori::Notification" do
   let ( :test_config_path ) { File.expand_path( "../../dotpomodori", __FILE__ ) }
 
   before(:each) do
+    source_config_path = File.expand_path( "../../config/pomodori.yml", __FILE__ )
+
+    Pomodori::Setup.any_instance.stub(:initial_config_file).and_return( source_config_path )
+
     @setup = Pomodori::Setup.new
+
     allow(@setup).to receive(:default_config_path).and_return( test_config_path )
 
     Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
@@ -49,7 +54,7 @@ describe "Pomodori::Notification" do
     let ( :notification ) { FactoryGirl.build(:note_start) }
 
     it "has a strategy" do
-      pending
+      expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Stdout')
     end
 
     it "presents a notification" do
