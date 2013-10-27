@@ -7,11 +7,11 @@ module Pomodori
     attr_reader :initial_config_file
     attr_reader :database
 
-    # FIXME: Call Pomodori::Config#initialize 
+    # FIXME: Call Pomodori::Config#initialize
     def initialize( file_path = nil )
       @initial_config_file = file_path || File.expand_path( "../../../config/pomodori.yml", __FILE__)
 
-      read_config @initial_config_file
+      read_config initial_config_file
       set_environment
 
       @database = Pomodori::Database.new( @initial_config_file )
