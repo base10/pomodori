@@ -4,12 +4,29 @@ describe "Pomodori::Notification" do
   let ( :test_config_path ) { File.expand_path( "../../dotpomodori", __FILE__ ) }
 
   before(:each) do
-    source_config_path = File.expand_path( "../../config/pomodori.yml", __FILE__ )
+    test_config = <<-EOF
+---
+version: 1
+database:
+  production: pomodori_production.sqlite3
+  test: pomodori_test.sqlite3
+  development: pomodori_development.sqlite3
+pomodoro:
+  summary: Working on Lorum Ipsum
+  duration: 25
+  count_to_long_break: 4
+pausa:
+  summary: Taking a short break
+  duration: 5
+lunga_pausa:
+  summary: Taking a long break
+  duration: 15
+notifier: stdout
+EOF
 
-    Pomodori::Setup.any_instance.stub(:initial_config_file).and_return( source_config_path )
+    #File.any_instance.stub(:read).with.and_return(test_config)
 
     @setup = Pomodori::Setup.new
-
     allow(@setup).to receive(:default_config_path).and_return( test_config_path )
 
     Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
@@ -20,6 +37,8 @@ describe "Pomodori::Notification" do
     @setup.run
     @database = Pomodori::Database.new
     @database.connect
+
+    @config = @database.config
   end
 
   after(:each) do
@@ -54,7 +73,8 @@ describe "Pomodori::Notification" do
     let ( :notification ) { FactoryGirl.build(:note_start) }
 
     it "has a strategy" do
-      expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Stdout')
+      #expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Stdout')
+      expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Osx')
     end
 
     it "presents a notification" do

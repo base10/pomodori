@@ -202,4 +202,9 @@ Trying to set default values and running into some test failures, which suggests
 ## 2013-10-27
 
 - So, thinking about Setup and Config, I could use a null object for cases when there's not a config file or database in place. That will help with the initial setup and with testing.
+- First, get issue-12 resolved with notification delivery
+- Then, address refactoring and issue-14
 
+## 2013-10-29
+
+- Backing out work on trying to mock File.read for a test, so just accepting what's coming from Configure
