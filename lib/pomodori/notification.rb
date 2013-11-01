@@ -10,6 +10,14 @@ module Pomodori
   class Notification < Sequel::Model
     many_to_one :event
 
+    attr_accessor :output
+
+    def initialize( options = {} )
+      @output = options.fetch(:output, STDOUT)
+
+      super
+    end
+
     def validate
       validate_action
       validate_deliver_at
@@ -41,9 +49,13 @@ module Pomodori
     end
 
     def deliver
-      # TODO: Get the right kind of notifier
-      # Call the delivery method
-      # Add tests
+      options = {
+                  notification: self,
+                  output:       output
+                }
+
+      notifier = eval(notifier_strategy).new( options )
+      notifier.deliver
     end
 
     def title

@@ -1,4 +1,5 @@
 require "spec_helper"
+require "stringio"
 
 describe "Pomodori::Notification" do
   let ( :test_config_path ) { File.expand_path( "../../dotpomodori", __FILE__ ) }
@@ -71,6 +72,7 @@ EOF
 
   describe "fulfillment" do
     let ( :notification ) { FactoryGirl.build(:note_start) }
+    let ( :output )       { double('output').as_null_object }
 
     it "has a strategy" do
       #expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Stdout')
@@ -78,8 +80,13 @@ EOF
     end
 
     it "presents a notification" do
-      pending
-      #expect(notification.deliver).
+      notification.stub(:notifier_strategy).and_return('Pomodori::Notifier::Stdout')
+
+      notification.output = output
+      notification.deliver
+
+      expect(output).to include(notification.title)
+      expect(output).to include(notification.message)
     end
 
     it "updates completed_at" do
