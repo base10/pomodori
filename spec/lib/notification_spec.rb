@@ -90,7 +90,12 @@ EOF
     end
 
     it "updates completed_at" do
-      pending
+      notification.stub(:notifier_strategy).and_return('Pomodori::Notifier::Stdout')
+
+      notification.output = output
+      notification.deliver
+
+      expect(notification.completed_at).not_to be(nil)
     end
   end
 

@@ -56,6 +56,9 @@ module Pomodori
 
       notifier = eval(notifier_strategy).new( options )
       notifier.deliver
+
+      self.completed_at = DateTime.now
+      self.save
     end
 
     def title
