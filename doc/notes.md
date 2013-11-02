@@ -208,3 +208,8 @@ Trying to set default values and running into some test failures, which suggests
 ## 2013-10-29
 
 - Backing out work on trying to mock File.read for a test, so just accepting what's coming from Configure
+
+## 2013-10-31
+
+- Finished issue-12
+- Beginning on issue-14 (applying Confident Ruby lessons)
