@@ -213,3 +213,9 @@ Trying to set default values and running into some test failures, which suggests
 
 - Finished issue-12
 - Beginning on issue-14 (applying Confident Ruby lessons)
+
+## 2013-11-29
+
+- Config becomes a "parameter object" per Confident Ruby, instantiated and then passed
+- Base methods move to a base module class
+- Config set-up moves to a set of common examples
