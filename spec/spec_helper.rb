@@ -5,7 +5,7 @@ Spork.prefork do
   require 'rspec/core'
   require 'rspec/autorun'
   require 'simplecov'
-  
+
   SimpleCov.start
 
   RSpec.configure do |config|
@@ -24,24 +24,29 @@ Spork.prefork do
     FactoryGirl.find_definitions
 
     ## TODO: Put the set-up block here for configs. Alternately, I require
-    ## files for the spec files themselves. Might be an interesting bit of 
+    ## files for the spec files themselves. Might be an interesting bit of
     ## inception, that.
-    
+
     ## Other strategy: Rescue the exception, run setup?
 
-    # Require Ruby files under the lib directory
-    base_dir = File.expand_path("../../", __FILE__)
-    Dir["#{base_dir}/lib/**/*.rb"].each {|f| require f}
+
 
     # Run specs in random order to surface order dependencies. If you find an
     # order dependency and want to debug it, you can fix the order by providing
     # the seed, which is printed after each run.
     #     --seed 1234
     config.order = 'random'
+
   end
 end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
   FactoryGirl.reload
+
+  # Require Ruby files under the lib directory
+  RSpec.configure do |config|
+    base_dir = File.expand_path("../../", __FILE__)
+    Dir["#{base_dir}/lib/**/*.rb"].each {|f| require f}
+  end
 end
