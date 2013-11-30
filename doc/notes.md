@@ -219,3 +219,4 @@ Trying to set default values and running into some test failures, which suggests
 - Config becomes a "parameter object" per Confident Ruby, instantiated and then passed
 - Base methods move to a base module class
 - Config set-up moves to a set of common examples
+- Initial config file can be a class method on Pomodori::Configure
