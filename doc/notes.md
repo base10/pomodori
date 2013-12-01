@@ -228,3 +228,7 @@ I'm trying to think of how I can safely extract Pomodori::Configure and:
 - Change it over to a class
 - Get other classes to declare their own initialize
 - Update calls to environment accordingly
+    - Setup
+    - Database
+    - Make sure other changes propogate
+    - Simplify the tests

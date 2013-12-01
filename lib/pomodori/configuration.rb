@@ -17,6 +17,11 @@ module Pomodori
       config_path
     end
 
+    # FIXME: This method should be temporary
+    def config_path
+      default_config_path
+    end
+
     # FIXME: Make this a constant instead?
     def default_config_file
       file_path = default_config_path + "/pomodori.yml"

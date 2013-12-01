@@ -3,9 +3,9 @@
 require 'pp'
 
 module Pomodori
-  database  = Pomodori::Database.new
-  DB        = database.connect
-  CONFIG    = database.config
+  CONFIGURATION = Pomodori::Configuration.new
+  database      = Pomodori::Database.new( { configuration: CONFIGURATION } )
+  DB            = database.connect
 
   class Notification < Sequel::Model
     many_to_one :event
@@ -44,7 +44,7 @@ module Pomodori
     end
 
     def notifier_strategy
-      strategy_pref   = CONFIG['notifier']
+      strategy_pref   = CONFIGURATION.config['notifier']
       strategy_class  = 'Pomodori::Notifier::' + strategy_pref.camelcase
     end
 

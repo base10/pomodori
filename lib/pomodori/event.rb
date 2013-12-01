@@ -6,26 +6,27 @@ require 'micromachine'
 require 'verbs'
 
 module Pomodori
-  database  = Pomodori::Database.new
+  CONFIGURATION = Pomodori::Configuration.new
+
+  database  = Pomodori::Database.new( { configuration: CONFIGURATION } )
   DB        = database.connect
-  CONFIG    = database.config
 
   class Event < Sequel::Model(:events)
     # FIXME: I need to rethink using initialize in a composed module when I'm
     # inheriting something that also provides initialize
     #include Pomodori::Configure
-    attr_accessor :config
+    attr_accessor :configuration
     one_to_many   :notifications
 
     # TODO: define scopes
 
     def initialize(values = {})
-      @config           = CONFIG
+      @configuration    = CONFIGURATION
 
       values[:kind]     = determine_kind
       values[:state]    = "ready"
-      values[:duration] = @config[determine_kind]['duration']
-      values[:summary]  = @config[determine_kind]['summary']
+      values[:duration] = @configuration[determine_kind]['duration']
+      values[:summary]  = @configuration[determine_kind]['summary']
 
       super(values)
     end
