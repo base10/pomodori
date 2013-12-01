@@ -5,6 +5,7 @@ Spork.prefork do
   require 'rspec/core'
   require 'rspec/autorun'
   require 'simplecov'
+  require 'awesome_print'
 
   SimpleCov.start
 
