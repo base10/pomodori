@@ -220,3 +220,11 @@ Trying to set default values and running into some test failures, which suggests
 - Base methods move to a base module class
 - Config set-up moves to a set of common examples
 - Initial config file can be a class method on Pomodori::Configure
+
+## 2013-11-30
+
+I'm trying to think of how I can safely extract Pomodori::Configure and:
+
+- Change it over to a class
+- Get other classes to declare their own initialize
+- Update calls to environment accordingly
