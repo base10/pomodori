@@ -1,7 +1,8 @@
+#-*- mode: ruby; x-counterpart: ../../lib/pomodori/configuration.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
 require "spec_helper"
 
 module Pomodori
-  class Example  
+  class Example
     include Pomodori::Configure
   end
 end
@@ -18,7 +19,7 @@ describe Pomodori::Example do
     ENV['POMODORI_ENV'] = "test"
   end
 
-  describe "config" do 
+  describe "config" do
     it "has a baseline config if no config file is available" do
       expect { @example = Pomodori::Example.new }.to_not raise_error
       expect(@example.config).to have_key('database')
@@ -34,9 +35,9 @@ describe Pomodori::Example do
     it "sets the config accessor" do
       File.stub(:exists?).and_return(true)
       File.stub(:read).and_return("---\nfoo: bar\nbippy: baz")
-    
+
       config_obj = Pomodori::Example.new
-    
+
       expect( config_obj.config ).to_not    be(nil)
       expect( config_obj.config.class ).to  be(Hash)
       expect( config_obj.config['foo'] ).to eq('bar')
@@ -49,7 +50,7 @@ describe Pomodori::Example do
 
       before(:each) do
         ENV['POMODORI_ENV'] = environment
-      
+
         @config = Pomodori::Example.new
       end
 
@@ -60,13 +61,13 @@ describe Pomodori::Example do
           expect( @config.environment ).to eq('test')
         end
       end
-    
+
       describe "development" do
         let ( :environment ) { 'development' }
-    
+
         it "supports development environment" do
           expect( @config.environment ).to eq('development')
-        end    
+        end
       end
 
       describe "production" do
@@ -79,7 +80,7 @@ describe Pomodori::Example do
 
       describe "nil (default)" do
         let ( :environment ) { nil }
-    
+
         it "sets a default environment" do
           expect( @config.environment ).to eq('production')
         end
