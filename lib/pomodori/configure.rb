@@ -1,9 +1,9 @@
-#-*- mode: ruby; x-counterpart: ../spec/lib/configure_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+#-*- mode: ruby; x-counterpart: ../spec/lib/configuration_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
 require 'yaml'
 require 'pp'
 
 module Pomodori
-  module Configuration
+  class Configuration
     attr_accessor :config, :needs_setup, :environment
 
     def initialize( config_file = nil )
