@@ -4,8 +4,6 @@ require 'pp'
 
 module Pomodori
   class Database
-    include Pomodori::Configure
-
     Sequel.extension :migration
 
     attr_accessor :db_handle

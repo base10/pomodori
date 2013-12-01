@@ -2,8 +2,6 @@ require 'fileutils'
 
 module Pomodori
   class Setup
-    include Pomodori::Configure
-
     attr_reader :initial_config_file
     attr_reader :database
 
