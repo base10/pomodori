@@ -25,10 +25,10 @@ describe Pomodori::Database do
     end
   end
 
-  describe "databases by environment" do 
+  describe "databases by environment" do
     describe "known environments" do
       ['test', 'development', 'production'].each do |env|
-        before(:each) do 
+        before(:each) do
           ENV['POMODORI_ENV'] = env
           @database = Pomodori::Database.new
         end
@@ -42,7 +42,7 @@ describe Pomodori::Database do
     describe "unknown environments" do
       it "doesn't know about unexpected environments" do
         Pomodori::Database.any_instance.stub(:set_environment)
-        
+
         ENV['POMODORI_ENV'] = "OHAI!"
 
         expect { @database = Pomodori::Database.new }.to_not raise_error
