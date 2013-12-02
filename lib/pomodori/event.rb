@@ -25,8 +25,8 @@ module Pomodori
 
       values[:kind]     = determine_kind
       values[:state]    = "ready"
-      values[:duration] = @configuration[determine_kind]['duration']
-      values[:summary]  = @configuration[determine_kind]['summary']
+      values[:duration] = @configuration.config[determine_kind]['duration']
+      values[:summary]  = @configuration.config[determine_kind]['summary']
 
       super(values)
     end
