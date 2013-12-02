@@ -22,6 +22,11 @@ module Pomodori
       default_config_path
     end
 
+    # FIXME: Look at the env. and return the database file name
+    def database_file
+      "#{config_path}/#{config['database'][environment]}"
+    end
+
     # FIXME: Make this a constant instead?
     def default_config_file
       file_path = default_config_path + "/pomodori.yml"
