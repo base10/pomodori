@@ -2,17 +2,17 @@ require 'fileutils'
 
 module Pomodori
   class Setup
-    attr_reader :initial_config_file
-    attr_reader :database
+    attr_reader :initial_config_file, :database, :configuration
 
     # FIXME: Call Pomodori::Config#initialize
     def initialize( file_path = nil )
-      @initial_config_file = file_path || File.expand_path( "../../../config/pomodori.yml", __FILE__)
+      @initial_config_file  = file_path || File.expand_path( "../../../config/pomodori.yml", __FILE__)
+      @configuration        = Pomodori::Configuration.new
 
-      read_config initial_config_file
-      set_environment
+      @configuration.read_config initial_config_file
+      @configuration.set_environment
 
-      @database = Pomodori::Database.new( @initial_config_file )
+      @database = Pomodori::Database.new( { configuration: configuration } )
     end
 
     def run
@@ -23,14 +23,14 @@ module Pomodori
     end
 
     def ensure_config_path_exists
-      unless File.directory? default_config_path
-        FileUtils.mkdir_p default_config_path
+      unless File.directory? configuration.default_config_path
+        FileUtils.mkdir_p configuration.default_config_path
       end
     end
 
     def ensure_config_file_exists
-      unless File.exists? default_config_file
-        FileUtils.cp initial_config_file, default_config_file
+      unless File.exists? configuration.default_config_file
+        FileUtils.cp initial_config_file, configuration.default_config_file
       end
     end
 
