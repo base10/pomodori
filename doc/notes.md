@@ -232,3 +232,7 @@ I'm trying to think of how I can safely extract Pomodori::Configure and:
     - Database
     - Make sure other changes propogate
     - Simplify the tests
+
+## 2013-12-01
+
+- Continuing on with work from Nov. 30
