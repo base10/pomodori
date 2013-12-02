@@ -25,21 +25,19 @@ lunga_pausa:
 notifier: stdout
 EOF
 
-    #File.any_instance.stub(:read).with.and_return(test_config)
+    File.any_instance.stub(:read).with( test_config_path ).and_return(test_config)
 
-    @setup = Pomodori::Setup.new
-    allow(@setup).to receive(:default_config_path).and_return( test_config_path )
+    Pomodori::Configuration.any_instance.stub(:default_config_path).and_return( test_config_path )
 
-    Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
+    @setup          = Pomodori::Setup.new
+    @configuration  = @setup.configuration
+    @setup.run
+
+    @database = Pomodori::Database.new( { configuration: @configuration } )
+    @database.connect
 
     Pomodori::Pomodoro.any_instance.stub(:id).and_return( 23 )
     Pomodori::Pomodoro.any_instance.stub(:pk).and_return( 23 )
-
-    @setup.run
-    @database = Pomodori::Database.new
-    @database.connect
-
-    @config = @database.config
   end
 
   after(:each) do
