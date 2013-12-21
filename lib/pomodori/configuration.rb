@@ -33,6 +33,7 @@ module Pomodori
       file_path
     end
 
+    # FIXME: read_config can be written more "Confidently"
     def read_config(file_path = nil)
       config_file = file_path || default_config_file
 
@@ -59,6 +60,7 @@ module Pomodori
       ['production', 'test', 'development']
     end
 
+    # FIXME: can likely be written more "Confidently"
     def set_environment
       env = String.new
 
