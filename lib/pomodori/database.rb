@@ -1,3 +1,5 @@
+#-*- mode: ruby; x-counterpart: ../../spec/lib/database_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+
 require 'sequel'
 require 'fileutils'
 require 'pp'

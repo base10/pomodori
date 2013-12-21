@@ -1,4 +1,5 @@
-#-*- mode: ruby; x-counterpart: ../spec/lib/configuration_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+#-*- mode: ruby; x-counterpart: ../../spec/lib/configuration_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+
 require 'yaml'
 require 'pp'
 

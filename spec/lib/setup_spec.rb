@@ -1,3 +1,5 @@
+#-*- mode: ruby; x-counterpart: ../../lib/pomodori/setup.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+
 require_relative "../spec_helper"
 require 'fileutils'
 

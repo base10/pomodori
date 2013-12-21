@@ -1,3 +1,5 @@
+#-*- mode: ruby; x-counterpart: ../../lib/pomodori/notification.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+
 require "spec_helper"
 require "stringio"
 

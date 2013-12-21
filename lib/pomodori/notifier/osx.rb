@@ -1,3 +1,5 @@
+#-*- mode: ruby; x-counterpart: ../../../spec/lib/notifier/osx_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+
 require 'terminal-notifier'
 
 module Pomodori

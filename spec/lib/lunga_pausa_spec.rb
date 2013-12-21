@@ -1,3 +1,5 @@
+#-*- mode: ruby; x-counterpart: ../../lib/pomodori/lunga_pausa.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+
 require "spec_helper"
 
 describe "Pomodori::LungaPausa" do

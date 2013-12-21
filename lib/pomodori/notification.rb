@@ -1,3 +1,5 @@
+#-*- mode: ruby; x-counterpart: ../../spec/lib/notification_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+
 # actions: start, halfway, close, complete, cancel
 
 require 'pp'

@@ -1,3 +1,5 @@
+#-*- mode: ruby; x-counterpart: ../../spec/lib/pomodoro_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+
 # kinds:    'pomodoro', 'pausa', 'lungo_pausa'
 # States:   'new', 'completed', 'cancelled', 'in_progress'
 
