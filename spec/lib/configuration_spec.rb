@@ -111,7 +111,13 @@ describe Pomodori::Configuration do
 
     describe "#summary" do
       it "returns a default summary for an event type" do
-        pending
+        expect( subject.get_summary('pomodoro') ).to      include('Working')
+        expect( subject.get_summary('pausa') ).to         include('Taking')
+        expect( subject.get_summary('lunga_pausa') ).to   include('Taking')
+      end
+
+      it "raises an exception for unknown event types" do
+        expect { subject.get_summary('bippy') }.to raise_error KeyError
       end
     end
   end

@@ -82,5 +82,10 @@ module Pomodori
       type_info = config.fetch( event_type )
       duration  = type_info.fetch('duration')
     end
+
+    def get_summary( event_type )
+      type_info = config.fetch( event_type )
+      summary   = type_info.fetch('summary')
+    end
   end
 end
