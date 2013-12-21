@@ -12,14 +12,8 @@ module Pomodori
       @configuration = params.fetch(:configuration)
     end
 
-    # FIXME: Let configuration handle this
     def database_file
-      unless configuration.known_environments.member?(configuration.environment)
-        raise Exception, "Improper environment. Must be in #{known_environments.flatten}"
-      end
-
-      db_file = configuration.config_path + "/" + configuration.config['database']["#{configuration.environment}"]
-      db_file
+      configuration.database_file
     end
 
     def connect

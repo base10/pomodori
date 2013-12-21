@@ -6,16 +6,14 @@ describe "Pomodori::Pomodoro" do
 
   # TODO: Convert to 'let' blocks
   before(:each) do
-    @setup = Pomodori::Setup.new
-    allow(@setup).to receive(:default_config_path).and_return( test_config_path )
+    Pomodori::Configuration.any_instance.stub(:default_config_path).and_return( test_config_path )
 
-    Pomodori::Database.any_instance.stub(:default_config_path).and_return( test_config_path )
-
+    @setup          = Pomodori::Setup.new
+    @configuration  = @setup.configuration
     @setup.run
-    @database = Pomodori::Database.new
-    @database.connect
 
-    @config = @database.config
+    @database = Pomodori::Database.new( { configuration: @configuration } )
+    @database.connect
   end
 
   after(:each) do
@@ -26,7 +24,7 @@ describe "Pomodori::Pomodoro" do
   # example group
   describe "saving" do
     it "saves a valid object" do
-      pomodoro = build(:pomodoro, config: @config)
+      pomodoro = build(:pomodoro)
 
       expect(pomodoro.valid?).to be_true
       expect { pomodoro.save }.to_not raise_error
@@ -34,35 +32,35 @@ describe "Pomodori::Pomodoro" do
 
     # Initial creation needs summary, duration, kind, state, created_at
     it "expects a summary" do
-      pomodoro = build(:pomodoro, config: @config, summary: '')
+      pomodoro = build(:pomodoro, summary: '')
       expect(pomodoro.valid?).to be_false
 
-      pomodoro = build(:pomodoro, config: @config, summary: nil)
+      pomodoro = build(:pomodoro, summary: nil)
       expect(pomodoro.valid?).to be_false
     end
 
     it "expects a duration" do
-      pomodoro = build(:pomodoro, config: @config, duration: '')
+      pomodoro = build(:pomodoro, duration: '')
       expect(pomodoro.valid?).to be_false
     end
 
     it "expects a kind" do
-      pomodoro = build(:pomodoro, config: @config)
+      pomodoro = build(:pomodoro)
       pomodoro.stub(:kind).and_return(nil)
 
       expect(pomodoro.valid?).to be_false
     end
 
     it "expects a state" do
-      pomodoro = build(:pomodoro, config: @config, state: '')
+      pomodoro = build(:pomodoro, state: '')
       expect(pomodoro.valid?).to be_false
 
-      pomodoro = build(:pomodoro, config: @config, state: nil)
+      pomodoro = build(:pomodoro, state: nil)
       expect(pomodoro.valid?).to be_false
     end
 
     it "fills in a creation date and time" do
-      pomodoro = build(:pomodoro, config:       @config,
+      pomodoro = build(:pomodoro,
                                   created_at:   nil,
                                   started_at:   nil,
                                   completed_at: nil
@@ -74,7 +72,7 @@ describe "Pomodori::Pomodoro" do
   end
 
   describe "initialization" do
-    let(:pomodoro) { build(:pomodoro, config: @config,
+    let(:pomodoro) { build(:pomodoro,
                                       created_at:   nil,
                                       started_at:   nil,
                                       completed_at: nil
@@ -112,7 +110,7 @@ describe "Pomodori::Pomodoro" do
   end
 
   describe "starting a pomodoro" do
-    let(:pomodoro) { build(:pomodoro, config: @config,
+    let(:pomodoro) { build(:pomodoro,
                                       created_at:   nil,
                                       started_at:   nil,
                                       completed_at: nil
@@ -149,7 +147,7 @@ describe "Pomodori::Pomodoro" do
   end
 
   describe "completing a pomodoro" do
-    let(:pomodoro) { build(:pomodoro, config: @config,
+    let(:pomodoro) { build(:pomodoro,
                                       created_at:   nil,
                                       started_at:   nil,
                                       completed_at: nil
@@ -192,7 +190,7 @@ describe "Pomodori::Pomodoro" do
   end
 
   describe "cancelling a pomodoro" do
-    let(:pomodoro) { build(:pomodoro, config: @config) }
+    let(:pomodoro) { build(:pomodoro) }
 
     before(:each) do
       pomodoro.start

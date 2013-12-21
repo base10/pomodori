@@ -22,9 +22,9 @@ module Pomodori
       default_config_path
     end
 
-    # FIXME: Look at the env. and return the database file name
     def database_file
-      "#{config_path}/#{config['database'][environment]}"
+      file_name = config['database'].fetch( environment )
+      "#{config_path}/#{file_name}"
     end
 
     # FIXME: Make this a constant instead?
