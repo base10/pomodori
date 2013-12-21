@@ -1,4 +1,5 @@
 #-*- mode: ruby; x-counterpart: ../../lib/pomodori/configuration.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
+
 require "spec_helper"
 
 describe Pomodori::Configuration do
@@ -13,6 +14,7 @@ describe Pomodori::Configuration do
 
   after(:each) do
     ENV['POMODORI_ENV'] = "test"
+    FileUtils.rm_rf test_config_path
   end
 
   describe "config" do
@@ -39,7 +41,6 @@ describe Pomodori::Configuration do
     end
   end
 
-  # FIXME: I think a lot of this could get
   describe 'environments' do
     describe "known or default" do
       let ( :environment )  { 'test' }
@@ -86,6 +87,31 @@ describe Pomodori::Configuration do
         ENV['POMODORI_ENV'] = "OHAI"
 
         expect { Pomodori::Example.new }.to raise_error
+      end
+    end
+  end
+
+  describe 'event defaults' do
+    before(:each) do
+      setup      = Pomodori::Setup.new
+      setup.run
+    end
+
+    describe "#duration" do
+      it "returns a default duration for an event type" do
+        expect( subject.get_duration('pomodoro') ).to eq(25)
+        expect( subject.get_duration('pausa') ).to eq(5)
+        expect( subject.get_duration('lunga_pausa') ).to eq(15)
+      end
+
+      it "raises an exception for unknown event types" do
+        expect { subject.get_duration('bippy') }.to raise_error KeyError
+      end
+    end
+
+    describe "#summary" do
+      it "returns a default summary for an event type" do
+        pending
       end
     end
   end

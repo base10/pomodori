@@ -77,5 +77,10 @@ module Pomodori
 
       @environment = env
     end
+
+    def get_duration( event_type )
+      type_info = config.fetch( event_type )
+      duration  = type_info.fetch('duration')
+    end
   end
 end
