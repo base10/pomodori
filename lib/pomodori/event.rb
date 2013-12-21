@@ -34,11 +34,11 @@ module Pomodori
     end
 
     def get_duration
-      configuration.config[determine_kind]['duration']
+      configuration.get_duration( determine_kind )
     end
 
     def get_summary
-      configuration.config[determine_kind]['summary']
+      configuration.get_summary( determine_kind )
     end
 
     def determine_kind
