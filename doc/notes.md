@@ -236,3 +236,12 @@ I'm trying to think of how I can safely extract Pomodori::Configure and:
 ## 2013-12-01
 
 - Continuing on with work from Nov. 30
+
+## 2013-12-20
+
+Read something from Ben Scofield that projects shouldn't last more than a quarter and given how long this has been dragging on, yep.
+
+## 2013-12-21
+
+- Failing test for databases is in the wrong spot. Let configuration fail instead.
+- I'm going to take another pass through the code to see if there's anything else needing refactoring, but that seems like a pretty start.
