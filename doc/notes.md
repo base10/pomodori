@@ -247,3 +247,5 @@ Read something from Ben Scofield that projects shouldn't last more than a quarte
 - I'm going to take another pass through the code to see if there's anything else needing refactoring, but that seems like a pretty start.
 - Separate consideration, would it be worthwhile converting to ActiveRecord?
     - Based on Steven's notes at work about using ActiveRecord vs. Sequel and prevalence of use.
+- What would make Notifier better as a base class vs. module?
+    - Might await moving that around based on POODR reading
