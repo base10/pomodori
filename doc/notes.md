@@ -245,3 +245,5 @@ Read something from Ben Scofield that projects shouldn't last more than a quarte
 
 - Failing test for databases is in the wrong spot. Let configuration fail instead.
 - I'm going to take another pass through the code to see if there's anything else needing refactoring, but that seems like a pretty start.
+- Separate consideration, would it be worthwhile converting to ActiveRecord?
+    - Based on Steven's notes at work about using ActiveRecord vs. Sequel and prevalence of use.
