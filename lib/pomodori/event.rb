@@ -22,6 +22,13 @@ module Pomodori
 
     # TODO: define scopes
 
+    # Builds a new event object (Pomodoro, Pausa, LungaPausa)
+    #
+    # @param options [Hash] options can contain two keys, duration and summary.
+    #   - duration: [Fixnum] Read as minutes to set the event lifespan for
+    #   - summary: [String] What going on with this event
+    #
+    # @return [Object] A Pomodoro, Pausa or LungaPausa object (depending on class)
     def initialize( options = {} )
       @configuration    = CONFIGURATION
       values            = Hash.new
@@ -34,14 +41,18 @@ module Pomodori
       super(values)
     end
 
+    # @return [Fixnum] the (default) duration in minutes for the event
     def get_duration
       configuration.get_duration( determine_kind )
     end
 
+    # @return [String] the (default) summary for the event
     def get_summary
       configuration.get_summary( determine_kind )
     end
 
+    # @return [String] Converts class to a string.
+    #   Used to get information from Pomodori::Configuration
     def determine_kind
       klass     = self.class.to_s
       hierarchy = klass.split(/\:\:/)
