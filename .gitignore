@@ -5,9 +5,13 @@
 .yardoc
 Gemfile.lock
 InstalledFiles
-_yardoc
+.yardoc
 coverage
 doc/working
+doc/*.html
+doc/css
+doc/js
+doc/Pomodori
 lib/bundler/man
 pkg
 rdoc
