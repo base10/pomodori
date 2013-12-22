@@ -1,9 +1,5 @@
 #-*- mode: ruby; x-counterpart: ../../spec/lib/pomodoro_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
 
-# kinds:    'pomodoro', 'pausa', 'lungo_pausa'
-# States:   'new', 'completed', 'cancelled', 'in_progress'
-
-require 'pp'
 require 'micromachine'
 require 'verbs'
 
@@ -18,6 +14,13 @@ module Pomodori
   # - Pomodoro: A (25 minute) working session
   # - Pausa: A short (five minute) break
   # - LungaPausa: A longer (15 minute) break
+  #
+  # Events can exist in four states:
+  #
+  # - new: Created, but not yet started
+  # - in_progress: In-flight, but not resolved
+  # - completed: Successfully finished
+  # - cancelled: Aborted while in-flight
   class Event < Sequel::Model(:events)
     # FIXME: I need to rethink using initialize in a composed module when I'm
     # inheriting something that also provides initialize
