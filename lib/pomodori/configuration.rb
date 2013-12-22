@@ -12,7 +12,6 @@ module Pomodori
       set_environment
     end
 
-    # FIXME: Make this a constant instead?
     def default_config_path
       config_path = ENV['HOME'] + "/.pomodori"
       config_path
@@ -28,33 +27,25 @@ module Pomodori
       "#{config_path}/#{file_name}"
     end
 
-    # FIXME: Make this a constant instead?
     def default_config_file
       file_path = default_config_path + "/pomodori.yml"
       file_path
     end
 
-    # FIXME: read_config can be written more "Confidently"
-    def read_config(file_path = nil)
+    def read_config( file_path = nil )
       config_file = file_path || default_config_file
+      @config     = YAML.load( File.read( config_file ) )
+    rescue Errno::ENOENT
+      @needs_setup  = true
+      db_path       = File.expand_path('../../tmp/tmp_db.sqlite3', __FILE__)
 
-      if File.exists?( config_file )
-        @config = YAML.load( File.read( config_file ) )
-      else
-        @needs_setup  = true
-        db_path       = File.expand_path('../../tmp/tmp_db.sqlite3', __FILE__)
-
-        @config = {
-                    'database' => {
-                      'production'  => db_path,
-                      'test'        => db_path,
-                      'development' => db_path
-                    }
+      @config = {
+                  'database' => {
+                    'production'  => db_path,
+                    'test'        => db_path,
+                    'development' => db_path
                   }
-
-        # TODO: Determine context (am I testing?) and specify a more specific
-        # error message
-      end
+                }
     end
 
     def known_environments
