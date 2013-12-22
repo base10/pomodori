@@ -22,13 +22,14 @@ module Pomodori
 
     # TODO: define scopes
 
-    def initialize(values = {})
+    def initialize( options = {} )
       @configuration    = CONFIGURATION
+      values            = Hash.new
 
       values[:kind]     = determine_kind
       values[:state]    = "ready"
-      values[:duration] = get_duration
-      values[:summary]  = get_summary
+      values[:duration] = options.fetch('duration') { get_duration }
+      values[:summary]  = options.fetch('summary')  { get_summary }
 
       super(values)
     end
