@@ -86,7 +86,7 @@ describe Pomodori::Configuration do
       it "sets a default environment" do
         ENV['POMODORI_ENV'] = "OHAI"
 
-        expect { Pomodori::Example.new }.to raise_error
+        expect { Pomodori::Configuration.new }.to raise_error StandardError
       end
     end
   end

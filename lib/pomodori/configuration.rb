@@ -61,18 +61,11 @@ module Pomodori
       ['production', 'test', 'development']
     end
 
-    # FIXME: can likely be written more "Confidently"
     def set_environment
-      env = String.new
+      env = ENV.fetch('POMODORI_ENV') { 'production' }
 
-      if ENV['POMODORI_ENV']
-        if known_environments.member?(ENV['POMODORI_ENV'])
-          env = ENV['POMODORI_ENV']
-        else
-          raise Exception, "Improper environment. Must be in #{known_environments.flatten}"
-        end
-      else
-        env = 'production'
+      unless known_environments.member?( env )
+        raise StandardError, "Improper environment. Must be in #{known_environments.flatten}"
       end
 
       @environment = env
