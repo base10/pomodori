@@ -22,9 +22,6 @@ module Pomodori
   # - completed: Successfully finished
   # - cancelled: Aborted while in-flight
   class Event < Sequel::Model(:events)
-    # FIXME: I need to rethink using initialize in a composed module when I'm
-    # inheriting something that also provides initialize
-    #include Pomodori::Configure
     attr_accessor :configuration
     one_to_many   :notifications
 
@@ -140,7 +137,7 @@ module Pomodori
       self.send(time_method( method ), DateTime.now)
       self.save
 
-      # kickoff transition tasks
+      # TODO: Kickoff transition tasks
     end
 
     # Supporting method for micromachine, implements the state machine
