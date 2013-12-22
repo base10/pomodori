@@ -16,6 +16,8 @@ describe "Pomodori::Pomodoro" do
 
     @database = Pomodori::Database.new( { configuration: @configuration } )
     @database.connect
+
+    Pomodori::Pomodoro.send(:public, *Pomodori::Pomodoro.protected_instance_methods)
   end
 
   after(:each) do

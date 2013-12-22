@@ -62,6 +62,24 @@ module Pomodori
       kind
     end
 
+    # Tell an event to begin
+    def start
+      state_change(:start) if transition.trigger?(:start)
+    end
+
+    # Cancel a running event
+    def cancel
+      state_change(:cancel) if transition.trigger?(:cancel)
+    end
+
+    # Complete a running event
+    def complete
+      state_change(:complete) if transition.trigger?(:complete)
+    end
+
+    # Public API ends here
+    protected
+
     def before_validation
       if values[:created_at].nil?
         values[:created_at] = DateTime.now
@@ -100,20 +118,6 @@ module Pomodori
       errors.add(:created_at, "can't be nil")   if created_at.nil?
     end
 
-    def transition
-      @transition ||= begin
-        state_machine = MicroMachine.new( state || "ready" )
-
-        state_machine.when(:start,    "ready"       => "in_progress")
-        state_machine.when(:cancel,   "ready"       => "cancelled",
-                                      "in_progress" => "cancelled")
-        state_machine.when(:complete, "in_progress" => "completed")
-
-        state_machine.on(:any) { self.state = transition.state }
-
-        state_machine
-      end
-    end
 
     def time_method(state)
       method = Verbs::Conjugator.conjugate state, tense: :past, aspect: :perfective
@@ -129,16 +133,19 @@ module Pomodori
       # kickoff transition tasks
     end
 
-    def start
-      state_change(:start) if transition.trigger?(:start)
-    end
+    def transition
+      @transition ||= begin
+        state_machine = MicroMachine.new( state || "ready" )
 
-    def cancel
-      state_change(:cancel) if transition.trigger?(:cancel)
-    end
+        state_machine.when(:start,    "ready"       => "in_progress")
+        state_machine.when(:cancel,   "ready"       => "cancelled",
+                                      "in_progress" => "cancelled")
+        state_machine.when(:complete, "in_progress" => "completed")
 
-    def complete
-      state_change(:complete) if transition.trigger?(:complete)
+        state_machine.on(:any) { self.state = transition.state }
+
+        state_machine
+      end
     end
   end
 end
