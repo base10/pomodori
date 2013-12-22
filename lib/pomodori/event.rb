@@ -80,12 +80,14 @@ module Pomodori
     # Public API ends here
     protected
 
+    # Set a default created_at timestamp before we save
     def before_validation
       if values[:created_at].nil?
         values[:created_at] = DateTime.now
       end
     end
 
+    # Ensure we have a valid object
     def validate
       validate_summary
       validate_duration
@@ -133,6 +135,7 @@ module Pomodori
       # kickoff transition tasks
     end
 
+    # Supporting method for micromachine, implements the state machine
     def transition
       @transition ||= begin
         state_machine = MicroMachine.new( state || "ready" )
