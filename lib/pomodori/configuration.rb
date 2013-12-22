@@ -1,7 +1,6 @@
 #-*- mode: ruby; x-counterpart: ../../spec/lib/configuration_spec.rb; tab-width: 2; indent-tabs-mode: nil; x-auto-expand-tabs: true;-*-
 
 require 'yaml'
-require 'pp'
 
 module Pomodori
   class Configuration
@@ -55,11 +54,14 @@ module Pomodori
     def set_environment
       env = ENV.fetch('POMODORI_ENV') { 'production' }
 
-      unless known_environments.member?( env )
+      check_environment_validity( env )
+      @environment = env
+    end
+
+    def check_environment_validity( environment )
+      unless known_environments.member?( environment )
         raise StandardError, "Improper environment. Must be in #{known_environments.flatten}"
       end
-
-      @environment = env
     end
 
     def get_duration( event_type )
