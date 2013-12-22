@@ -13,6 +13,11 @@ module Pomodori
   database  = Pomodori::Database.new( { configuration: CONFIGURATION } )
   DB        = database.connect
 
+  # A base class to handle three types of Events in Pomodori
+  #
+  # - Pomodoro: A (25 minute) working session
+  # - Pausa: A short (five minute) break
+  # - LungaPausa: A longer (15 minute) break
   class Event < Sequel::Model(:events)
     # FIXME: I need to rethink using initialize in a composed module when I'm
     # inheriting something that also provides initialize
