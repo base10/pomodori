@@ -29,7 +29,7 @@ describe "Pomodori::Notifier::Stdout" do
     it "expects a notification object" do
       options = { output: output  }
 
-      expect { Pomodori::Notifier::Stdout.new( options ) }.to raise_error(Pomodori::Notifier::Error)
+      expect { Pomodori::Notifier::Stdout.new( options ) }.to raise_error( KeyError )
     end
   end
 

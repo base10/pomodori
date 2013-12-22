@@ -28,7 +28,7 @@ describe "Pomodori::Notifier::Osx" do
     it "expects a notification object" do
       options = { output: output  }
 
-      expect { Pomodori::Notifier::Osx.new( options ) }.to raise_error(Pomodori::Notifier::Error)
+      expect { Pomodori::Notifier::Osx.new( options ) }.to raise_error( KeyError )
     end
   end
 
