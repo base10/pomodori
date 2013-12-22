@@ -7,5 +7,6 @@ require_relative "pomodori/pausa"
 require_relative "pomodori/lunga_pausa"
 require_relative "string_underscore"
 
+# Everything is a level down.
 module Pomodori
 end
