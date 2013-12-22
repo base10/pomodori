@@ -4,6 +4,7 @@ require 'terminal-notifier'
 
 module Pomodori
   module Notifier
+    # Delivers notifications via Mac OS X's Notification Center
     class Osx
       include Pomodori::Notifier
 

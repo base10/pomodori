@@ -2,6 +2,7 @@
 
 module Pomodori
   module Notifier
+    # Delivers notifications to STDOUT (which can be captured for testing)
     class Stdout
       include Pomodori::Notifier
 
