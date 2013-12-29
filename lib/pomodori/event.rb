@@ -125,7 +125,6 @@ module Pomodori
       errors.add(:created_at, "can't be nil")   if created_at.nil?
     end
 
-
     def time_method(state)
       method = Verbs::Conjugator.conjugate state, tense: :past, aspect: :perfective
       method += '_at='
