@@ -39,7 +39,7 @@ module Pomodori
       @configuration    = CONFIGURATION
       values            = Hash.new
 
-      values[:kind]     = determine_kind
+      values[:kind]     = self.class.determine_kind
       values[:state]    = "ready"
       values[:duration] = options.fetch('duration') { get_duration }
       values[:summary]  = options.fetch('summary')  { get_summary }
@@ -57,23 +57,25 @@ module Pomodori
       begin_ds  = now.beginning_of_day
       end_ds    = now.end_of_day
 
-      self.where(:kind => determine_kind).where(:completed_at => begin_ds .. end_ds).all
+      kind      = self.determine_kind
+
+      self.where(:kind => kind).where(:completed_at => begin_ds .. end_ds).all
     end
 
     # @return [Fixnum] the (default) duration in minutes for the event
     def get_duration
-      configuration.get_duration( determine_kind )
+      configuration.get_duration( self.class.determine_kind )
     end
 
     # @return [String] the (default) summary for the event
     def get_summary
-      configuration.get_summary( determine_kind )
+      configuration.get_summary( self.class.determine_kind )
     end
 
     # @return [String] Converts class to a string.
     #   Used to get information from Pomodori::Configuration
-    def determine_kind
-      klass     = self.class.to_s
+    def self.determine_kind
+      klass     = self.to_s
       hierarchy = klass.split(/\:\:/)
       kind      = hierarchy.pop.to_underscore
       kind      = kind.downcase

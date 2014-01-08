@@ -77,8 +77,7 @@ describe "Pomodori::Pausa" do
     end
 
     it "sets a kind" do
-      expect(@pausa.kind).not_to be_nil
-      expect(@pausa.determine_kind).to eq('pausa')
+      expect(Pomodori::Pausa.determine_kind).to eq('pausa')
       expect(@pausa.kind).to eq('pausa')
     end
 
