@@ -249,3 +249,8 @@ Read something from Ben Scofield that projects shouldn't last more than a quarte
     - Based on Steven's notes at work about using ActiveRecord vs. Sequel and prevalence of use.
 - What would make Notifier better as a base class vs. module?
     - Might await moving that around based on POODR reading
+
+## 2014-01-07
+
+- Added issue-23, although I think depending on how I structure reporting, I can avoid it.
+- Looking at the [Sequel README](http://sequel.jeremyevans.net/rdoc/files/README_rdoc.html) and DateTime's available methods, implemented issue-13
