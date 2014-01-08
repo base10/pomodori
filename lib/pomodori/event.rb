@@ -2,6 +2,7 @@
 
 require 'micromachine'
 require 'verbs'
+require 'date'
 
 module Pomodori
   CONFIGURATION = Pomodori::Configuration.new
@@ -44,6 +45,19 @@ module Pomodori
       values[:summary]  = options.fetch('summary')  { get_summary }
 
       super(values)
+    end
+
+    # Retrieve a list of event objects (Pomodoro, Pausa, LungaPausa) completed
+    # today.
+    #
+    # @return [Array] A list of Pomodoro, Pausa, LungaPausa objects
+    # (depending on class)
+    def self.done_today
+      now       = DateTime.current
+      begin_ds  = now.beginning_of_day
+      end_ds    = now.end_of_day
+
+      self.where(:kind => determine_kind).where(:completed_at => begin_ds .. end_ds).all
     end
 
     # @return [Fixnum] the (default) duration in minutes for the event
