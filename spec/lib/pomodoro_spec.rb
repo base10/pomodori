@@ -84,8 +84,7 @@ describe "Pomodori::Pomodoro" do
                     }
 
     it "sets a kind" do
-      expect(pomodoro.kind).not_to be_nil
-      expect(pomodoro.determine_kind).to eq('pomodoro')
+      expect(Pomodori::Pomodoro.determine_kind).to eq('pomodoro')
       expect(pomodoro.kind).to eq('pomodoro')
     end
 
@@ -228,6 +227,22 @@ describe "Pomodori::Pomodoro" do
     it "cannot be completed" do #expect exception here (may need to add db cleaner)
       pomodoro.complete
       expect(pomodoro.transition.trigger?(:complete) ).to eq(false)
+    end
+  end
+
+  describe "pomodori completed today" do
+    before(:each) do
+      pomodori = Array.new
+      3.times { pomodori.push build(:pomodoro) }
+
+      pomodori.each do |pomodoro|
+        pomodoro.start
+        pomodoro.complete
+      end
+    end
+
+    it "#done_today gets a list" do
+      expect(Pomodori::Pomodoro.done_today.size).to eq(3)
     end
   end
 
