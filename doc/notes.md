@@ -254,3 +254,23 @@ Read something from Ben Scofield that projects shouldn't last more than a quarte
 
 - Added issue-23, although I think depending on how I structure reporting, I can avoid it.
 - Looking at the [Sequel README](http://sequel.jeremyevans.net/rdoc/files/README_rdoc.html) and DateTime's available methods, implemented issue-13
+
+## 2014-01-09
+
+- Fixed issue-13, issue-24 and issue-25 in one swoop
+- Next up
+    - Add notifications for start, cancel and complete
+    - Schedule notification deliveries
+        - https://github.com/jmettraux/rufus-scheduler
+        - Callback through a bin?
+            - Makes sense if not using a gem for it
+        - Pass a block to execute on completion
+        - Making sure I can spawn processes asynchronously
+    - Rules
+        - One running event at a time
+    - CLI
+        - straight command line with flags
+        - interactive CLI
+    - Reporting
+        - HTML
+        - CLI table printing
