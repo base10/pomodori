@@ -37,9 +37,6 @@ EOF
 
     @database = Pomodori::Database.new( { configuration: @configuration } )
     @database.connect
-
-    Pomodori::Pomodoro.any_instance.stub(:id).and_return( 23 )
-    Pomodori::Pomodoro.any_instance.stub(:pk).and_return( 23 )
   end
 
   after(:each) do
@@ -48,7 +45,7 @@ EOF
 
   describe "saving" do
     it "saves a valid object" do
-      notification = FactoryGirl.build(:note_start)
+      notification  = FactoryGirl.build(:note_start)
 
       expect(notification.valid?).to be_true
       expect { notification.save }.not_to raise_error

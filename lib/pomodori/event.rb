@@ -98,6 +98,10 @@ module Pomodori
       state_change(:complete) if transition.trigger?(:complete)
     end
 
+    def save!
+      save
+    end
+
     # Public API ends here
     protected
 

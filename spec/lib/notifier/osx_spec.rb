@@ -15,9 +15,6 @@ describe "Pomodori::Notifier::Osx" do
 
     @database = Pomodori::Database.new( { configuration: @configuration } )
     @database.connect
-
-    Pomodori::Pomodoro.any_instance.stub(:id).and_return( 23 )
-    Pomodori::Pomodoro.any_instance.stub(:pk).and_return( 23 )
   end
 
   after(:each) do

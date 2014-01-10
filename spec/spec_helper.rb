@@ -41,6 +41,7 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   FactoryGirl.reload
+  Dir["./spec/support/**/*.rb"].sort.each {|f| require f}
 
   # Require Ruby files under the lib directory
   RSpec.configure do |config|

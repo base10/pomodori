@@ -23,6 +23,6 @@ FactoryGirl.define do
     action        'start'
     deliver_at    '2013-06-05T22:32:20-04:00'
 
-    association :event, factory: :pomodoro, strategy: :build
+    association :event, factory: :pomodoro, strategy: :create
   end
 end
