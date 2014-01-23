@@ -274,3 +274,8 @@ Read something from Ben Scofield that projects shouldn't last more than a quarte
     - Reporting
         - HTML
         - CLI table printing
+
+## 2014-01-18
+
+- Reading through [POODR](http://www.poodr.com) and feeling the desire for some UML diagramming of the pmd binary with the event classes
+    - Sadly, OmniGraffle doesn't seem particularly conducive to building UML sequence diagrams. The stencils don't seem to work for it all that well.
