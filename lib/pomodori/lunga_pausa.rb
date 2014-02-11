@@ -6,5 +6,13 @@ module Pomodori
   # Defaults to 15 minutes.
   # See Pomodori::Event for the interface info
   class LungaPausa < Pomodori::Event
+    def add_start_notifications
+    end
+
+    def add_cancel_notifications
+    end
+
+    def add_save_notifications
+    end
   end
 end

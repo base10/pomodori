@@ -7,5 +7,14 @@ module Pomodori
   class Pausa < Pomodori::Event
     # TODO: class method that determines the next type of break and returns
     # the appropriate object (pausa or lunga_pausa)
+
+    def add_start_notifications
+    end
+
+    def add_cancel_notifications
+    end
+
+    def add_save_notifications
+    end
   end
 end

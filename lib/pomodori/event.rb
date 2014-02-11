@@ -86,16 +86,31 @@ module Pomodori
     # Tell an event to begin
     def start
       state_change(:start) if transition.trigger?(:start)
+      add_start_notifications
+    end
+
+    def add_start_notifications
+      raise NotImplementedError, "This #{self.class} cannot respond to:"
     end
 
     # Cancel a running event
     def cancel
       state_change(:cancel) if transition.trigger?(:cancel)
+      add_cancel_notifications
+    end
+
+    def add_cancel_notifications
+      raise NotImplementedError, "This #{self.class} cannot respond to:"
     end
 
     # Complete a running event
     def complete
       state_change(:complete) if transition.trigger?(:complete)
+      add_save_notifications
+    end
+
+    def add_save_notifications
+      raise NotImplementedError, "This #{self.class} cannot respond to:"
     end
 
     def save!
