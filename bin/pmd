@@ -19,11 +19,11 @@ desc "Begin a new Pomodoro followed by a Break"
 command :start do |c|
   c.desc "set a custom summary. Otherwise, a default will be used"
   c.arg_name 'summary'
-  c.flag :s, :summary
+  c.flag [:s, :summary]
 
   c.desc "Set the length of the Pomodoro in minutes"
   c.arg_name 'length'
-  c.flag :l, :length
+  c.flag [:l, :length]
 
   c.action do |global_options, options, args|
 
