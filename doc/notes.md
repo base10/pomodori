@@ -279,3 +279,20 @@ Read something from Ben Scofield that projects shouldn't last more than a quarte
 
 - Reading through [POODR](http://www.poodr.com) and feeling the desire for some UML diagramming of the pmd binary with the event classes
     - Sadly, OmniGraffle doesn't seem particularly conducive to building UML sequence diagrams. The stencils don't seem to work for it all that well.
+
+## 2014-01-22
+
+- Looked for UML diagramming tools and it looks like ruby-uml, an old tool, might be helpful
+    - Need to install http://sourceforge.net/projects/aspectr-fork/
+    - http://ruby-uml.rubyforge.org
+    - Dunno if it runs
+
+## 2014-02-10
+
+- Found a potential [new config system](https://github.com/binarylogic/settingslogic)
+- Thinking about resolving Issue #23 by making Event a module instead of a class
+- Also working on adding in hooks for a adding notifications
+
+## 2014-02-11
+
+- More work on the hooks

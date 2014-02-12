@@ -230,6 +230,18 @@ describe "Pomodori::Pomodoro" do
     end
   end
 
+  describe "implements notification population methods" do
+    let(:pomodoro) { build(:pomodoro) }
+
+    ['start', 'cancel', 'save'].each do |action|
+      method_name = "add_#{action}_notifications"
+
+      it "\##{method_name}" do
+        expect( pomodoro.respond_to?( method_name.to_sym ) ).to eq(true)
+      end
+    end
+  end
+
   describe "pomodori completed today" do
     before(:each) do
       pomodori = Array.new
