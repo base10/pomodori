@@ -296,3 +296,26 @@ Read something from Ben Scofield that projects shouldn't last more than a quarte
 ## 2014-02-11
 
 - More work on the hooks
+- Something I seem to have left off is triggering any sort of method upon a notification completion for notification types
+- Not sure why notification is in use there
+
+## 2014-03-03
+
+Thinking through processing more. I built some notes of what needed to be done in my physical notebook. Here's where I think that can go:
+
+- Event generates notifications during a state change
+- Start, cancel, complete begin notifications
+- Notifications that can be deferred need a separate class vs. ones that are delivered immediately
+- deferred notifications can also trigger a state change
+- Event is responsible for driving notifications
+- calculate seconds of delta before deliver_at is due
+- Use process.fork with a sleep value set. When the sleep comes back, deliver the notification, activate the next notification
+- At the end of the notification chain, transition state, if a transition is available
+    - Check for existence of notifications, if no more, transition
+- Clean up old notifications (> 24 hours old)
+- Cancel will need to interrupt in-progress notifications, spike any outstanding notifications
+    - completed\_at is set to now()
+
+## 2014-03-09
+
+
