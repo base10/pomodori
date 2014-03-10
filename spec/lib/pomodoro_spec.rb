@@ -147,6 +147,12 @@ describe "Pomodori::Pomodoro" do
     it "can be cancelled" do
       expect(pomodoro.transition.trigger?(:cancel) ).to eq(true)
     end
+
+    it "builds notifications" do
+      expect(pomodoro.notifications.size).to eq(0)
+      pomodoro.start
+      expect(pomodoro.notifications.size).to be >= 1
+    end
   end
 
   describe "completing a pomodoro" do

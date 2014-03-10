@@ -318,4 +318,5 @@ Thinking through processing more. I built some notes of what needed to be done i
 
 ## 2014-03-09
 
-
+- Created issue-26 for implementing notifications for Pomodori
+- Added a failing test
