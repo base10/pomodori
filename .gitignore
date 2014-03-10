@@ -10,6 +10,7 @@ coverage
 doc/working
 doc/*.html
 doc/css
+doc/gem_graph.png
 doc/js
 doc/Pomodori
 lib/bundler/man
