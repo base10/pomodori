@@ -320,3 +320,20 @@ Thinking through processing more. I built some notes of what needed to be done i
 
 - Created issue-26 for implementing notifications for Pomodori
 - Added a failing test
+
+
+## 2014-03-10
+
+- Rethinking the method signature for both Notifications and Event implementing notifications
+    - Notification: Action may not be the most obvious
+- I can create a factory for notifications
+    - args: event, post-action, notifications (array of hashs, "action", "deliver_at")
+        - saves notifications
+        - notifications might need to reloaded
+    - Likely helpful to draw the sequence diagram
+        - Event adds notifications
+        - start
+            - first notification off the stack is processed
+            - once it delivers, next notification is processed
+            - ..
+            - last notification processes, calls state change, if appropriate
