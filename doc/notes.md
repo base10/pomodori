@@ -337,3 +337,11 @@ Thinking through processing more. I built some notes of what needed to be done i
             - once it delivers, next notification is processed
             - ..
             - last notification processes, calls state change, if appropriate
+
+
+## 2014-03-12
+
+- Defining run method for events which will run "notification"
+- Besides the notifications array, I could have "state notifications" that I execute the "run" state out of events and clear state notifications afterward
+- I'd fork to go to the notification (which might have a Proc from the event) and not block the interface
+- Event *may* need to understand how to repopulate transition notifications

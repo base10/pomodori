@@ -23,7 +23,7 @@ module Pomodori
   # - completed: Successfully finished
   # - cancelled: Aborted while in-flight
   class Event < Sequel::Model(:events)
-    attr_accessor :configuration
+    attr_accessor :configuration, :state_notifications
     one_to_many   :notifications
 
     # TODO: define scopes
@@ -43,6 +43,8 @@ module Pomodori
       values[:state]    = "ready"
       values[:duration] = options.fetch('duration') { get_duration }
       values[:summary]  = options.fetch('summary')  { get_summary }
+
+      @state_notifications = Array.new
 
       super(values)
     end
@@ -87,6 +89,8 @@ module Pomodori
     def start
       state_change(:start) if transition.trigger?(:start)
       add_start_notifications
+      run # Maybe there's a block here?
+      # clear_completed_notifications (would break test)
     end
 
     def add_start_notifications
@@ -115,6 +119,9 @@ module Pomodori
 
     def save!
       save
+    end
+
+    def run
     end
 
     # Public API ends here

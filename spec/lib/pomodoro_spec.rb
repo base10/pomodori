@@ -148,10 +148,10 @@ describe "Pomodori::Pomodoro" do
       expect(pomodoro.transition.trigger?(:cancel) ).to eq(true)
     end
 
-    it "builds notifications" do
-      expect(pomodoro.notifications.size).to eq(0)
+    it "builds state_notifications" do
+      expect(pomodoro.state_notifications.size).to eq(0)
       pomodoro.start
-      expect(pomodoro.notifications.size).to be >= 1
+      expect(pomodoro.state_notifications.size).to be >= 1
     end
   end
 
