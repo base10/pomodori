@@ -44,10 +44,12 @@ module Pomodori
     end
 
     def processed?
-      if completed_at.to_datetime
+      if self.completed_at.to_datetime
         return true
       end
 
+      false
+    rescue NoMethodError => e
       false
     end
 

@@ -346,3 +346,8 @@ Thinking through processing more. I built some notes of what needed to be done i
 - I'd fork to go to the notification (which might have a Proc from the event) and not block the interface
 - Event *may* need to understand how to repopulate transition notifications
 - For testing, I'll need to mock notifications (I want to test a delay, but not a 25 minute one)
+
+
+## 2014-03-13
+
+- Filling in tests

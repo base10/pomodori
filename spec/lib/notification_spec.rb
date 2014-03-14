@@ -71,6 +71,12 @@ EOF
     let ( :notification ) { FactoryGirl.build(:note_start) }
     let ( :output )       { double('output').as_null_object }
 
+    it "knows if it's been previously processed" do
+      expect(notification.processed?).to be false
+      notification = FactoryGirl.build(:note_start, completed_at: DateTime.now)
+      expect(notification.processed?).to be true
+    end
+
     it "has a strategy" do
       #expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Stdout')
       expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Osx')
