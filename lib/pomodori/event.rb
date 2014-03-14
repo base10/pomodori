@@ -122,6 +122,10 @@ module Pomodori
     end
 
     def run
+      state_notifications.each do |notice|
+        # Add fork here
+        #notice.process
+      end
     end
 
     # Public API ends here

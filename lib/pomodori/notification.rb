@@ -36,6 +36,21 @@ module Pomodori
       strategy_class  = 'Pomodori::Notifier::' + strategy_pref.camelcase
     end
 
+    def process
+      return if processed?
+
+      #add_delay
+      #deliver
+    end
+
+    def processed?
+      if completed_at.to_datetime
+        return true
+      end
+
+      false
+    end
+
     # Delivers a notification with the appropriate notifier and marks
     # the notification as complete
     def deliver
