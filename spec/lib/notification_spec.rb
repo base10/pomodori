@@ -68,6 +68,33 @@ EOF
     end
   end
 
+  describe "delay calculation" do
+    let ( :notification ) { FactoryGirl.build(:note_start) }
+    let ( :now )          { DateTime.now }
+
+    it "defaults delay to 0" do
+      expect(notification.delay).to eq(0)
+    end
+
+    it "keeps delay at 0 when 'deliver_at' is before 'now'" do
+      notification.deliver_at = now - 5.seconds
+      notification.calculate_delay
+      expect(notification.delay).to eq(0)
+    end
+
+    it "keeps delay at 0 when 'deliver_at' is 'now'" do
+      notification.deliver_at = now
+      notification.calculate_delay
+      expect(notification.delay).to eq(0)
+    end
+
+    it "updates delay when 'deliver_at' is after 'now'" do
+      notification.deliver_at = now + 5.seconds
+      notification.calculate_delay
+      expect(notification.delay).to eq(5)
+    end
+  end
+
   describe "fulfillment" do
     let ( :notification ) { FactoryGirl.build(:note_start) }
     let ( :output )       { double('output').as_null_object }
@@ -78,10 +105,6 @@ EOF
       expect(notification.processed?).to be true
     end
 
-    it "sets a delay based on current time and deliver_at" do
-      pending
-    end
-
     it "has a strategy" do
       #expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Stdout')
       expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Osx')
@@ -89,7 +112,6 @@ EOF
 
     it "presents a notification" do
       notification.stub(:notifier_strategy).and_return('Pomodori::Notifier::Stdout')
-
 
       notification.output = output
       notification.deliver
@@ -107,7 +129,7 @@ EOF
       expect(notification.completed_at).not_to be(nil)
     end
 
-    it "runs through #process" do
+    it "(FIXME: horrible name) runs through #process" do
       pending
     end
   end

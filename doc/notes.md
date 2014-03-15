@@ -351,3 +351,7 @@ Thinking through processing more. I built some notes of what needed to be done i
 ## 2014-03-13
 
 - Filling in tests
+
+## 2014-03-14
+
+- Working on calculating delivery delay in Notification

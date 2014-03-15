@@ -14,7 +14,7 @@ module Pomodori
   class Notification < Sequel::Model
     many_to_one :event
 
-    attr_accessor :output
+    attr_accessor :output, :delay
 
     # Builds a new Pomodori::Notification object. These are tied to Events.
     # @param options [Hash]
@@ -25,6 +25,7 @@ module Pomodori
     # @return A new Pomodori::Notification object
     def initialize( options = {} )
       @output = options.fetch(:output, STDOUT)
+      @delay  = 0 #default delay
 
       super
     end
@@ -39,6 +40,7 @@ module Pomodori
     def process
       return if processed?
 
+      calculate_delay
       add_delay
       deliver
     end
@@ -53,8 +55,15 @@ module Pomodori
       false
     end
 
+    def calculate_delay
+      now_seconds         = DateTime.now.strftime("%s").to_i
+      deliver_at_seconds  = self.deliver_at.strftime("%s").to_i
+      tmp_delay           = deliver_at_seconds - now_seconds
+      @delay              = tmp_delay >= 1 ? tmp_delay : 0
+    end
+
     def add_delay
-      sleep 1
+      sleep self.delay
     end
 
     # Delivers a notification with the appropriate notifier and marks
