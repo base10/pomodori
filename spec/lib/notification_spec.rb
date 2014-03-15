@@ -96,7 +96,8 @@ EOF
   end
 
   describe "fulfillment" do
-    let ( :notification ) { FactoryGirl.build(:note_start) }
+    let ( :deliver_at )   { DateTime.now + 1.seconds }
+    let ( :notification ) { FactoryGirl.build(:note_start, deliver_at: deliver_at) }
     let ( :output )       { double('output').as_null_object }
 
     it "knows if it's been previously processed" do
@@ -114,7 +115,7 @@ EOF
       notification.stub(:notifier_strategy).and_return('Pomodori::Notifier::Stdout')
 
       notification.output = output
-      notification.deliver
+      notification.process
 
       expect(output).to include(notification.title)
       expect(output).to include(notification.message)
@@ -124,13 +125,9 @@ EOF
       notification.stub(:notifier_strategy).and_return('Pomodori::Notifier::Stdout')
 
       notification.output = output
-      notification.deliver
+      notification.process
 
       expect(notification.completed_at).not_to be(nil)
-    end
-
-    it "(FIXME: horrible name) runs through #process" do
-      pending
     end
   end
 
