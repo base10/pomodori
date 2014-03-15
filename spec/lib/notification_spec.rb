@@ -27,6 +27,7 @@ lunga_pausa:
 notifier: stdout
 EOF
 
+    File.any_instance.stub(:read).and_call_original
     File.any_instance.stub(:read).with( test_config_path ).and_return(test_config)
 
     Pomodori::Configuration.any_instance.stub(:default_config_path).and_return( test_config_path )
@@ -77,6 +78,10 @@ EOF
       expect(notification.processed?).to be true
     end
 
+    it "sets a delay based on current time and deliver_at" do
+      pending
+    end
+
     it "has a strategy" do
       #expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Stdout')
       expect( notification.notifier_strategy ).to eq('Pomodori::Notifier::Osx')
@@ -84,6 +89,7 @@ EOF
 
     it "presents a notification" do
       notification.stub(:notifier_strategy).and_return('Pomodori::Notifier::Stdout')
+
 
       notification.output = output
       notification.deliver
@@ -99,6 +105,10 @@ EOF
       notification.deliver
 
       expect(notification.completed_at).not_to be(nil)
+    end
+
+    it "runs through #process" do
+      pending
     end
   end
 

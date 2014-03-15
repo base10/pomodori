@@ -39,8 +39,8 @@ module Pomodori
     def process
       return if processed?
 
-      #add_delay
-      #deliver
+      add_delay
+      deliver
     end
 
     def processed?
@@ -51,6 +51,10 @@ module Pomodori
       false
     rescue NoMethodError => e
       false
+    end
+
+    def add_delay
+      sleep 1
     end
 
     # Delivers a notification with the appropriate notifier and marks
