@@ -102,8 +102,15 @@ EOF
 
     it "knows if it's been previously processed" do
       expect(notification.processed?).to be false
-      notification = FactoryGirl.build(:note_start, completed_at: DateTime.now)
+      notification = FactoryGirl.build(:note_start, completed_at: DateTime.now - 5.seconds)
       expect(notification.processed?).to be true
+    end
+
+    it "won't deliver a processed notification" do
+      Pomodori::Notification.should_not_receive(:deliver)
+
+      notification = FactoryGirl.build(:note_start, completed_at: DateTime.now - 5.seconds)
+      notification.process
     end
 
     it "has a strategy" do
