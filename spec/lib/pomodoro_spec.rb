@@ -10,6 +10,7 @@ describe "Pomodori::Pomodoro" do
   before(:each) do
     Pomodori::Configuration.any_instance.stub(:default_config_path).and_return( test_config_path )
     Pomodori::Notification.any_instance.stub(:delay).and_return(1)
+    Pomodori::Pomodoro.any_instance.stub(:run)
 
     @setup          = Pomodori::Setup.new
     @configuration  = @setup.configuration
