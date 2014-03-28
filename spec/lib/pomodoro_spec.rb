@@ -9,6 +9,7 @@ describe "Pomodori::Pomodoro" do
   # TODO: Convert to 'let' blocks
   before(:each) do
     Pomodori::Configuration.any_instance.stub(:default_config_path).and_return( test_config_path )
+    Pomodori::Notification.any_instance.stub(:delay).and_return(1)
 
     @setup          = Pomodori::Setup.new
     @configuration  = @setup.configuration
@@ -149,15 +150,13 @@ describe "Pomodori::Pomodoro" do
     end
 
     it "builds state_notifications" do
-      expect(pomodoro.state_notifications.size).to eq(0)
+      pomodoro.state_notifications.should_receive(:push).at_least(4).times
       pomodoro.start
-      expect(pomodoro.state_notifications.size).to be >= 1
     end
   end
 
   describe "completing a pomodoro" do
     let(:pomodoro) { build(:pomodoro,
-                                      created_at:   nil,
                                       started_at:   nil,
                                       completed_at: nil
                                 )

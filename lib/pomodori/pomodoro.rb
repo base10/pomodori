@@ -6,6 +6,7 @@ module Pomodori
   class Pomodoro < Pomodori::Event
     def add_start_notifications
       now = DateTime.now
+
       n1  = Notification.new({  action:     "Started",
                                 deliver_at: now,
                                 event:      self

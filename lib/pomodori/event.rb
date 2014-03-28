@@ -89,8 +89,8 @@ module Pomodori
     def start
       state_change(:start) if transition.trigger?(:start)
       add_start_notifications
-      run # Maybe there's a block here?
-      # clear_completed_notifications (would break test)
+      run                       # TODO: Maybe there's a block here?
+      clear_state_notifications
     end
 
     def add_start_notifications
@@ -123,13 +123,16 @@ module Pomodori
 
     def run
       state_notifications.each do |notice|
-        # Add fork here
-        #notice.process
+        notice.process
       end
     end
 
     # Public API ends here
     protected
+
+    def clear_state_notifications
+      @state_notifications = Array.new
+    end
 
     # Set a default created_at timestamp before we save
     def before_validation

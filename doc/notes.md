@@ -355,3 +355,20 @@ Thinking through processing more. I built some notes of what needed to be done i
 ## 2014-03-14
 
 - Working on calculating delivery delay in Notification
+    - Done and hooked in
+
+## 2014-03-15
+
+- The process fork may not be needed apart from the bin segment
+    - I'll take that as a first approach and can fall back to Proc passing / callbacks
+    - setting-up at jobs is a second option
+- Next is implementing Event#clear\_completed\_notifications, wiring in the cli with procs
+    - cli should be treated as a controller class
+    - should involve writing a pid file
+- TODO: rework test around event notifications
+    - state notifications won't be reflected because they'll be cleared
+
+## 2014-03-27
+
+- Made a bad assumption looking to state_notifications for testing after running start
+    - I can make sure state\_notifications gets called (done)
