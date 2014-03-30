@@ -154,10 +154,12 @@ describe "Pomodori::Pomodoro" do
       pomodoro.start
     end
 
+    # Solving based on http://stackoverflow.com/questions/9800992/how-to-say-any-instance-should-receive-any-number-of-times-in-rspec/9998793#9998793
     it "processes state_notifications" do
-      pending "it's broken below"
-      expect_any_instance_of(Pomodori::Notification).to receive(:process)
+      count = 0
+      Pomodori::Notification.any_instance.stub(:process) { |arg| count += 1 }
       pomodoro.start
+      expect(count).to be >= 1
     end
   end
 
