@@ -372,3 +372,7 @@ Thinking through processing more. I built some notes of what needed to be done i
 
 - Made a bad assumption looking to state_notifications for testing after running start
     - I can make sure state\_notifications gets called (done)
+
+## 2014-03-29
+
+- Tweaking how I test notifications
