@@ -101,6 +101,8 @@ module Pomodori
     def cancel
       state_change(:cancel) if transition.trigger?(:cancel)
       add_cancel_notifications
+      run
+      clear_state_notifications
     end
 
     def add_cancel_notifications
@@ -111,6 +113,8 @@ module Pomodori
     def complete
       state_change(:complete) if transition.trigger?(:complete)
       add_save_notifications
+      run
+      clear_state_notifications
     end
 
     def add_save_notifications
