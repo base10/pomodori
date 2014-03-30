@@ -7,28 +7,18 @@ module Pomodori
     def add_start_notifications
       now = DateTime.now
 
-      n1  = Notification.new({  action:     "Started",
-                                deliver_at: now,
-                                event:      self
-                            })
+      draft_notifications = [
+        { action: "Started",      deliver_at: now },
+        { action: "Halfway!",     deliver_at: now + 13.minutes },
+        { action: "Almost Done",  deliver_at: now + 20.minutes },
+        { action: "Done",         deliver_at: now + 25.minutes }
+      ]
 
-      n2  = Notification.new({  action:     "Halfway!",
-                                deliver_at: now + 13.minutes,
-                                event:      self
-                            })
-
-      n3  = Notification.new({  action:     "Almost Done",
-                                deliver_at: now + 20.minutes,
-                                event:      self
-                            })
-
-      n4  = Notification.new({  action:     "Done",
-                                deliver_at: now + 25.minutes,
-                                event:      self
-                             })
-
-      [n1, n2, n3, n4].each do |notice|
+      draft_notifications.each do |draft_notice|
+        draft_notice[:event]  = self
+        notice                = Pomodori::Notification.new( draft_notice )
         notice.save
+
         state_notifications.push notice
       end
     end
