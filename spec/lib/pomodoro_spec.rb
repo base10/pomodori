@@ -161,6 +161,11 @@ describe "Pomodori::Pomodoro" do
       pomodoro.start
       expect(count).to be >= 1
     end
+
+    it "clears state_notifications" do
+      pomodoro.start
+      expect( pomodoro.state_notifications.size ).to eq 0
+    end
   end
 
   describe "completing a pomodoro" do
