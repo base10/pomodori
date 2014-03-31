@@ -28,7 +28,7 @@ describe "Pomodori::Pomodoro" do
   shared_examples "a notification handler" do
     # TODO: Put the next three tests into a shared example group
     it "builds state_notifications" do
-      pomodoro.state_notifications.should_receive(:push).at_least(4).times
+      pomodoro.state_notifications.should_receive(:push).at_least( num_notices ).times
       pomodoro.start
     end
 
@@ -170,7 +170,9 @@ describe "Pomodori::Pomodoro" do
       expect(pomodoro.transition.trigger?(:cancel) ).to eq(true)
     end
 
-    it_behaves_like "a notification handler"
+    it_behaves_like "a notification handler" do
+      let(:num_notices) { 4 }
+    end
   end
 
   describe "completing a pomodoro" do
