@@ -376,3 +376,12 @@ Thinking through processing more. I built some notes of what needed to be done i
 ## 2014-03-29
 
 - Tweaking how I test notifications
+
+## 2014-03-30
+
+- Carrying forward work on cancel, completed, using shared examples
+- Next
+    - Pausa
+    - Lunga pausa
+    - Adding a pid / process
+    - Potentially using a controller?
