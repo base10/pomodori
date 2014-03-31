@@ -25,6 +25,27 @@ describe "Pomodori::Pomodoro" do
     FileUtils.rm_rf test_config_path
   end
 
+  shared_examples "a notification handler" do
+    # TODO: Put the next three tests into a shared example group
+    it "builds state_notifications" do
+      pomodoro.state_notifications.should_receive(:push).at_least(4).times
+      pomodoro.start
+    end
+
+    # Solving based on http://stackoverflow.com/questions/9800992/how-to-say-any-instance-should-receive-any-number-of-times-in-rspec/9998793#9998793
+    it "processes state_notifications" do
+      count = 0
+      Pomodori::Notification.any_instance.stub(:process) { |arg| count += 1 }
+      pomodoro.start
+      expect(count).to be >= 1
+    end
+
+    it "clears state_notifications" do
+      pomodoro.start
+      expect( pomodoro.state_notifications.size ).to eq 0
+    end
+  end
+
   # TODO: Once the Pomodoro tests are written, abstract them to a shared
   # example group
   describe "saving" do
@@ -149,23 +170,7 @@ describe "Pomodori::Pomodoro" do
       expect(pomodoro.transition.trigger?(:cancel) ).to eq(true)
     end
 
-    it "builds state_notifications" do
-      pomodoro.state_notifications.should_receive(:push).at_least(4).times
-      pomodoro.start
-    end
-
-    # Solving based on http://stackoverflow.com/questions/9800992/how-to-say-any-instance-should-receive-any-number-of-times-in-rspec/9998793#9998793
-    it "processes state_notifications" do
-      count = 0
-      Pomodori::Notification.any_instance.stub(:process) { |arg| count += 1 }
-      pomodoro.start
-      expect(count).to be >= 1
-    end
-
-    it "clears state_notifications" do
-      pomodoro.start
-      expect( pomodoro.state_notifications.size ).to eq 0
-    end
+    it_behaves_like "a notification handler"
   end
 
   describe "completing a pomodoro" do
