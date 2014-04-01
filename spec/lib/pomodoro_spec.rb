@@ -150,8 +150,9 @@ describe "Pomodori::Pomodoro" do
     end
 
     it_has_behavior "event state notifications" do
-      let( :num_notices )   { 4 }
-      let( :state_action )  { :start }
+      let( :context_object )  { pomodoro }
+      let( :num_notices )     { 4 }
+      let( :state_action )    { :start }
     end
   end
 
@@ -197,8 +198,9 @@ describe "Pomodori::Pomodoro" do
     end
 
     it_has_behavior "event state notifications" do
-      let( :num_notices )   { 1 }
-      let( :state_action )  { :complete }
+      let( :context_object )  { pomodoro }
+      let( :num_notices )     { 1 }
+      let( :state_action )    { :complete }
     end
   end
 
@@ -240,8 +242,9 @@ describe "Pomodori::Pomodoro" do
     end
 
     it_has_behavior "event state notifications" do
-      let( :num_notices )   { 1 }
-      let( :state_action )  { :cancel }
+      let( :context_object )  { pomodoro }
+      let( :num_notices )     { 1 }
+      let( :state_action )    { :cancel }
     end
   end
 
