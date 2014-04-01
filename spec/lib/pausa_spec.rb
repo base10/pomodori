@@ -106,15 +106,55 @@ describe "Pomodori::Pausa" do
   end
 
   describe "starting a break" do
-    # Pending
+    let(:pausa) { build(:pausa,
+                                      started_at:   nil,
+                                      completed_at: nil
+                                )
+                    }
+
+    # TODO: Add other shared behavior
+
+    it_has_behavior "event state notifications" do
+      let( :context_object )  { pausa }
+      let( :num_notices )     { 2 }
+      let( :state_action )    { :start }
+    end
   end
 
-  describe "marking a break complete" do
-    # Pending
+  describe "completing a break" do
+    let(:pausa) { build(:pausa,
+                                      started_at:   nil,
+                                      completed_at: nil
+                                )
+                    }
+
+    before(:each) do
+      pausa.start
+    end
+
+    it_has_behavior "event state notifications" do
+      let( :context_object )  { pausa }
+      let( :num_notices )     { 1 }
+      let( :state_action )    { :complete }
+    end
   end
 
-  describe "marking a break incomplete" do
-    # Pending
+  describe "cancel a break" do
+    let(:pausa) { build(:pausa,
+                                      started_at:   nil,
+                                      completed_at: nil
+                                )
+                    }
+
+    before(:each) do
+      pausa.start
+    end
+
+    it_has_behavior "event state notifications" do
+      let( :context_object )  { pausa }
+      let( :num_notices )     { 1 }
+      let( :state_action )    { :cancel }
+    end
   end
 
   # TODO: Testing of business logic/workflow
