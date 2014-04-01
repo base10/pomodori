@@ -24,9 +24,25 @@ module Pomodori
     end
 
     def add_cancel_notifications
+      notice = Pomodori::Notification.new({
+                action:     "Cancelled!",
+                deliver_at: DateTime.now,
+                event:      self
+              })
+
+      notice.save
+      state_notifications.push notice
     end
 
     def add_save_notifications
+      notice = Pomodori::Notification.new({
+                action:     "Completed!",
+                deliver_at: DateTime.now,
+                event:      self
+              })
+
+      notice.save
+      state_notifications.push notice
     end
   end
 end

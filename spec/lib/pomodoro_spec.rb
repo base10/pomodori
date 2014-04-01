@@ -220,7 +220,7 @@ describe "Pomodori::Pomodoro" do
     end
 
     it_behaves_like "a notification handler" do
-      let( :num_notices )   { 2 }
+      let( :num_notices )   { 1 }
       let( :state_action )  { :complete }
     end
   end
