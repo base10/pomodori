@@ -11,6 +11,8 @@ Spork.prefork do
   RSpec.configure do |config|
     ENV['POMODORI_ENV'] = 'test'
 
+    config.alias_it_should_behave_like_to :it_has_behavior, 'has behavior:'
+
     config.mock_with :rspec do |config|
       config.syntax = [:expect, :should]
     end
