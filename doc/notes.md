@@ -385,3 +385,15 @@ Thinking through processing more. I built some notes of what needed to be done i
     - Lunga pausa
     - Adding a pid / process
     - Potentially using a controller?
+
+## 2014-03-31
+
+- Added tests around cancel and complete notifications in Pomodoro
+- TODO: Handle the number of notifications for events programmatically
+    - Sample messages
+        - "You just started!"
+        - "You've completed N minutes"
+    - Notify every N minutes (config option?)
+    - At least one notification on start and end
+    - Logic can expect to be shared by Pomodoro and LungaPausa
+    - [Filed](https://github.com/base10/pomodori/issues/27)
