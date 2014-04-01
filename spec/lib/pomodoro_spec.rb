@@ -26,22 +26,24 @@ describe "Pomodori::Pomodoro" do
   end
 
   shared_examples "a notification handler" do
-    # TODO: Put the next three tests into a shared example group
+    # num_notices and state_action come from the passed-in Proc
     it "builds state_notifications" do
-      pomodoro.state_notifications.should_receive(:push).at_least( num_notices ).times
-      pomodoro.start
+      pomodoro.state_notifications.should_receive(:push).exactly( num_notices ).times
+      pomodoro.send( state_action )
     end
 
     # Solving based on http://stackoverflow.com/questions/9800992/how-to-say-any-instance-should-receive-any-number-of-times-in-rspec/9998793#9998793
     it "processes state_notifications" do
       count = 0
+
       Pomodori::Notification.any_instance.stub(:process) { |arg| count += 1 }
-      pomodoro.start
-      expect(count).to be >= 1
+      pomodoro.send( state_action )
+
+      expect(count).to be >= num_notices
     end
 
     it "clears state_notifications" do
-      pomodoro.start
+      pomodoro.send( state_action )
       expect( pomodoro.state_notifications.size ).to eq 0
     end
   end
@@ -171,7 +173,8 @@ describe "Pomodori::Pomodoro" do
     end
 
     it_behaves_like "a notification handler" do
-      let(:num_notices) { 4 }
+      let( :num_notices )   { 4 }
+      let( :state_action )  { :start }
     end
   end
 
@@ -215,6 +218,11 @@ describe "Pomodori::Pomodoro" do
       pomodoro.complete
       expect(pomodoro.transition.trigger?(:start) ).to eq(false)
     end
+
+    it_behaves_like "a notification handler" do
+      let( :num_notices )   { 2 }
+      let( :state_action )  { :complete }
+    end
   end
 
   describe "cancelling a pomodoro" do
@@ -252,6 +260,11 @@ describe "Pomodori::Pomodoro" do
     it "cannot be completed" do #expect exception here (may need to add db cleaner)
       pomodoro.complete
       expect(pomodoro.transition.trigger?(:complete) ).to eq(false)
+    end
+
+    it_behaves_like "a notification handler" do
+      let( :num_notices )   { 1 }
+      let( :state_action )  { :cancel }
     end
   end
 
