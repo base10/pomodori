@@ -7,6 +7,7 @@ describe "Pomodori::Pausa" do
 
   before(:each) do
     Pomodori::Configuration.any_instance.stub(:default_config_path).and_return( test_config_path )
+    Pomodori::Notification.any_instance.stub(:process)
 
     @setup          = Pomodori::Setup.new
     @configuration  = @setup.configuration

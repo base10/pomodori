@@ -9,12 +9,22 @@ module Pomodori
     # the appropriate object (pausa or lunga_pausa)
 
     def add_start_notifications
+      now = DateTime.now
+
+      draft_notifications = [
+        { action: "Started",      deliver_at: now },
+        { action: "Done",         deliver_at: now + 5.minutes }
+      ]
+
+      draft_notifications.each do |draft_notice|
+        draft_notice[:event]  = self
+        notice                = Pomodori::Notification.new( draft_notice )
+        notice.save
+
+        state_notifications.push notice
+      end
     end
 
-    def add_cancel_notifications
-    end
 
-    def add_save_notifications
-    end
-  end
+   end
 end

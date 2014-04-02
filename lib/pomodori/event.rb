@@ -106,7 +106,14 @@ module Pomodori
     end
 
     def add_cancel_notifications
-      raise NotImplementedError, "This #{self.class} cannot respond to:"
+      notice = Pomodori::Notification.new({
+                action:     "Cancelled!",
+                deliver_at: DateTime.now,
+                event:      self
+              })
+
+      notice.save
+      state_notifications.push notice
     end
 
     # Complete a running event
@@ -118,7 +125,14 @@ module Pomodori
     end
 
     def add_save_notifications
-      raise NotImplementedError, "This #{self.class} cannot respond to:"
+      notice = Pomodori::Notification.new({
+                action:     "Completed!",
+                deliver_at: DateTime.now,
+                event:      self
+              })
+
+      notice.save
+      state_notifications.push notice
     end
 
     def save!

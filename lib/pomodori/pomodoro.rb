@@ -4,6 +4,9 @@ module Pomodori
   # The main unit of work. Defaults to a 25 minute duration
   # See Pomodori::Event for interface info
   class Pomodoro < Pomodori::Event
+
+    # FIXME: Doesn't properly handle time (if, for instance, user sets
+    # Pomodoro instance to 22 minutes, the "done" notification is *late*)
     def add_start_notifications
       now = DateTime.now
 
@@ -21,28 +24,6 @@ module Pomodori
 
         state_notifications.push notice
       end
-    end
-
-    def add_cancel_notifications
-      notice = Pomodori::Notification.new({
-                action:     "Cancelled!",
-                deliver_at: DateTime.now,
-                event:      self
-              })
-
-      notice.save
-      state_notifications.push notice
-    end
-
-    def add_save_notifications
-      notice = Pomodori::Notification.new({
-                action:     "Completed!",
-                deliver_at: DateTime.now,
-                event:      self
-              })
-
-      notice.save
-      state_notifications.push notice
     end
   end
 end
