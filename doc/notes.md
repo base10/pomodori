@@ -403,3 +403,6 @@ Thinking through processing more. I built some notes of what needed to be done i
 ## 2014-05-02
 
 - No work in April on this. That's not good. I'm really anxious to get done with this phase and move on to other projects
+- Closing out work on #26, moving on to hooking into the pmd class
+    - Added #28
+- Also added #29 to refactor event notification examples into shared example groups in rspec tests
