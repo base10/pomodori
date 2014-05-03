@@ -1,3 +1,5 @@
+<!-- -*- mode:markdown; x-soft-wrap-text:true; -*- -->
+
 # Dev Notes
 
 ## Purpose
@@ -397,3 +399,7 @@ Thinking through processing more. I built some notes of what needed to be done i
     - At least one notification on start and end
     - Logic can expect to be shared by Pomodoro and LungaPausa
     - [Filed](https://github.com/base10/pomodori/issues/27)
+
+## 2014-05-02
+
+- No work in April on this. That's not good. I'm really anxious to get done with this phase and move on to other projects
