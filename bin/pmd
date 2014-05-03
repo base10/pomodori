@@ -30,11 +30,16 @@ command :start do |c|
   end
 end
 
+# command :add
+
 desc "End an in-progress Pomodoro"
 command :end do |c|
   c.action do
     puts "end called"
   end
 end
+
+
+# command :report
 
 exit run(ARGV)
