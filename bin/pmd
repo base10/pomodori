@@ -31,6 +31,20 @@ command :start do |c|
 end
 
 # command :add
+desc "Add a new Pomodoro"
+command :add do |c|
+  c.desc "set a custom summary. Otherwise, a default will be used"
+  c.arg_name 'summary'
+  c.flag [:s, :summary]
+
+  c.desc "Set the length of the Pomodoro in minutes"
+  c.arg_name 'length'
+  c.flag [:l, :length]
+
+  c.action do
+    puts "add called"
+  end
+end
 
 desc "End an in-progress Pomodoro"
 command :end do |c|
@@ -39,6 +53,12 @@ command :end do |c|
   end
 end
 
+desc "Delete a Pomodoro"
+command :delete do |c|
+  c.action do
+    puts "delete called"
+  end
+end
 
 # command :report
 
