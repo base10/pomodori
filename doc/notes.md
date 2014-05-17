@@ -406,3 +406,7 @@ Thinking through processing more. I built some notes of what needed to be done i
 - Closing out work on #26, moving on to hooking into the pmd class
     - Added #28
 - Also added #29 to refactor event notification examples into shared example groups in rspec tests
+
+## 2014-05-16
+
+Listening to the Ruby Rogues podcast, Episode 155, I heard some pieces about Ruby's shortcomings that had me thinking about how to approach the CLI. As mentioned in earlier entries, I plan to use a controller. That controller will be responsible for the forking the request. The forked request should be self-contained, writing a pid to indicate a running pomodoro, but returning control to the CLI for the user to accomplish other actions. I'll also need the notion of a follow-up action (for chaining a pomodoro and a pausa together), but that should wait until the walking skeleton is done.
