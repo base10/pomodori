@@ -409,4 +409,11 @@ Thinking through processing more. I built some notes of what needed to be done i
 
 ## 2014-05-16
 
-Listening to the Ruby Rogues podcast, Episode 155, I heard some pieces about Ruby's shortcomings that had me thinking about how to approach the CLI. As mentioned in earlier entries, I plan to use a controller. That controller will be responsible for the forking the request. The forked request should be self-contained, writing a pid to indicate a running pomodoro, but returning control to the CLI for the user to accomplish other actions. I'll also need the notion of a follow-up action (for chaining a pomodoro and a pausa together), but that should wait until the walking skeleton is done.
+Listening to the Ruby Rogues podcast, Episode 155, I heard some pieces about Ruby's shortcomings that had me thinking about how to approach the CLI. As mentioned in earlier entries, I plan to use a controller. That controller will be responsible for the forking the request. The forked request should be self-contained, writing a pid to indicate a running pomodoro, but returning control to the CLI for the user to accomplish other actions. I'll also need the notion of a follow-up action (for chaining a pomodoro and a pausa together.
+
+## 2014-09-11
+
+So, been a while since I've done anything with this code. Time to fix that.
+
+- TODO: use Service/controller objects between the CLI and data objects
+- Have a number of test failures to address that I left the last time I touched this, apparently.
