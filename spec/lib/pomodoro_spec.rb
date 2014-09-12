@@ -31,37 +31,37 @@ describe "Pomodori::Pomodoro" do
     it "saves a valid object" do
       pomodoro = build(:pomodoro)
 
-      expect(pomodoro.valid?).to be_true
+      expect(pomodoro.valid?).to be true
       expect { pomodoro.save }.to_not raise_error
     end
 
     # Initial creation needs summary, duration, kind, state, created_at
     it "expects a summary" do
       pomodoro = build(:pomodoro, summary: '')
-      expect(pomodoro.valid?).to be_false
+      expect(pomodoro.valid?).to be false
 
       pomodoro = build(:pomodoro, summary: nil)
-      expect(pomodoro.valid?).to be_false
+      expect(pomodoro.valid?).to be false
     end
 
     it "expects a duration" do
       pomodoro = build(:pomodoro, duration: '')
-      expect(pomodoro.valid?).to be_false
+      expect(pomodoro.valid?).to be false
     end
 
     it "expects a kind" do
       pomodoro = build(:pomodoro)
       pomodoro.stub(:kind).and_return(nil)
 
-      expect(pomodoro.valid?).to be_false
+      expect(pomodoro.valid?).to be false
     end
 
     it "expects a state" do
       pomodoro = build(:pomodoro, state: '')
-      expect(pomodoro.valid?).to be_false
+      expect(pomodoro.valid?).to be false
 
       pomodoro = build(:pomodoro, state: nil)
-      expect(pomodoro.valid?).to be_false
+      expect(pomodoro.valid?).to be false
     end
 
     it "fills in a creation date and time" do
@@ -71,8 +71,8 @@ describe "Pomodori::Pomodoro" do
                                   completed_at: nil
                                 )
 
-      expect(pomodoro.valid?).to be_true
-      expect(pomodoro.created_at.nil?).to be_false
+      expect(pomodoro.valid?).to be true
+      expect(pomodoro.created_at.nil?).to be false
     end
   end
 

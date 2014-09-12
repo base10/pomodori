@@ -26,37 +26,37 @@ describe "Pomodori::LungaPausa" do
     it "saves a valid object" do
       pausa = build(:lunga_pausa)
 
-      expect(pausa.valid?).to be_true
+      expect(pausa.valid?).to be true
       expect { pausa.save }.to_not raise_error
     end
 
     # Initial creation needs summary, duration, kind, state, created_at
     it "expects a summary" do
       pausa = build(:lunga_pausa, summary: '')
-      expect(pausa.valid?).to be_false
+      expect(pausa.valid?).to be false
 
       pausa = build(:lunga_pausa, summary: nil)
-      expect(pausa.valid?).to be_false
+      expect(pausa.valid?).to be false
     end
 
     it "expects a duration" do
       pausa = build(:lunga_pausa, duration: '')
-      expect(pausa.valid?).to be_false
+      expect(pausa.valid?).to be false
     end
 
     it "expects a kind" do
       pausa = build(:lunga_pausa)
       pausa.stub(:kind).and_return(nil)
 
-      expect(pausa.valid?).to be_false
+      expect(pausa.valid?).to be false
     end
 
     it "expects a state" do
       pausa = build(:lunga_pausa, state: '')
-      expect(pausa.valid?).to be_false
+      expect(pausa.valid?).to be false
 
       pausa = build(:lunga_pausa, state: nil)
-      expect(pausa.valid?).to be_false
+      expect(pausa.valid?).to be false
     end
 
     it "fills in a creation date and time" do
@@ -66,8 +66,8 @@ describe "Pomodori::LungaPausa" do
                                   completed_at: nil
                                 )
 
-      expect(pausa.valid?).to be_true
-      expect(pausa.created_at.nil?).to be_false
+      expect(pausa.valid?).to be true
+      expect(pausa.created_at.nil?).to be false
     end
   end
 

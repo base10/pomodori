@@ -48,23 +48,23 @@ EOF
     it "saves a valid object" do
       notification  = FactoryGirl.build(:note_start)
 
-      expect(notification.valid?).to be_true
+      expect(notification.valid?).to be true
       expect { notification.save }.not_to raise_error
     end
 
     it "expects an action" do
       notification = FactoryGirl.build(:note_start, action: '')
-      expect(notification.valid?).to be_false
+      expect(notification.valid?).to be false
     end
 
     it "expects a deliver_at" do
       notification = FactoryGirl.build(:note_start, deliver_at: nil)
-      expect(notification.valid?).to be_false
+      expect(notification.valid?).to be false
     end
 
     it "expects an event" do
       notification = FactoryGirl.build(:note_start, event: nil)
-      expect(notification.valid?).to be_false
+      expect(notification.valid?).to be false
     end
   end
 
