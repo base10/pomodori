@@ -417,3 +417,4 @@ So, been a while since I've done anything with this code. Time to fix that.
 
 - TODO: use Service/controller objects between the CLI and data objects
 - Have a number of test failures to address that I left the last time I touched this, apparently.
+- Added #30 to upgrade to RSpec 3.1
