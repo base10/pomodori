@@ -12,7 +12,7 @@ params = {
   all_on_start:   true
 }
 
-guard :rspec do
+guard :rspec, cmd: 'bundle exec rspec' do
   watch(%r{^spec/lib/.+_spec\.rb$})
   watch(%r{^lib/pomodori/(.+)\.rb$})  { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')        { "spec" }
