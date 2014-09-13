@@ -418,3 +418,8 @@ So, been a while since I've done anything with this code. Time to fix that.
 - TODO: use Service/controller objects between the CLI and data objects
 - Have a number of test failures to address that I left the last time I touched this, apparently.
 - Added #30 to upgrade to RSpec 3.1
+
+## 2014-09-12
+
+- Finished RSpec 3.1 upgrade (#30)
+- Thinking through what I have to do with issue 28 (Create and attach command line interface), I suspect I should break this down into smaller tasks and build smaller service objects out of those
