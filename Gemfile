@@ -7,7 +7,7 @@ gemspec
 # Technically, RSpec is the *only* necessary one.
 # guard, spork and others are "nice to have"
 
-gem "rspec",        '~> 2.99'
+gem "rspec",        '~> 3.1.0'
 gem "simplecov",    require: false
 gem "factory_girl"
 gem "guard-bundler"
