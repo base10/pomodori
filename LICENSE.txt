@@ -1,4 +1,4 @@
-Copyright (c) 2013 Nathan L. Walls
+Copyright (c) 2014 Nathan L. Walls
 
 MIT License
 
