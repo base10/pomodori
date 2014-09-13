@@ -5,11 +5,6 @@ require 'verbs'
 require 'date'
 
 module Pomodori
-  CONFIGURATION = Pomodori::Configuration.new
-
-  database  = Pomodori::Database.new( { configuration: CONFIGURATION } )
-  DB        = database.connect
-
   # A base class to handle three types of Events in Pomodori
   #
   # - Pomodoro: A (25 minute) working session

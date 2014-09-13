@@ -14,4 +14,7 @@ require_relative "string_underscore"
 
 # Everything is a level down.
 module Pomodori
+  CONFIGURATION = Pomodori::Configuration.new
+  database      = Pomodori::Database.new( { configuration: CONFIGURATION } )
+  DB            = database.connect
 end

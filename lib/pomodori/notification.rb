@@ -5,10 +5,6 @@
 require 'pp'
 
 module Pomodori
-  CONFIGURATION = Pomodori::Configuration.new
-  database      = Pomodori::Database.new( { configuration: CONFIGURATION } )
-  DB            = database.connect
-
   # Builds a new Pomodori::Notification object to handles notifications
   # from events
   class Notification < Sequel::Model
