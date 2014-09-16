@@ -423,3 +423,7 @@ So, been a while since I've done anything with this code. Time to fix that.
 
 - Finished RSpec 3.1 upgrade (#30)
 - Thinking through what I have to do with issue 28 (Create and attach command line interface), I suspect I should break this down into smaller tasks and build smaller service objects out of those
+
+## 2014-09-15
+
+- I ended up [opening up a Milestone](https://github.com/base10/pomodori/milestones/CLI%20MVP) and opening a number of issues underneath
