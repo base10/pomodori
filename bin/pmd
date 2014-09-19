@@ -7,6 +7,12 @@ include GLI::App
 
 program_desc "A command-line Pomodoro application"
 
+def consolidate_options( *args )
+  consoldated_opts = Hash.new
+  args.each { |hash| consolidated_opts.merge hash }
+  consoldated_opts
+end
+
 desc "Setup the Pomodori database and default configuration file"
 command :setup do |c|
   c.action do
@@ -26,7 +32,7 @@ command :start do |c|
   c.flag [:l, :length]
 
   c.action do |global_options, options, args|
-
+    puts "start called"
   end
 end
 
@@ -41,8 +47,10 @@ command :add do |c|
   c.arg_name 'length'
   c.flag [:l, :length]
 
-  c.action do
-    puts "add called"
+  c.action do |global_options, options|
+    consolidated_opts = consolidate_options( global_options, options )
+
+    puts "called add"
   end
 end
 
