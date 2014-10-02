@@ -10,6 +10,7 @@ require_relative "pomodori/notifier"
 require_relative "pomodori/notifier/error"
 require_relative "pomodori/notifier/osx" ## FIXME: Only on Mac OS X
 require_relative "pomodori/notifier/stdout"
+require_relative "pomodori/service"
 require_relative "string_underscore"
 
 # Everything is a level down.

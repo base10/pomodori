@@ -50,7 +50,8 @@ command :add do |c|
   c.action do |global_options, options|
     consolidated_opts = consolidate_options( global_options, options )
 
-    puts "called add"
+    so = ReleaseAutomation::Service::PomodoriAdd.new( consolidated_opts )
+    so.run
   end
 end
 
