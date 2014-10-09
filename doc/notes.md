@@ -428,3 +428,8 @@ So, been a while since I've done anything with this code. Time to fix that.
 
 - I ended up [opening up a Milestone](https://github.com/base10/pomodori/milestones/CLI%20MVP) and opening a number of issues underneath
 - TODO: Add a task to move the require_relative statements out of pomodori into the appropriate level of file
+
+## 2014-10-01
+
+- While I was on my way up north for vacation, I started work on service objects
+- Created an aggregate argument handler
