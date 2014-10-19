@@ -39,11 +39,11 @@ end
 # command :add
 desc "Add a new Pomodoro"
 command :add do |c|
-  c.desc "set a custom summary. Otherwise, a default will be used"
+  c.desc "Set a custom summary."
   c.arg_name 'summary'
   c.flag [:s, :summary]
 
-  c.desc "Set the length of the Pomodoro in minutes"
+  c.desc "Set the length of the Pomodoro in minutes."
   c.arg_name 'length'
   c.flag [:l, :length]
 

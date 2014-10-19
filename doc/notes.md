@@ -433,3 +433,8 @@ So, been a while since I've done anything with this code. Time to fix that.
 
 - While I was on my way up north for vacation, I started work on service objects
 - Created an aggregate argument handler
+
+## 2014-10-18
+
+- Picking up work on Issue 32 again, primarily as a way to get back into the swing of working on personal projects at home
+- Looking back at code I started a little ways back and not happy I didn't keep length vs. duration consistent throughout the application.
